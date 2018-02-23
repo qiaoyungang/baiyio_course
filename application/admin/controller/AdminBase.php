@@ -62,7 +62,7 @@ class AdminBase extends Controller
         $id = Session::get('id');
         $auth     = new Auth();
 
-        $auth_rule_list = Db::name('auth_rule')->where('status', 1)->order(['sort' => 'DESC', 'id' => 'ASC'])->select();
+        $auth_rule_list = Db::name('auth_rule')->where('status', 1)->order(['sort' => 'ASC'])->select();
 
         foreach ($auth_rule_list as $value) {
             if ($auth->check($value['name'], $id) || $id == 1) {

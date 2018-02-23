@@ -29,17 +29,32 @@ class News extends AdminBase
      * @param int    $page
      * @return mixed
      */
-    public function index($keyword = '', $page = 1)
+    public function index($keyword = '', $page = 1,$n_sel)
     {
         $map   = [];
-        $field = 'n_id,n_title,n_datetime';
+        $field = 'n_id,n_title,n_datetime,n_sel';
+        $map["n_sel"]=$n_sel;
 
         if (!empty($keyword)) {
             $map['n_title'] = ['like', "%{$keyword}%"];
         }
-
+        if($n_sel=="1"){
+            $title="资讯";
+        }elseif($n_sel=="2"){
+            $title="国内美育理论";
+        }elseif($n_sel=="3"){
+            $title="国际美育理论";
+        }elseif($n_sel=="4"){
+            $title="董事长寄语";
+        }elseif($n_sel=="5"){
+            $title="专家指导";
+        }elseif($n_sel=="6"){
+            $title="百亿欧文化理念";
+        }elseif($n_sel=="7"){
+            $title="涂鸦报告";
+        }
         $news_list  = $this->news_model->field($field)->where($map)->order(['n_datetime' => 'DESC'])->paginate(15, false, ['page' => $page]);
-        return $this->fetch('index', compact('news_list','keyword'));
+        return $this->fetch('index', compact('news_list','keyword','title','n_sel'));
     }
 
     /**
@@ -47,9 +62,9 @@ class News extends AdminBase
      * @param string $pid
      * @return mixed
      */
-    public function add()
+    public function add($n_sel)
     {
-        return $this->fetch();
+        return $this->fetch('',compact('n_sel'));
     }
 
     /**
@@ -63,6 +78,7 @@ class News extends AdminBase
             $data["n_text"]=$_POST['n_text'];
             $data["n_datetime"]=$_POST['n_datetime'];
             $data["n_pic"]=$_POST['thumb'];
+            $data["n_sel"]=$_POST['n_sel'];
             $validate_result = $this->validate($data, 'News');
 
             if ($validate_result !== true) {
@@ -83,11 +99,11 @@ class News extends AdminBase
      * @param $id
      * @return mixed
      */
-    public function edit($n_id)
+    public function edit($n_id,$n_sel)
     {
         $news = $this->news_model->find($n_id);
 
-        return $this->fetch('edit', compact('news'));
+        return $this->fetch('edit', compact('news','n_sel'));
     }
 
     /**
@@ -115,7 +131,7 @@ class News extends AdminBase
      * 删除栏目
      * @param $id
      */
-    public function delete($n_id)
+    public function delete($n_id,$n_sel)
     {
         if ($this->news_model->destroy($n_id)) {
             $this->success('删除成功');

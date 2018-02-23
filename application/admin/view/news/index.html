@@ -4,12 +4,12 @@
     <!--tab标签-->
     <div class="layui-tab layui-tab-brief">
         <ul class="layui-tab-title">
-            <li class="layui-this">新闻资讯</li>
-            <li class=""><a href="{:url('admin/news/add')}">添加文章</a></li>
+            <li class="layui-this">{$title}</li>
+            <li class=""><a href="{:url('admin/news/add',['n_sel'=>$n_sel])}">添加文章</a></li>
         </ul>
         <div class="layui-tab-content">
 
-            <form class="layui-form layui-form-pane" action="{:url('admin/news/index')}" method="get">
+            <form class="layui-form layui-form-pane" action="{:url('admin/news/index',['n_sel'=>$n_sel])}" method="get">
                 <div class="layui-inline">
                     <label class="layui-form-label">关键词</label>
                     <div class="layui-input-inline">
@@ -23,7 +23,7 @@
             <hr>
 
             <form action="" method="post" class="ajax-form">
-                <button type="button" class="layui-btn layui-btn-danger layui-btn-small ajax-action" data-action="{:url('admin/news/delete')}">删除</button>
+                <button type="button" class="layui-btn layui-btn-danger layui-btn-small ajax-action" data-action="{:url('admin/news/delete/')}">删除</button>
                 <div class="layui-tab-item layui-show">
                     <table class="layui-table">
                         <thead>
@@ -43,8 +43,8 @@
                             <td>{$vo.n_title}</td>
                             <td>{$vo.n_datetime}</td>
                             <td>
-                                <a href="{:url('admin/news/edit',['n_id'=>$vo['n_id']])}" class="layui-btn layui-btn-normal layui-btn-mini">编辑</a>
-                                <a href="{:url('admin/news/delete',['n_id'=>$vo['n_id']])}" class="layui-btn layui-btn-danger layui-btn-mini ajax-delete">删除</a>
+                                <a href="{:url('admin/news/edit',['n_id'=>$vo['n_id'],'n_sel'=>$vo['n_sel']])}" class="layui-btn layui-btn-normal layui-btn-mini">编辑</a>
+                                <a href="{:url('admin/news/delete',['n_id'=>$vo['n_id'],'n_sel'=>$vo['n_sel']])}" class="layui-btn layui-btn-danger layui-btn-mini ajax-delete">删除</a>
                             </td>
                         </tr>
                         {/foreach}

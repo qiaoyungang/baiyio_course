@@ -4,12 +4,12 @@
     <!--tab标签-->
     <div class="layui-tab layui-tab-brief">
         <ul class="layui-tab-title">
-            <li class=""><a href="{:url('admin/news/index')}">文章管理</a></li>
+            <li class=""><a href="{:url('admin/news/index',['n_sel'=>$n_sel])}">文章管理</a></li>
             <li class="layui-this">编辑栏目</li>
         </ul>
         <div class="layui-tab-content">
             <div class="layui-tab-item layui-show">
-                <form class="layui-form form-container" action="{:url('admin/news/update')}" method="post">
+                <form class="layui-form form-container" action="{:url('admin/news/update',['n_sel'=>$n_sel])}" method="post">
                     <div class="layui-form-item">
                         <label class="layui-form-label">标题</label>
                         <div class="layui-input-block">
@@ -20,7 +20,8 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">缩略图</label>
                         <div class="layui-input-block">
-                            <img src="__PUBLIC__{$news.n_pic}" width="300" height="200"><br>
+                            {if condition="$news.n_pic neq ''"}
+                            <img src="__PUBLIC__{$news.n_pic}" width="300" height="200"><br>{/if}
                             <input type="text" name="n_pic" value="{$news.n_pic}" class="layui-input layui-input-inline" id="thumb">
                             <input type="file" name="file" class="layui-upload-file">
                         </div>
