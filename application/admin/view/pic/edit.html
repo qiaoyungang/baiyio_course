@@ -1,0 +1,70 @@
+{extend name="base" /}
+{block name="body"}
+<div class="layui-body">
+    <!--tab标签-->
+    <div class="layui-tab layui-tab-brief">
+        <ul class="layui-tab-title">
+            <li class=""><a href="{:url('admin/pic/index',['p_sel'=>$p_sel])}">文章管理</a></li>
+            <li class="layui-this">编辑栏目</li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <form class="layui-form form-container" action="{:url('admin/pic/update',['p_sel'=>$p_sel])}" method="post">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">标题</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="p_title" value="{$pic.p_title}" required  lay-verify="required" placeholder="请输入标题" class="layui-input">
+                        </div>
+                    </div>
+                   
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">缩略图</label>
+                        <div class="layui-input-block">
+                            {if condition="$pic.p_pic neq ''"}
+                            <img src="__PUBLIC__{$pic.p_pic}" width="300" height="200"><br>{/if}
+                            <input type="text" name="p_pic" value="{$pic.p_pic}" class="layui-input layui-input-inline" id="thumb">
+                            <input type="file" name="file" class="layui-upload-file">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">内容</label>
+                        <div class="layui-input-block">
+                            <textarea name="p_text" lay-verify="p_text" placeholder="" class="layui-textarea" id="p_text">{$pic.p_text}</textarea>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">发布时间</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="p_datetime" value="{$pic.p_datetime}" class="layui-input datetime">
+                        </div>
+                    </div>
+                    {if condition="$pic.p_sel eq '1'"}
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">视频地址</label>
+                        <div class="layui-input-block">
+                            <textarea name="p_href" rows="8" cols="110">{$pic.p_href}</textarea> 备注：视频代码
+                        </div>
+                    </div>
+                    {/if}
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <input type="hidden" name="p_id" value="{$pic.p_id}">
+                            <button class="layui-btn" lay-submit lay-filter="*">更新</button>
+                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
+{block name="js"}
+<script src="__JS__/ueditorPHP/ueditor.config.js"></script>
+<script src="__JS__/ueditorPHP/ueditor.all.min.js"></script>
+{/block}
+{block name="script"}
+<script>
+    var ue = UE.getEditor('p_text');
+</script>
+{/block}

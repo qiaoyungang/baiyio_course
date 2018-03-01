@@ -4,98 +4,86 @@
     <!--tab标签-->
     <div class="layui-tab layui-tab-brief">
         <ul class="layui-tab-title">
-            <li class=""><a href="{:url('admin/video/index')}">视频管理</a></li>
-            <li class=""><a href="{:url('admin/video/add')}">添加视频</a></li>
+            <li class=""><a href="{:url('admin/video/index',['v_sel'=>$v_sel])}">视频管理</a></li>
+            <li class=""><a href="{:url('admin/video/add',['v_sel'=>$v_sel])}">添加视频</a></li>
             <li class="layui-this">编辑视频</li>
         </ul>
         <div class="layui-tab-content">
             <div class="layui-tab-item layui-show">
-                <form class="layui-form form-container" action="{:url('admin/video/update')}" method="post">
-                    
+                <form class="layui-form form-container" action="{:url('admin/video/update')}" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="v_sel" value="{$v_sel}">
                     <div class="layui-form-item">
                         <label class="layui-form-label">标题</label>
                         <div class="layui-input-block">
-                            <input type="text" name="title" value="{$article.title}" required  lay-verify="required" placeholder="请输入标题" class="layui-input">
-                        </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">作者</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="author" value="{$article.author}" placeholder="（选填）请输入作者" class="layui-input">
-                        </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">简介</label>
-                        <div class="layui-input-block">
-                            <textarea name="introduction" placeholder="（选填）请输入简介" class="layui-textarea">{$article.introduction}</textarea>
-                        </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">内容</label>
-                        <div class="layui-input-block">
-                            <textarea name="content" lay-verify="content" placeholder="" class="layui-textarea" id="content">{$article.content}</textarea>
+                            <input type="text" name="v_title" value="{$video.v_title}" required  lay-verify="required" placeholder="请输入标题" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">缩略图</label>
                         <div class="layui-input-block">
-                            <input type="text" name="thumb" value="{$article.thumb}" class="layui-input layui-input-inline" id="thumb">
+                            {if condition="$video.v_pic neq ''"}
+                                <img src="__PUBLIC__{$video.v_pic}" width="300" height="200"><br>{/if}
+                            <input type="text" name="thumb" value="{$video.v_pic}" class="layui-input layui-input-inline" id="thumb">
                             <input type="file" name="file" class="layui-upload-file">
                         </div>
                     </div>
                     <div class="layui-form-item">
-                        <label class="layui-form-label">图集</label>
+                        <label class="layui-form-label">视频类型</label>
                         <div class="layui-input-block">
-                            <button type="button" id="upload-photo-btn" class="layui-btn">上传图集</button>
-                            <div id="photo-container">
-                                {if condition="!empty($article['photo'])"}
-                                {foreach name="$article['photo']" item="vo"}
-                                <div class="photo-list">
-                                    <input type="text" name="photo[]" value="{$vo}" class="layui-input layui-input-inline">
-                                    <button type="button" class="layui-btn layui-btn-danger remove-photo-btn">移除</button>
-                                </div>
-                                {/foreach}
-                                {/if}
-                            </div>
+                            <input type="radio" name="v_lx" value="1" title="Flv格式" {if condition="$video.v_lx==1"} checked="checked"{/if}>
+                            <input type="radio" name="v_lx" value="2" title="Mp4格式" {if condition="$video.v_lx==2"} checked="checked"{/if}>
                         </div>
                     </div>
                     <div class="layui-form-item">
-                        <label class="layui-form-label">状态</label>
+                        <label class="layui-form-label">视频</label>
                         <div class="layui-input-block">
-                            <input type="radio" name="status" value="1" title="已审核" {if condition="$article.status==1"} checked="checked"{/if}>
-                            <input type="radio" name="status" value="0" title="未审核" {if condition="$article.status==0"} checked="checked"{/if}>
+                            {if condition="$video.v_href neq null"}
+                            <a href="{$video.v_href}" target="_blank">视频另存为下载</a><br><br>
+                            {/if}
+                            <input type="file" name="video">
+                            <input type="hidden" name="v_hrefa" value="{$video.v_href}">
                         </div>
                     </div>
                     <div class="layui-form-item">
-                        <label class="layui-form-label">置顶</label>
+                        <label class="layui-form-label">大概简介</label>
                         <div class="layui-input-block">
-                            <input type="radio" name="is_top" value="1" title="置顶" {if condition="$article.is_top==1"} checked="checked"{/if}>
-                            <input type="radio" name="is_top" value="0" title="未置顶" {if condition="$article.is_top==0"} checked="checked"{/if}>
+                            <textarea name="v_text1" placeholder="（选填）请输入简介" class="layui-textarea">{$video.v_text1}</textarea>
                         </div>
                     </div>
                     <div class="layui-form-item">
-                        <label class="layui-form-label">推荐</label>
+                        <label class="layui-form-label">内容</label>
                         <div class="layui-input-block">
-                            <input type="radio" name="is_recommend" value="1" title="推荐" {if condition="$article.is_recommend==1"} checked="checked"{/if}>
-                            <input type="radio" name="is_recommend" value="0" title="未推荐" {if condition="$article.is_recommend==0"} checked="checked"{/if}>
+                            <textarea name="v_text" lay-verify="v_text" placeholder="" class="layui-textarea" id="v_text">{$video.v_text}</textarea>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">价格(/元)</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="v_money" value="{$video.v_money}" required  lay-verify="required" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">时长(/分钟)</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="v_time" value="{$video.v_time}" required  lay-verify="required" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">积分(/分)</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="v_score" value="{$video.v_score}" required  lay-verify="required" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">发布时间</label>
                         <div class="layui-input-block">
-                            <input type="text" name="publish_time" value="{$article.publish_time}" class="layui-input datetime">
-                        </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">排序</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="sort" value="{$article.sort}" required  lay-verify="required" class="layui-input">
+                            <input type="text" name="v_datetime" value="{$video.v_datetime}" class="layui-input datetime">
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <input type="hidden" name="id" value="{$article.id}">
-                            <button class="layui-btn" lay-submit lay-filter="*">更新</button>
+                            <input type="hidden" name="v_id" value="{$video.v_id}">
+                            <input type="submit" class="layui-btn" value="更新">
                             <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                         </div>
                     </div>
@@ -111,31 +99,6 @@
 {/block}
 {block name="script"}
 <script>
-    $(function() {
-        var ue = UE.getEditor('content'),
-            uploadEditor = UE.getEditor('upload-photo-btn'),
-            photoListItem,
-            uploadImage;
-
-        uploadEditor.ready(function () {
-            uploadEditor.setDisabled();
-            uploadEditor.hide();
-            uploadEditor.addListener('beforeInsertImage', function (t, arg) {
-                $.each(arg, function (index, item) {
-                    photoListItem = '<div class="photo-list"><input type="text" name="photo[]" value="' + item.src + '" class="layui-input layui-input-inline">';
-                    photoListItem += '<button type="button" class="layui-btn layui-btn-danger remove-photo-btn">移除</button></div>';
-
-                    $('#photo-container').append(photoListItem).on('click', '.remove-photo-btn', function () {
-                        $(this).parent('.photo-list').remove();
-                    });
-                });
-            });
-        });
-
-        $('#upload-photo-btn').on('click', function () {
-            uploadImage = uploadEditor.getDialog("insertimage");
-            uploadImage.open();
-        });
-    });
+    var ue = UE.getEditor('v_text');
 </script>
 {/block}

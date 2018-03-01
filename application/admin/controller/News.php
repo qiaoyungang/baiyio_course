@@ -52,6 +52,12 @@ class News extends AdminBase
             $title="百亿欧文化理念";
         }elseif($n_sel=="7"){
             $title="涂鸦报告";
+        }elseif($n_sel=="8"){
+            $title="排课公告";
+        }elseif($n_sel=="9"){
+            $title="公告";
+        }elseif($n_sel=="10"){
+            $title="服务保障";
         }
         $news_list  = $this->news_model->field($field)->where($map)->order(['n_datetime' => 'DESC'])->paginate(15, false, ['page' => $page]);
         return $this->fetch('index', compact('news_list','keyword','title','n_sel'));
@@ -110,6 +116,7 @@ class News extends AdminBase
      * 更新栏目
      * @param $id
      */
+    
     public function update($n_id)
     {
         if ($this->request->isPost()) {

@@ -6,7 +6,6 @@ use think\Session;
 
 class Video extends Model
 {
-    protected $insert = ['create_time'];
 
     /**
      * 文章作者

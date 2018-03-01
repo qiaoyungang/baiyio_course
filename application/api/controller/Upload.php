@@ -31,8 +31,35 @@ class Upload extends Controller
     public function upload()
     {
         $config = [
-            'size' => 2097152,
+            'size' => 2097152000,
             'ext'  => 'jpg,gif,png,bmp'
+        ];
+
+        $file = $this->request->file('file');
+
+        $upload_path = str_replace('\\', '/', ROOT_PATH . 'public/uploads');
+        $save_path   = '/uploads/';
+        $info        = $file->validate($config)->move($upload_path);
+
+        if ($info) {
+            $result = [
+                'error' => 0,
+                'url'   => str_replace('\\', '/', $save_path . $info->getSaveName())
+            ];
+        } else {
+            $result = [
+                'error'   => 1,
+                'message' => $file->getError()
+            ];
+        }
+
+        return json($result);
+    }
+    public function upload_video()
+    {
+        $config = [
+            'size' => 2097152000,
+            'ext'  => 'flv,mp4'
         ];
 
         $file = $this->request->file('file');

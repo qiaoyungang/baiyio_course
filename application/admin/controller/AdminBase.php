@@ -70,7 +70,11 @@ class AdminBase extends Controller
             }
         }
         $menu = !empty($menu) ? array2tree($menu) : [];
-
         $this->assign('menu', $menu);
+
+        $role_id=Session::get("role_id");
+        $auth_group_list=Db::name('auth_group')->where('id',$role_id)->select();
+        $rules=$auth_group_list[0]['rules'];
+        $this->assign('rules',$rules);
     }
 }

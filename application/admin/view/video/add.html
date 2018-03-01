@@ -4,16 +4,17 @@
     <!--tab标签-->
     <div class="layui-tab layui-tab-brief">
         <ul class="layui-tab-title">
-            <li class=""><a href="{:url('admin/video/index')}">视频管理</a></li>
+            <li class=""><a href="{:url('admin/video/index',['v_sel'=>$v_sel])}">视频管理</a></li>
             <li class="layui-this">添加视频</li>
         </ul>
         <div class="layui-tab-content">
             <div class="layui-tab-item layui-show">
-                <form class="layui-form form-container" action="{:url('admin/video/save')}" method="post">
+                <form class="layui-form form-container" action="{:url('admin/video/save')}" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="v_sel" value="{$v_sel}">
                     <div class="layui-form-item">
                         <label class="layui-form-label">标题</label>
                         <div class="layui-input-block">
-                            <input type="text" name="bv_title" value="" required  lay-verify="required" placeholder="请输入标题" class="layui-input">
+                            <input type="text" name="v_title" value="" required  lay-verify="required" placeholder="请输入标题" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-form-item">
@@ -24,53 +25,57 @@
                         </div>
                     </div>
                     <div class="layui-form-item">
-                        <label class="layui-form-label">视频</label>
+                        <label class="layui-form-label">视频类型</label>
                         <div class="layui-input-block">
-                            <button type="button" id="upload-video-btn" class="layui-btn">上传视频</button>
-                            <div id="video-container"></div>
+                            <input type="radio" name="v_lx" value="1" title="Flv格式">
+                            <input type="radio" name="v_lx" value="2" title="Mp4格式" checked>
                         </div>
                     </div>
                     <div class="layui-form-item">
-                        <label class="layui-form-label">种类</label>
+                        <label class="layui-form-label">视频</label>
                         <div class="layui-input-block">
-                            <input type="radio" name="bv_selb" value="1" title="听画" checked="checked">
-                            <input type="radio" name="bv_selb" value="2" title="说画">
-                            <input type="radio" name="bv_selb" value="3" title="绘画">
+                            <input type="file" name="video">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">大概简介</label>
+                        <div class="layui-input-block">
+                            <textarea name="v_text1" placeholder="（选填）请输入简介" class="layui-textarea"></textarea>
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">内容</label>
                         <div class="layui-input-block">
-                            <textarea name="bv_text" placeholder="" class="layui-textarea" id="bv_text"></textarea>
+                            <textarea name="v_text" placeholder="" class="layui-textarea" id="v_text"></textarea>
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">价格(/元)</label>
                         <div class="layui-input-block">
-                            <input type="text" name="bv_money" value="0" required  lay-verify="required" class="layui-input">
+                            <input type="text" name="v_money" value="0" required  lay-verify="required" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">时长(/分钟)</label>
                         <div class="layui-input-block">
-                            <input type="text" name="bv_time" value="0" required  lay-verify="required" class="layui-input">
+                            <input type="text" name="v_time" value="0" required  lay-verify="required" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">积分(/分)</label>
                         <div class="layui-input-block">
-                            <input type="text" name="bv_score" value="0" required  lay-verify="required" class="layui-input">
+                            <input type="text" name="v_score" value="0" required  lay-verify="required" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-form-item">
-                        <label class="layui-form-label">排序</label>
+                        <label class="layui-form-label">发布时间</label>
                         <div class="layui-input-block">
-                            <input type="text" name="sort" value="0" required  lay-verify="required" class="layui-input">
+                            <input type="text" name="v_datetime" value="{:date('Y-m-d H:i:s')}" class="layui-input datetime">
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <button class="layui-btn" lay-submit lay-filter="*">保存</button>
+                            <input type="submit" class="layui-btn" value="保存">
                             <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                         </div>
                     </div>
@@ -87,54 +92,7 @@
 {block name="script"}
 <script>
     $(function() {
-        var ue = UE.getEditor('bv_text'),
-        uploadEditor = UE.getEditor('upload-photo-btn'),
-        videoEditor = UE.getEditor('upload-video-btn'),
-        photoListItem,
-        videoListItem,
-        uploadVideo,
-        uploadImage;
-
-    uploadEditor.ready(function () {
-        uploadEditor.setDisabled();
-        uploadEditor.hide();
-
-        uploadEditor.addListener('beforeInsertImage', function (t, arg) {
-            $.each(arg, function (index, item) {
-                photoListItem = '<div class="photo-list"><input type="text" name="photo[]" value="' + item.src + '" class="layui-input layui-input-inline">';
-                photoListItem += '<button type="button" class="layui-btn layui-btn-danger remove-photo-btn">移除</button></div>';
-
-                $('#photo-container').append(photoListItem).on('click', '.remove-photo-btn', function () {
-                    $(this).parent('.photo-list').remove();
-                });
-            });
-        });
-    });
-    
-    videoEditor.ready(function () {
-        videoEditor.setDisabled();
-        videoEditor.hide();
-        videoEditor.addListener('afterInsertVideo', function (t, arg) {
-            $.each(arg, function (index, item) {
-                videoListItem = '<div class="video-list"><input type="text" name="video[]" value="' + item.url + '" class="layui-input layui-input-inline">';
-                videoListItem += '<button type="button" class="layui-btn layui-btn-danger remove-video-btn">移除</button></div>';
-
-                $('#video-container').append(videoListItem).on('click', '.remove-video-btn', function () {
-                    $(this).parent('.video-list').remove();
-                });
-            });
-        });
-    });
-
-    $('#upload-photo-btn').on('click', function () {
-        uploadImage = uploadEditor.getDialog("insertimage");
-        uploadImage.open();
-    });
-
-    $('#upload-video-btn').on('click', function () {
-        uploadVideo = videoEditor.getDialog("insertvideo");
-        uploadVideo.open();
-    });
+        var ue = UE.getEditor('v_text');
     });
 </script>
 {/block}

@@ -41,21 +41,28 @@
                 <li class="layui-nav-item">
                     <a href="{:url('admin/index/index')}"><i class="fa fa-home"></i> 网站信息</a>
                 </li>
+                
                 {foreach name="menu" item="vo"}
-                {if condition="isset($vo['children'])"}
-                <li class="layui-nav-item">
-                    <a href="javascript:;"><i class="{$vo.icon}"></i> {$vo.title}</a>
-                    <dl class="layui-nav-child">
-                        {foreach name="vo['children']" item="v"}
-                        <dd><a href="{:url($v.name)}"> {$v.title}</a></dd>
-                        {/foreach}
-                    </dl>
-                </li>
-                {else /}
-                <li class="layui-nav-item">
-                    <a href="{:url($vo.name)}"><i class="{$vo.icon}"></i> {$vo.title}</a>
-                </li>
-                {/if}
+                    <?php 
+                        $aa=explode(",",$rules);
+                        for($k=0;$k<count($aa);$k++){
+                            if($aa[$k]==$vo["id"]){
+                    ?>
+                    {if condition="isset($vo['children'])"}
+                    <li class="layui-nav-item">
+                        <a href="javascript:;"><i class="{$vo.icon}"></i> {$vo.title}</a>
+                        <dl class="layui-nav-child">
+                            {foreach name="vo['children']" item="v"}
+                            <dd><a href="{:url($v.name)}"> {$v.title}</a></dd>
+                            {/foreach}
+                        </dl>
+                    </li>
+                    {else /}
+                    <li class="layui-nav-item">
+                        <a href="{:url($vo.name)}"><i class="{$vo.icon}"></i> {$vo.title}</a>
+                    </li>
+                    {/if}
+                    <?php }}?>
                 {/foreach}
 
                 <li class="layui-nav-item" style="height: 30px; text-align: center"></li>
