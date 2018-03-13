@@ -1,0 +1,57 @@
+{extend name="base" /}
+{block name="body"}
+<div class="layui-body">
+    <!--tab标签-->
+    <div class="layui-tab layui-tab-brief">
+        <ul class="layui-tab-title">
+            <li class="layui-this">套餐管理</li>
+            <li class=""><a href="{:url('admin/package/add')}">添加套餐</a></li>
+        </ul>
+        <div class="layui-tab-content">
+
+            <form class="layui-form layui-form-pane" action="{:url('admin/package/index')}" method="get">
+                <div class="layui-inline">
+                    <label class="layui-form-label">套餐名称</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="keyword" value="{$keyword}" placeholder="请输入关键词" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <button class="layui-btn">搜索</button>
+                </div>
+            </form>
+            <hr>
+
+            <form action="" method="post" class="ajax-form">
+                <div class="layui-tab-item layui-show">
+                    <table class="layui-table">
+                        <thead>
+                        <tr>
+                            <th>套餐名称</th>
+                            <th width="100">套餐价格</th>
+                            <th width="100">是否开启</th>
+                            <th width="100">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {foreach name="package_list" item="vo"}
+                        <tr>
+                            <td>{$vo.p_title}</td>
+                            <td>{$vo.p_money} 元</td>
+                            <td>{if condition="$vo.p_off==1"}开启{else /}<font color="red">已关闭</font>{/if}</td>
+                            <td>
+                                <a href="{:url('admin/package/edit',['p_id'=>$vo['p_id']])}" class="layui-btn layui-btn-normal layui-btn-mini">编辑</a>
+                                <a href="{:url('admin/package/delete',['p_id'=>$vo['p_id']])}" class="layui-btn layui-btn-danger layui-btn-mini ajax-delete">删除</a>
+                            </td>
+                        </tr>
+                        {/foreach}
+                        </tbody>
+                    </table>
+                    <!--分页-->
+                    {$package_list->render()}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{/block}

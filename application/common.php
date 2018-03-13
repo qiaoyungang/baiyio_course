@@ -209,3 +209,16 @@ function delete_dir_file($dir_name)
 
     return $result;
 }
+
+/**
+     * 选中多选框
+     * @param $id
+     */
+    function get_array_repeats(array $array,$string) {    
+        $count = array_count_values($array);     
+        if (key_exists($string,$count)){    
+          return $count[$string];    
+        }else{    
+            return 0;    
+        }    
+}   

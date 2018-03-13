@@ -1,0 +1,61 @@
+{extend name="base" /}
+{block name="body"}
+<div class="layui-body">
+    <!--tab标签-->
+    <div class="layui-tab layui-tab-brief">
+        <ul class="layui-tab-title">
+            <li class=""><a href="{:url('admin/work/index')}">信息管理</a></li>
+            <li class="layui-this">添加信息</li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <form class="layui-form form-container" action="{:url('admin/work/save')}" method="post">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">工作量</label>
+                        <div class="layui-input-block">
+                            <textarea name="bw_text" placeholder="" class="layui-textarea" id="bw_text"></textarea>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">老师</label>
+                        <div class="layui-input-block">
+                            <select name="t_id">
+                            {foreach name="team_list" item="vo"}
+                            <option value="{$vo.t_id}">{$vo.t_title}</option>
+                            {/foreach}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">日期记录（年）</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="bw_year" value="{:date('Y')}" class="layui-input" style="width:200px;">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">日期记录（月）</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="bw_month" value="{:date('m')}" class="layui-input" style="width:200px;">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button class="layui-btn" lay-submit lay-filter="*">保存</button>
+                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
+{block name="js"}
+<script src="__JS__/ueditorPHP/ueditor.config.js"></script>
+<script src="__JS__/ueditorPHP/ueditor.all.min.js"></script>
+{/block}
+{block name="script"}
+<script>
+    var ue = UE.getEditor('bw_text');
+</script>
+{/block}

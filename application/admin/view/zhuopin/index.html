@@ -1,0 +1,45 @@
+{extend name="base" /}
+{block name="body"}
+<div class="layui-body">
+    <!--tab标签-->
+    <div class="layui-tab layui-tab-brief">
+        <ul class="layui-tab-title">
+            <li class="layui-this">点评</li>
+            <li class=""></li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <table class="layui-table">
+                    <thead>
+                    <tr>
+                        <th>教师</th>
+                        <th>上传人</th>
+                        <th>班级</th>
+                        <th>对应学习视频</th>
+                        <th>上传时间</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {foreach name="zhuopin_list" item="vo"}
+                    <tr>
+                        <td>{foreach name="vo['vat']" item="subt"}{$subt["t_title"]}{/foreach}</td>
+                        <td>{foreach name="vo['voa']" item="suba"}{$suba["username"]}{/foreach}</td>
+                        <td>{foreach name="vo['vam']" item="subm"}{$subm["c_title"]}{/foreach}</td>
+                        <td>{foreach name="vo['vak']" item="subk"}{$subk["v_title"]}{/foreach}</td>
+                        <td>{$vo.zp_datetime}</td>
+                        <td>
+                            <a href="{:url('admin/zhuopin/edit',['zp_id'=>$vo['zp_id']])}" class="layui-btn layui-btn-normal layui-btn-mini">查看</a>
+                            <a href="{:url('admin/zhuopin/delete',['zp_id'=>$vo['zp_id']])}" class="layui-btn layui-btn-danger layui-btn-mini ajax-delete">删除</a>
+                        </td>
+                    </tr>
+                    {/foreach}
+                    </tbody>
+                </table>
+                <!--分页-->
+                {$zhuopin_list->render()}
+            </div>
+        </div>
+    </div>
+</div>
+{/block}

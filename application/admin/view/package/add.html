@@ -1,0 +1,67 @@
+{extend name="base" /}
+{block name="body"}
+<div class="layui-body">
+    <!--tab标签-->
+    <div class="layui-tab layui-tab-brief">
+        <ul class="layui-tab-title">
+            <li class=""><a href="{:url('admin/package/index')}">套餐管理</a></li>
+            <li class="layui-this">添加套餐</li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <form class="layui-form form-container" action="{:url('admin/package/save')}" method="post">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">套餐名称</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="p_title" value="" required  lay-verify="required" placeholder="请输入标题" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">套餐价格</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="p_money" value="0" required  lay-verify="required"  lay-verify="required" placeholder="请输入价格|输入数字" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">视频选择</label>
+                        <div class="layui-input-block">
+                            范课课程：
+                            {foreach name="video_lista" item="vo"}
+                            <input type="checkbox" name="p_video[]" value="{$vo.v_id}" title="{$vo.v_title}">
+                            {/foreach}<br>
+
+                            亲子课程：
+                            {foreach name="video_listb" item="vo"}
+                            <input type="checkbox" name="p_video[]" value="{$vo.v_id}" title="{$vo.v_title}">
+                            {/foreach}<br>
+
+                            小班课程：
+                            {foreach name="video_listc" item="vo"}
+                            <input type="checkbox" name="p_video[]" value="{$vo.v_id}" title="{$vo.v_title}">
+                            {/foreach}<br>
+
+                            幼儿园：
+                            {foreach name="video_listd" item="vo"}
+                            <input type="checkbox" name="p_video[]" value="{$vo.v_id}" title="{$vo.v_title}">
+                            {/foreach}<br>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">是否开启</label>
+                        <div class="layui-input-block">
+                            <input type="radio" name="p_off" value="1" title="开启" checked="checked">
+                            <input type="radio" name="p_off" value="2" title="关闭">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button class="layui-btn" lay-submit lay-filter="*">保存</button>
+                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}

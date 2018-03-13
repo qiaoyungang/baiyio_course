@@ -1,0 +1,57 @@
+{extend name="base" /}
+{block name="body"}
+<div class="layui-body">
+    <!--tab标签-->
+    <div class="layui-tab layui-tab-brief">
+        <ul class="layui-tab-title">
+            <li class="layui-this">班级管理</li>
+            <li class=""><a href="{:url('admin/classt/add')}">添加信息</a></li>
+        </ul>
+        <div class="layui-tab-content">
+
+            <form class="layui-form layui-form-pane" action="{:url('admin/classt/index')}" method="get">
+                <div class="layui-inline">
+                    <label class="layui-form-label">班级名称</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="keyword" value="{$keyword}" placeholder="请输入关键词" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <button class="layui-btn">搜索</button>
+                </div>
+            </form>
+            <hr>
+
+            <form action="" method="post" class="ajax-form">
+                <div class="layui-tab-item layui-show">
+                    <table class="layui-table">
+                        <thead>
+                        <tr>
+                            <th>班级名称</th>
+                            <th width="100">班级老师</th>
+                            <th width="100">班级价格</th>
+                            <th width="100">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {foreach name="classt_list" item="vo"}
+                        <tr>
+                            <td>{$vo.c_title}</td>
+                            <td>{foreach name="vo['voa']" item="suba"}{$suba["t_title"]}{/foreach}</td>
+                            <td>{$vo.c_money} 元</td>
+                            <td>
+                                <a href="{:url('admin/classt/edit',['c_id'=>$vo['c_id']])}" class="layui-btn layui-btn-normal layui-btn-mini">编辑</a>
+                                <a href="{:url('admin/classt/delete',['c_id'=>$vo['c_id']])}" class="layui-btn layui-btn-danger layui-btn-mini ajax-delete">删除</a>
+                            </td>
+                        </tr>
+                        {/foreach}
+                        </tbody>
+                    </table>
+                    <!--分页-->
+                    {$classt_list->render()}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{/block}

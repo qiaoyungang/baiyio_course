@@ -1,0 +1,120 @@
+{extend name="base" /}
+{block name="body"}
+<div class="layui-body">
+    <!--tab标签-->
+    <div class="layui-tab layui-tab-brief">
+        <ul class="layui-tab-title">
+            <li class=""><a href="{:url('admin/user/index')}">会员管理</a></li>
+            <li class="layui-this">查看及编辑</li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <form class="layui-form form-container" action="{:url('admin/user/update')}" method="post">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">用户名</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="username" value="{$user.username}" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">密码</label>
+                        <div class="layui-input-block">
+                            <input type="password" name="password" value="" placeholder="（选填）如不修改则留空" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">联系号码</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="mobile" value="{$user.mobile}" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">邮箱地址</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="email" value="{$user.email}" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">头像</label>
+                        <div class="layui-input-block">
+                            {if condition="$user.touxiang neq ''"}
+                            <img src="__PUBLIC__{$user.touxiang}" width="300" height="200"><br>{/if}
+                            <input type="text" name="touxiang" value="{$user.touxiang}" class="layui-input layui-input-inline" id="thumb">
+                            <input type="file" name="file" class="layui-upload-file">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">用户积分</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="score" value="{$user.score}" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">用户金钱</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="money" value="{$user.money}" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">创建时间</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="create_time" value="{$user.create_time}" class="layui-input datetime">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">所在班级</label>
+                        <div class="layui-input-block">
+                            <select name="c_id">
+                                {foreach name="classt" item="vo"}
+                                <option value="{$vo.c_id}" {if condition="$user.c_id==$vo.c_id"} selected{/if}>{$vo.c_title}</option>
+                                {/foreach}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">会员类型</label>
+                        <div class="layui-input-block">
+                            <input type="radio" name="status" value="1" title="普通会员" {if condition="$user.status==1"} checked="checked"{/if}>
+                            <input type="radio" name="status" value="2" title="付费会员" {if condition="$user.status==2"} checked="checked"{/if}>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">等级选择</label>
+                        <div class="layui-input-block">
+                            <select name="bl_id">
+                            <option value="0" {if condition="$user.bl_id==0"} selected {/if}></option>
+                            {foreach name="leave_list" item="vol"}
+                            <option value="{$vol.bl_id}" {if condition="$user.bl_id==$vol.bl_id"} selected {/if}>{$vol.bl_title}</option>
+                            {/foreach}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">是否通过</label>
+                        <div class="layui-input-block">
+                            <input type="radio" name="off" value="1" title="审核通过" {if condition="$user.off==1"} checked="checked"{/if}>
+                            <input type="radio" name="off" value="2" title="账号关闭" {if condition="$user.off==2"} checked="checked"{/if}>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <input type="hidden" name="id" value="{$user.id}">
+                            <button class="layui-btn" lay-submit lay-filter="*">更新</button>
+                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
+{block name="js"}
+<script src="__JS__/ueditorPHP/ueditor.config.js"></script>
+<script src="__JS__/ueditorPHP/ueditor.all.min.js"></script>
+{/block}
+{block name="script"}
+<script>
+    var ue = UE.getEditor('n_text');
+</script>
+{/block}

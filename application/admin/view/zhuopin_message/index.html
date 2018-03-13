@@ -1,0 +1,43 @@
+{extend name="base" /}
+{block name="body"}
+<div class="layui-body">
+    <!--tab标签-->
+    <div class="layui-tab layui-tab-brief">
+        <ul class="layui-tab-title">
+            <li class="layui-this">查看/我要留言</li>
+            <li class=""><a href="{:url('admin/ZhuopinMessage/add',['zp_id'=>$zp_id])}">添加信息</a></li>
+        </ul>
+        <div class="layui-tab-content">
+            <form action="" method="post" class="ajax-form">
+               <div class="layui-tab-item layui-show">
+                    <table class="layui-table">
+                        <thead>
+                        <tr>
+                            <th>留言内容</th>
+                            <th width="150">留言日期</th>
+                            <th width="100">类型</th>
+                            <th width="100">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {foreach name="zhuopin_message_list" item="vo"}
+                        <tr>
+                            <td>{$vo.zm_message}</td>
+                            <td>{$vo.zm_datetime}</td>
+                            <td>{if condition="$vo.zm_sel==1"}【老师回复】{else /}<font color="red">【学生回复】</font>{/if}</td>
+                            <td>
+                                <a href="{:url('admin/ZhuopinMessage/edit',['zm_id'=>$vo['zm_id'],'zp_id'=>$vo['zp_id']])}" class="layui-btn layui-btn-normal layui-btn-mini">编辑</a>
+                                <a href="{:url('admin/ZhuopinMessage/delete',['zm_id'=>$vo['zm_id'],'zp_id'=>$vo['zp_id']])}" class="layui-btn layui-btn-danger layui-btn-mini ajax-delete">删除</a>
+                            </td>
+                        </tr>
+                        {/foreach}
+                        </tbody>
+                    </table>
+                    <!--分页-->
+                    {$zhuopin_message_list->render()}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{/block}

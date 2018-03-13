@@ -1,0 +1,57 @@
+{extend name="base" /}
+{block name="body"}
+<div class="layui-body">
+    <!--tab标签-->
+    <div class="layui-tab layui-tab-brief">
+        <ul class="layui-tab-title">
+            <li class=""><a href="{:url('admin/classt/index')}">信息管理</a></li>
+            <li class="layui-this">编辑信息</li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <form class="layui-form form-container" action="{:url('admin/classt/update')}" method="post">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">班级名称</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="c_title" value="{$classt.c_title}" required  lay-verify="required" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">年份</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="c_year" value="{$classt.c_year}" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">月份</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="c_month" value="{$classt.c_month}" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">老师选择</label>
+                        <div class="layui-input-block">
+                            {foreach name="team_list" item="vo"}
+                            <input type="radio" name="t_id" value="{$vo.t_id}" title="{$vo.t_title}" {if condition="$classt.t_id==$vo.t_id"} checked="checked"{/if}>
+                            {/foreach}
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">价格</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="c_money" value="{$classt.c_money}" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <input type="hidden" name="c_id" value="{$classt.c_id}">
+                            <button class="layui-btn" lay-submit lay-filter="*">更新</button>
+                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}

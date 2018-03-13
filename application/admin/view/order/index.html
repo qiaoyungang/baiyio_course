@@ -1,0 +1,51 @@
+{extend name="base" /}
+{block name="body"}
+<div class="layui-body">
+    <!--tab标签-->
+    <div class="layui-tab layui-tab-brief">
+        <ul class="layui-tab-title">
+            <li class="layui-this">所有订单</li>
+            <li class=""></li>
+        </ul>
+        <div class="layui-tab-content">
+            <form action="" method="post" class="ajax-form">
+                <div class="layui-tab-item layui-show">
+                    <table class="layui-table">
+                        <thead>
+                        <tr>
+                            <th>项目名称</th>
+                            <th>购买人</th>
+                            <th>购买时间</th>
+                            <th>购买价格</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {foreach name="order_list" item="vo"}
+                        <tr>
+                            <td>
+                                {if condition="$vo.p_id==0"}
+                                    {foreach name="vo['vov']" item="suba"}{$suba["v_title"]}{/foreach}
+                                {else /}
+                                    {foreach name="vo['voo']" item="subc"}{$subc["p_title"]}{/foreach}
+                                {/if}
+                            </td>
+                            <td>{foreach name="vo['voa']" item="subb"}{$subb["username"]}{/foreach}</td>
+                            <td>{$vo.o_datetime}</td>
+                            <td>{$vo.o_money}</td>
+                            <td>
+                                <a href="{:url('admin/order/edit',['o_id'=>$vo['o_id']])}" class="layui-btn layui-btn-normal layui-btn-mini">查看</a>
+                                <a href="{:url('admin/order/delete',['o_id'=>$vo['o_id']])}" class="layui-btn layui-btn-danger layui-btn-mini ajax-delete">删除</a>
+                            </td>
+                        </tr>
+                        {/foreach}
+                        </tbody>
+                    </table>
+                    <!--分页-->
+                    {$order_list->render()}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{/block}

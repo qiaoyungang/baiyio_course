@@ -1,0 +1,44 @@
+{extend name="base" /}
+{block name="body"}
+<div class="layui-body">
+    <!--tab标签-->
+    <div class="layui-tab layui-tab-brief">
+        <ul class="layui-tab-title">
+            <li class=""><a href="{:url('admin/order/index')}">所有订单</a></li>
+            <li class="layui-this">查看</li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <table class="layui-table">
+                    <tr>
+                        <td width="120" align="center">购买人</td>
+                        <td>{$user.username}</td>
+                    </tr>
+                    <tr>
+                        <td width="120" align="center">项目名称</td>
+                        {if condition="$order.p_id==0"}
+                        <td>
+                            {if condition="$order.v_sel==1"}【范课】{/if}
+                            {if condition="$order.v_sel==2"}【亲子课】{/if}
+                            {if condition="$order.v_sel==3"}【小班课】{/if}
+                            {if condition="$order.v_sel==4"}【幼儿园】{/if}
+                            {$video.v_title} 
+                        </td>
+                        {else /}
+                        <td>{$package.p_title}</td>{/if}
+                    </tr>
+                    
+                    <tr>
+                        <td width="120" align="center">购买价格</td>
+                        <td>{$order.o_money} 元</td>
+                    </tr>   
+                    <tr>
+                        <td width="120" align="center">购买时间</td>
+                        <td>{$order.o_datetime}</td>
+                    </tr>  
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}

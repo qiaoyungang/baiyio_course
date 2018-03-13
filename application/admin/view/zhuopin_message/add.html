@@ -1,0 +1,47 @@
+{extend name="base" /}
+{block name="body"}
+<div class="layui-body">
+    <!--tab标签-->
+    <div class="layui-tab layui-tab-brief">
+        <ul class="layui-tab-title">
+            <li class=""><a href="{:url('admin/ZhuopinMessage/index',['zp_id'=>$zp_id])}">信息管理</a></li>
+            <li class="layui-this">回复留言</li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <form class="layui-form form-container" action="{:url('admin/ZhuopinMessage/save')}" method="post">
+                    <input type="hidden" name="zp_id" value="{$zp_id}">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">留言内容</label>
+                        <div class="layui-input-block">
+                            <textarea name="zm_message" placeholder="" class="layui-textarea" id="zm_message"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">回复时间</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="zm_datetime" value="{:date('Y-m-d H:i:s')}" class="layui-input" style="width:200px;">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button class="layui-btn" lay-submit lay-filter="*">保存</button>
+                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
+{block name="js"}
+<script src="__JS__/ueditorPHP/ueditor.config.js"></script>
+<script src="__JS__/ueditorPHP/ueditor.all.min.js"></script>
+{/block}
+{block name="script"}
+<script>
+    var ue = UE.getEditor('zm_message');
+</script>
+{/block}

@@ -1,0 +1,68 @@
+{extend name="base" /}
+{block name="body"}
+<div class="layui-body">
+    <!--tab标签-->
+    <div class="layui-tab layui-tab-brief">
+        <ul class="layui-tab-title">
+            <li class=""><a href="{:url('admin/package/index')}">套餐管理</a></li>
+            <li class="layui-this">编辑栏目</li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <form class="layui-form form-container" action="{:url('admin/package/update')}" method="post">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">套餐名称</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="p_title" value="{$package.p_title}" required  lay-verify="required" placeholder="请输入标题" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">套餐价格</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="p_money" value="{$package.p_money}" required  lay-verify="required" placeholder="请输入价格" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">视频选择</label>
+                        <div class="layui-input-block">
+                            范课课程：
+                            {foreach name="video_lista" item="voa"}
+                            <input type="checkbox" name="p_video[]" value="{$voa.v_id}" title="{$voa.v_title}" {if condition="get_array_repeats(explode(',',$package.p_video),$voa.v_id) > 0"}checked{/if}>
+                            {/foreach}<br>
+
+                            亲子课程：
+                            {foreach name="video_listb" item="vob"}
+                            <input type="checkbox" name="p_video[]" value="{$vob.v_id}" title="{$vob.v_title}" {if condition="get_array_repeats(explode(',',$package.p_video),$vob.v_id) > 0"}checked{/if}>
+                            {/foreach}<br>
+
+                            小班课程：
+                            {foreach name="video_listc" item="voc"}
+                            <input type="checkbox" name="p_video[]" value="{$voc.v_id}" title="{$voc.v_title}" {if condition="get_array_repeats(explode(',',$package.p_video),$voc.v_id) > 0"}checked{/if}>
+                            {/foreach}<br>
+
+                            幼儿园：
+                            {foreach name="video_listd" item="vod"}
+                            <input type="checkbox" name="p_video[]" value="{$vod.v_id}" title="{$vod.v_title}" {if condition="get_array_repeats(explode(',',$package.p_video),$vod.v_id) > 0"}checked{/if}>
+                            {/foreach}<br>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">是否开启</label>
+                        <div class="layui-input-block">
+                            <input type="radio" name="p_off" value="1" title="开启" {if condition="$package.p_off==1"} checked="checked"{/if}>
+                            <input type="radio" name="p_off" value="2" title="关闭" {if condition="$package.p_off==2"} checked="checked"{/if}>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <input type="hidden" name="p_id" value="{$package.p_id}">
+                            <button class="layui-btn" lay-submit lay-filter="*">更新</button>
+                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}

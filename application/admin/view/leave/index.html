@@ -1,0 +1,41 @@
+{extend name="base" /}
+{block name="body"}
+<div class="layui-body">
+    <!--tab标签-->
+    <div class="layui-tab layui-tab-brief">
+        <ul class="layui-tab-title">
+            <li class="layui-this">评级</li>
+            <li class=""><a href="{:url('admin/leave/add')}">添加级别</a></li>
+        </ul>
+        <div class="layui-tab-content">
+            <form action="" method="post" class="ajax-form">
+               <div class="layui-tab-item layui-show">
+                    <table class="layui-table">
+                        <thead>
+                        <tr>
+                            <th>等级名称</th>
+                            <th>排序</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {foreach name="leave_list" item="vo"}
+                        <tr>
+                            <td>{$vo.bl_title}</td>
+                            <td>{$vo.bl_count}</td>
+                            <td>
+                                <a href="{:url('admin/leave/edit',['bl_id'=>$vo['bl_id']])}" class="layui-btn layui-btn-normal layui-btn-mini">编辑</a>
+                                <a href="{:url('admin/leave/delete',['bl_id'=>$vo['bl_id']])}" class="layui-btn layui-btn-danger layui-btn-mini ajax-delete">删除</a>
+                            </td>
+                        </tr>
+                        {/foreach}
+                        </tbody>
+                    </table>
+                    <!--分页-->
+                    {$leave_list->render()}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{/block}

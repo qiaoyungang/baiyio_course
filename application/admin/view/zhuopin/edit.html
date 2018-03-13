@@ -1,0 +1,46 @@
+{extend name="base" /}
+{block name="body"}
+<div class="layui-body">
+    <!--tab标签-->
+    <div class="layui-tab layui-tab-brief">
+        <ul class="layui-tab-title">
+            <li class=""><a href="{:url('admin/zhuopin/index')}">信息管理</a></li>
+            <li class="layui-this">查看信息</li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <table class="layui-table">
+                    <tr>
+                        <td width="200">上传人</td>
+                        <td>{$user[0]["username"]}</td>
+                    </tr>
+                    <tr>
+                        <td>班级</td>
+                        <td>{$classt[0]["c_title"]}</td>
+                    </tr>
+                    <tr>
+                        <td>对应学习视频</td>
+                        <td>{$video[0]["v_title"]}</td>
+                    </tr>
+                    <tr>
+                        <td>留言内容</td>
+                        <td>{$zhuopin.zp_text}</td>
+                    </tr>
+                    <tr>
+                        <td>作品</td>
+                        <td><img src="__PUBLIC__{$zhuopin.zp_pic}" width="300" height="200"></td>
+                    </tr>
+                    <tr>
+                        <td>上传时间</td>
+                        <td>{$zhuopin.zp_datetime}</td>
+                    </tr>
+                    <tr>
+                        <td>操作</td>
+                        <td><a href="{:url('admin/ZhuopinMessage/index',['zp_id'=>$zhuopin.zp_id])}">查看/我要回复</a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
