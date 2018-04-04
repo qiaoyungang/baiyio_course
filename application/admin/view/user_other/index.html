@@ -1,0 +1,62 @@
+{extend name="base" /}
+{block name="body"}
+<div class="layui-body">
+    <!--tab标签-->
+    <div class="layui-tab layui-tab-brief">
+        <ul class="layui-tab-title">
+            <li class="layui-this">其他渠道用户管理</li>
+            <li class=""><a href="{:url('admin/UserOther/add')}">添加其他渠道用户</a></li>
+        </ul>
+        <div class="layui-tab-content">
+
+            <form class="layui-form layui-form-pane" action="{:url('admin/UserOther/index')}" method="get">
+                <div class="layui-inline">
+                    <label class="layui-form-label">用户名</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="keyword" value="{$keyword}" placeholder="请输入关键词" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <button class="layui-btn">搜索</button>
+                </div>
+            </form>
+            <hr>
+
+            <form action="" method="post" class="ajax-form">
+                <button type="button" class="layui-btn layui-btn-danger layui-btn-small ajax-action" data-action="{:url('admin/UserOther/delete/')}">删除</button>
+                <div class="layui-tab-item layui-show">
+                    <table class="layui-table">
+                        <thead>
+                        <tr>
+                            <th style="width: 15px;"><input type="checkbox" class="check-all"></th>
+                            <th>用户名称</th>
+                            <th>电话</th>
+                            <th>创建时间</th>
+                            <th>观看视频数量</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {foreach name="user_list" item="vo"}
+                        <tr>
+                            <td><input type="checkbox" name="ids[]" value="{$vo.id}"></td>
+                            <td>{$vo.username}</td>
+                            <td>{$vo.mobile}</td>
+                            <td>{$vo.create_time}</td>
+                            <td>{$vo.videosl}</td>
+                            <td>
+                                <a href="{:url('admin/UserOther/edit',['id'=>$vo['id']])}" class="layui-btn layui-btn-normal layui-btn-mini">查看及编辑</a>
+                                <a href="{:url('admin/UserOther/delete',['id'=>$vo['id']])}" class="layui-btn layui-btn-danger layui-btn-mini ajax-delete">删除</a>
+                            </td>
+                        </tr>
+                        {/foreach}
+                        </tbody>
+                    </table>
+                    <!--分页-->
+                    {$user_list->render()}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{/block}

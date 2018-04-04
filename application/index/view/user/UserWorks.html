@@ -1,0 +1,15 @@
+{include file="/User/header" /}
+<div class="main">
+    {include file="/User/left" /}
+    <div class="right">
+        <div class="title">作品　　 <a href="{:url('/index/User/UserWorksAdd')}" class="myupload">上传</a></div>
+        <div class="my_works">
+            {foreach name="ZpList" id="vo"}
+            <a href="{:url('/index/Video/ZhuopinView', ['zp_id' => $vo.zp_id])}" target="_blank"><img src="__PUBLIC__{$vo.zp_pic}"><center>{$vo.zp_title}</center></a>
+            {/foreach}
+        </div>
+        <div class="page">{$ZpList->render()}</div>
+
+    </div>
+</div>
+{include file="/User/footer" /}

@@ -1,0 +1,38 @@
+{include file="/User/header" /}
+<script>
+    function subm(obj1,obj2,obj3){
+        document.getElementById('vd_id').value=obj1;
+        document.getElementById('d_money').value=obj2;
+        document.getElementById('do_id').value=obj3;
+        forma.submit();
+    }
+</script>
+<div class="main">
+    {include file="/User/left" /}
+    <form name="forma" action="{:url('/index/Video/Shop')}" method="post" target="_blank">
+    <input type="hidden" name="vd_id" id="vd_id">
+    <input type="hidden" name="d_money" id="d_money">
+    <input type="hidden" name="do_id" id="do_id">
+    <div class="right">
+        <div class="title">优惠　（<font color="#FF0000">{$doCount}个</font>）备注：点击立即使用，优惠券立即生效，直接扫描购买。如不扫描离开支付页面优惠券将失效，特此声明。</div>
+        {foreach name="doList" id="vo"}
+            {foreach name="vo['voa']" item="suba"}
+            <div class="my_discounts">
+                {foreach name="suba['voaaa']" item="subaa"}
+                <span>￥<font size="+3">{$suba.d_money}</font>{foreach name="subaa['voccc']" item="subcc"}【{$subcc.vc_title}】{/foreach}<a href class="scope">限定{if condition="$suba.d_sel eq 1"}课程{else /}商城{/if}</a></span>
+                <p>使用范围：{$subaa.vd_title}</p>
+                <p>有效期间：{$suba.d_startime}至{$suba.d_endtime}</p>
+                <p>
+                    {if condition="($suba.d_startime elt $datetime) and ($suba.d_endtime egt $datetime)"}未过期{else /}<font color="red">已过期</font>{/if}
+                    &nbsp;&nbsp;&nbsp;&nbsp;{if condition="$vo.do_off eq 2"}<font color="red">已使用</font>{/if}
+                </p>
+                {if condition="($suba.d_startime elt $datetime) and ($suba.d_endtime egt $datetime) and ($vo.do_off eq 1) and ($suba.d_sel eq 1)"}<input type="button" value="立即使用" class="use" onclick="subm({$subaa['vd_id']},{$suba['d_money']},{$vo['do_id']})">{/if}
+                {if condition="($suba.d_startime elt $datetime) and ($suba.d_endtime egt $datetime) and ($vo.do_off eq 1) and ($suba.d_sel eq 2)"}<a href="####" class="use">立即使用</a>{/if}
+                {/foreach}
+            </div> 
+            {/foreach}
+        {/foreach}
+    </div>
+    </form>
+</div>
+{include file="/User/footer" /}

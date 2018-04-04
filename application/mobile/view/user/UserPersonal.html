@@ -1,0 +1,75 @@
+﻿{include file="/Index/header" /} 
+<script type="text/javascript">
+    function subm() { 
+        form1.submit();
+    } 
+</script>
+<body ontouchstart>
+<form action="{:url('Mobile/User/UserPersonalSubmit')}" method="post" name="form1" enctype="multipart/form-data">
+<div class="weui_tab">
+ <div class="weui_tab_bd">
+  <div class="weui_cells_title">基本信息</div>
+  {foreach name="userList" id="vo"}
+  <div class="weui_cells weui_cells_form">
+      <div class="weui_cell">
+            <div class="weui_cell_bd weui_cell_primary">
+                <div class="weui_uploader">
+                    <div class="weui_uploader_hd weui_cell">
+                        <div class="weui_cell_bd weui_cell_primary">头像上传</div>
+                    </div>
+                    <div class="weui_uploader_bd">
+                        <ul class="weui_uploader_files">
+                            <li class="weui_uploader_file" style="background-image:url(__PUBLIC__{$vo.touxiang})"></li>
+                        </ul>
+                        <div class="weui_uploader_input_wrp">
+                            <input name="touxiang" class="weui_uploader_input" type="file" accept="image/*" multiple />
+                            <input type="hidden" name="touxianga" value="{$vo.touxiang}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+  
+  <div class="weui_cell">
+            <div class="weui_cell_hd"><label class="weui_label">电话</label></div>
+            <div class="weui_cell_bd weui_cell_primary">
+                {$vo.mobile}
+            </div>
+  </div>
+   <div class="weui_cell">
+            <div class="weui_cell_hd"><label class="weui_label">邮箱</label></div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <input class="weui_input" type="email" pattern="[0-9]*" placeholder="请输入邮箱" name="email" value="{$vo.email}" />
+            </div>
+  </div>
+   <div class="weui_cell">
+            <div class="weui_cell_hd"><label class="weui_label">孩子昵称</label></div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <input class="weui_input" type="text"  placeholder="请输入昵称" name="username" value="{$vo.username}"/>
+            </div>
+  </div>
+   <div class="weui_cell weui_cell_select weui_select_after">
+            <div class="weui_cell_hd">
+                <label for="" class="weui_label">孩子性别</label>
+            </div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <select class="weui_select" name="female">
+                    <option value="1" {if condition="$vo.female eq 1"}selected{/if}>男孩</option>
+                    <option value="2" {if condition="$vo.female eq 2"}selected{/if}>女孩</option>
+                </select>
+            </div>
+        </div>
+        <div class="weui_cell">
+            <div class="weui_cell_hd"><label for="" class="weui_label">孩子年龄</label></div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <input class="weui_input" type="text" name="age" value="{$vo.age}" style="width:20px;">岁
+            </div>
+        </div>
+    </div>
+    {/foreach}
+    <div class="weui_btn_area">
+        <a class="weui_btn weui_btn_primary" href="javascript:void(0)" id="showTooltips" onclick="subm()">确定</a>
+    </div>
+</div>
+</form>
+{include file="/Index/footer" /} 

@@ -1,0 +1,43 @@
+﻿{include file="/Index/header" /} 
+<body ontouchstart>
+<div class="weui_tab">
+    <div class="weui_tab_bd">
+      <div class="top">
+         <a href="javascript:history.go(-1)" class="achievement1"><i class="fa fa-chevron-left"></i></a>         
+         <h2>学习成就</h2> 
+          <div class="achievement2"><img src="__MOBILE__/images/medal.png"></div>
+          <div class="achievement3">
+          <ul>
+          <li><font>{$orderCounta}</font>范课</li>
+          <li><font>{$orderCountb}</font>亲子课</li>
+          <li><font>{$userList['score']}</font>积分</li>
+          <li><font>{$ZpCount}</font>我的作品数量</li>
+          </ul>
+          </div> 
+        </div>
+    <div class="achievement4">
+        <div class="weui_panel_bd">
+            <div class="weui_media_box weui_media_text">
+            <a href="{:url('/Mobile/Video/VideoDirectory', ['vd_sel' => 1])}" class="weui_btn weui_btn_mini weui_btn_primary button ">快速学习</a>
+                <h4 class="weui_media_title">范课 Lv{$videoCounta}</h4>
+                <p class="weui_media_desc">{$orderCounta}/{$videoCounta}课</p>
+                <div class="weui_media_info1">  
+                    <div class="weui_media_info2" style="width:{$bga}%;"></div>  
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="achievement4">
+        <div class="weui_panel_bd">
+            <div class="weui_media_box weui_media_text">
+            <a href="{:url('/Mobile/Video/VideoDirectory', ['vd_sel' => 2])}" class="weui_btn weui_btn_mini weui_btn_primary button ">快速学习</a>
+                <h4 class="weui_media_title">亲子课 Lv{$videoCountb}</h4>
+                <p class="weui_media_desc">{$orderCountb}/{$videoCountb}课</p>
+                <div class="weui_media_info1">  
+                    <div class="weui_media_info2" style="width:{$bgb}%;"></div>  
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{include file="/Index/footer" /} 

@@ -1,0 +1,16 @@
+{include file="/Index/header" /}
+<div class="idea">
+<span>文化理念</span>
+<p><a href="{:url('/index/index/Pic', ['p_sel' => 1])}">图文视频</a><a href="{:url('/index/index/News', ['n_sel' => 1])}">资讯</a><a href="{:url('/index/index/News', ['n_sel' => 2])}">国内美育理论</a><a href="{:url('/index/index/News', ['n_sel' => 3])}">国际美育理论</a><a href="{:url('/index/index/News', ['n_sel' => 4])}">董事长寄语</a><a href="{:url('/index/index/News', ['n_sel' => 5])}">专家指导</a><a href="{:url('/index/index/News', ['n_sel' => 6])}">百亿欧文化理念</a><a href="{:url('/index/index/News', ['n_sel' => 7])}">涂鸦报告</a></p>
+</div>
+<div class="news">
+<ul>
+{foreach name="picList" id="vo"}
+<li><span>{$title}</span>
+<a href="{:url('/index/index/PicView', ['p_sel' => $vo.p_sel,'p_id' => $vo.p_id])}"><img src="__PUBLIC__{$vo.p_pic}">
+<center>{$vo['p_title']|mb_substr=0,22,'utf-8'}</center></a></li>
+{/foreach}
+</ul>
+</div>
+<div class="page">{$picList->render()}</div>
+{include file="/Index/footer" /}

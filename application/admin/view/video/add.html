@@ -29,12 +29,27 @@
                         <div class="layui-input-block">
                             <input type="radio" name="v_lx" value="1" title="Flv格式">
                             <input type="radio" name="v_lx" value="2" title="Mp4格式" checked>
+                            <input type="radio" name="v_lx" value="3" title="Swf格式"> 备注：电脑版视频类型
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">班级类型</label>
+                        <div class="layui-input-block">
+                            <input type="radio" name="v_selb" value="1" title="大班" checked>
+                            <input type="radio" name="v_selb" value="2" title="中班">
+                            <input type="radio" name="v_selb" value="3" title="小班">
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">视频</label>
                         <div class="layui-input-block">
                             <input type="file" name="video">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">手机版视频</label>
+                        <div class="layui-input-block">
+                            <input type="file" name="videoa"> 备注：手机只能上传mp4
                         </div>
                     </div>
                     <div class="layui-form-item">
@@ -77,6 +92,7 @@
                         <div class="layui-input-block">
                             <input type="submit" class="layui-btn" value="保存">
                             <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                            <input type="submit" value="提交">
                         </div>
                     </div>
                 </form>

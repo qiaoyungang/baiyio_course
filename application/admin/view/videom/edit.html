@@ -1,0 +1,132 @@
+{extend name="base" /}
+{block name="body"}
+<div class="layui-body">
+    <!--tab标签-->
+    <div class="layui-tab layui-tab-brief">
+        <ul class="layui-tab-title">
+            <li class=""><a href="{:url('admin/videom/index')}">小班课管理</a></li>
+            <li class=""><a href="{:url('admin/videom/add')}">添加信息</a></li>
+            <li class="layui-this">编辑信息</li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <form class="layui-form form-container" action="{:url('admin/videom/update')}" method="post" enctype="multipart/form-data">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">标题</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="bt_title" value="{$videom.bt_title}" required  lay-verify="required" placeholder="请输入标题" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">缩略图</label>
+                        <div class="layui-input-block">
+                            {if condition="$videom.bt_pic neq ''"}
+                                <img src="__PUBLIC__{$videom.bt_pic}" width="300" height="200"><br>{/if}
+                            <input type="text" name="thumb" value="{$videom.bt_pic}" class="layui-input layui-input-inline" id="thumb">
+                            <input type="file" name="file" class="layui-upload-file">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">概述</label>
+                        <div class="layui-input-block">
+                            <textarea name="bt_text1" placeholder="" class="layui-textarea" id="bt_text1">{$videom.bt_text1}</textarea>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">课程大纲</label>
+                        <div class="layui-input-block">
+                            <textarea name="bt_text2" placeholder="" class="layui-textarea" id="bt_text2">{$videom.bt_text2}</textarea>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">老师</label>
+                        <div class="layui-input-block">
+                            <select name="t_id">
+                            {foreach name="team_list" item="vo"}
+                            <option value="{$vo.t_id}" {if condition="$videom.t_id==$vo.t_id"} selected {/if}>{$vo.t_title}</option>
+                            {/foreach}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">班级类型</label>
+                        <div class="layui-input-block">
+                            <input type="radio" name="bt_sel" value="1" title="大班" {if condition="$videom.bt_sel==1"} checked="checked"{/if}>
+                            <input type="radio" name="bt_sel" value="2" title="中班" {if condition="$videom.bt_sel==2"} checked="checked"{/if}>
+                            <input type="radio" name="bt_sel" value="3" title="小班" {if condition="$videom.bt_sel==3"} checked="checked"{/if}>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">班级结果</label>
+                        <div class="layui-input-block">
+                            <input type="radio" name="bt_bl" value="1" title="未开班" {if condition="$videom.bt_bl==1"} checked="checked"{/if}>
+                            <input type="radio" name="bt_bl" value="2" title="已开班" {if condition="$videom.bt_bl==2"} checked="checked"{/if}>
+                            <input type="radio" name="bt_bl" value="3" title="已结束" {if condition="$videom.bt_bl==3"} checked="checked"{/if}>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">开课时间</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="bt_time" value="{$videom.bt_time}" required  lay-verify="required" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">班级人数</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="bt_rs" value="{$videom.bt_rs}" required  lay-verify="required" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">授课方式</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="bt_sk" value="{$videom.bt_sk}" required  lay-verify="required" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">原价(/元)</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="bt_moneya" value="{$videom.bt_moneya}" required  lay-verify="required" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">抢购价(/元)</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="bt_moneyb" value="{$videom.bt_moneyb}" required  lay-verify="required" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">积分(/分)</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="bt_score" value="{$videom.bt_score}" required  lay-verify="required" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">购买成功显示QQ直播信息</label>
+                        <div class="layui-input-block">
+                            <textarea name="bt_text4" placeholder="" class="layui-textarea" id="bt_text4">{$videom.bt_text4}</textarea>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <input type="hidden" name="bt_id" value="{$videom.bt_id}">
+                            <input type="submit" class="layui-btn" value="更新">
+                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
+{block name="js"}
+<script src="__JS__/ueditorPHP/ueditor.config.js"></script>
+<script src="__JS__/ueditorPHP/ueditor.all.min.js"></script>
+{/block}
+{block name="script"}
+<script>
+    var ue = UE.getEditor('bt_text1');
+    var ue = UE.getEditor('bt_text2');
+    var ue = UE.getEditor('bt_text4');
+</script>
+{/block}

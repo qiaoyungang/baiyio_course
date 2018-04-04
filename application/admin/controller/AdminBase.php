@@ -32,7 +32,6 @@ class AdminBase extends Controller
      */
     protected function checkAuth()
     {
-
         if (!Session::has('id')) {
             $this->redirect('admin/login/index');
         }

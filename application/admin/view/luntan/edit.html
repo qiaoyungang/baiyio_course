@@ -1,0 +1,64 @@
+{extend name="base" /}
+{block name="body"}
+<style>
+    .layui-input-block{padding-top:8px;}
+</style> 
+<div class="layui-body">
+    <!--tab标签-->
+    <div class="layui-tab layui-tab-brief">
+        <ul class="layui-tab-title">
+            <li class=""><a href="{:url('admin/Luntan/index')}">信息管理</a></li>
+            <li class="layui-this">查看信息</li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <form class="layui-form form-container" action="{:url('admin/Luntan/update')}" method="post">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">对应视频</label>
+                        <div class="layui-input-block">{$video[0]["v_title"]}</div>
+                    </div>
+                    
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">上传人</label>
+                        <div class="layui-input-block">{$user[0]["username"]}</div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">留言内容</label>
+                        <div class="layui-input-block">{$luntan.l_text}</div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">上传时间</label>
+                        <div class="layui-input-block">{$luntan.l_datetime}</div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">是否显示</label>
+                        <div class="layui-input-block" style="padding-top:0px;">
+                            <input type="radio" name="l_off" value="1" {if condition="$luntan.l_off==1"} checked="checked"{/if} title="显示"> &nbsp;&nbsp;
+                            <input type="radio" name="l_off" value="2" {if condition="$luntan.l_off==2"} checked="checked"{/if} title="不显示"> 
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">回复内容</label>
+                        <div class="layui-input-block">
+                            <textarea name="l_h_text" lay-verify="l_h_text" placeholder="" class="layui-textarea">{$luntan.l_h_text}</textarea>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">发布时间</label>
+                        <div class="layui-input-block" style="padding-top:0px;">
+                            <input type="text" name="l_h_datetime" value="{$luntan.l_h_datetime}" class="layui-input datetime">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <input type="hidden" name="l_id" value="{$luntan.l_id}">
+                            <button class="layui-btn" lay-submit lay-filter="*">更新</button>
+                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}

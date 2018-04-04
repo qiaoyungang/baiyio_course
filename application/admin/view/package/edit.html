@@ -34,16 +34,6 @@
                             {foreach name="video_listb" item="vob"}
                             <input type="checkbox" name="p_video[]" value="{$vob.v_id}" title="{$vob.v_title}" {if condition="get_array_repeats(explode(',',$package.p_video),$vob.v_id) > 0"}checked{/if}>
                             {/foreach}<br>
-
-                            小班课程：
-                            {foreach name="video_listc" item="voc"}
-                            <input type="checkbox" name="p_video[]" value="{$voc.v_id}" title="{$voc.v_title}" {if condition="get_array_repeats(explode(',',$package.p_video),$voc.v_id) > 0"}checked{/if}>
-                            {/foreach}<br>
-
-                            幼儿园：
-                            {foreach name="video_listd" item="vod"}
-                            <input type="checkbox" name="p_video[]" value="{$vod.v_id}" title="{$vod.v_title}" {if condition="get_array_repeats(explode(',',$package.p_video),$vod.v_id) > 0"}checked{/if}>
-                            {/foreach}<br>
                         </div>
                     </div>
                     <div class="layui-form-item">

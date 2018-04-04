@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>百亿欧</title>
+<link href="__HOME__/css/index.css" type="text/css" rel="stylesheet">
+<link href="__HOME__/css/page.css" type="text/css" rel="stylesheet">
+<link href="__HOME__/css/font-awesome.min.css" type="text/css" rel="stylesheet">
+<script src="__HOME__/js/jquery.js"></script>
+<script language=javascript>
+$(document).ready(function(){
+    $(".nav li").each(function(){
+        if($(this).attr('id') == window.location.hash){
+            $(this).addClass('cur');
+        }
+    });
+});
+</script>
+</head>
+
+<body background="__HOME__/images/body.jpg">
+<div class="top2" >
+    <form name="form1" action="{:url('/index/Index/Search')}" method="post">
+    <div class="top1">
+        {if condition="session('username') eq null"}
+            <a href="{:url('/index/User/Regit')}">注册</a><a href="{:url('/index/User/Login')}">登录</a> 
+        {/if}
+        {if condition="session('username') neq null"}
+            欢迎您：{:session('username')} <a href="{:url('/index/User/UserContole')}">【进入个人中心】</a><a href="{:url('/index/User/UserOut')}">【退出】</a>
+        {/if}
+        <i class="fa fa-search"></i><input type="text" name="keyword"><input type="submit" name="button" value="查 询" style="width:50px;">
+    </div>
+    </form>
+    <div class="nav">
+        <img src="__HOME__/images/logo.png" class="logo">
+        <ul>
+            <li id="#1"><a href="{:url('/index/index')}#1">网站首页</a></li>
+            <li id="#2"><a href="{:url('/index/Index/Pic',['p_sel'=>1])}#2">文化理念</a></li>
+            <li id="#3"><a href="{:url('/index/Video/VideoDirectory',['vd_sel'=>1])}#3">美育课程</a></li>
+            <li id="#4"><a href="#">商城</a></li>
+            <li id="#5"><a href="#">论坛</a></li>
+            <li id="#6"><a href="{:url('/index/Index/News', ['n_sel' => 10])}#6">服务保障</a></li>
+            <li id="#7"><a href="{:url('/index/Index/Contact')}#7">联系我们</a></li>
+            <li id="#8"><a href="{:url('/index/Index/News', ['n_sel' => 9])}#8">公告</a></li>
+            <li id="#9"><a href="{:url('/index/Index/Text', ['t_id' => 1])}#9">合作加盟</a></li>
+        </ul>
+    </div>
+</div>

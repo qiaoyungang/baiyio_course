@@ -2,7 +2,6 @@
 namespace app\admin\controller;
 
 use app\admin\model\Course as CourseModel;
-use app\admin\model\Classt as ClasstModel;
 use think\Db;
 
 /**
@@ -19,7 +18,6 @@ class Course extends AdminBase
     {
         parent::_initialize();
         $this->course_model = new CourseModel();
-        $this->classt_model = new ClasstModel();
     }
 
     /**
@@ -30,10 +28,7 @@ class Course extends AdminBase
      */
     public function index($page = 1)
     {
-        $course_list  = $this->course_model->order(['c_id' => 'DESC'])->paginate(15, false, ['page' => $page]);
-        foreach($course_list as $n=>$var){
-            $course_list[$n]['voa']=$this->classt_model->where(array('c_id'=>$var['c_id']))->select();
-        }
+        $course_list  = $this->course_model->order(['bc_id' => 'DESC'])->paginate(15, false, ['page' => $page]);
         return $this->fetch('index', compact('course_list'));
     }
 
@@ -44,8 +39,7 @@ class Course extends AdminBase
      */
     public function add()
     {
-        $class_list  = $this->classt_model->order(['c_id' => 'ASC'])->select();
-        return $this->fetch('',compact('class_list'));
+        return $this->fetch('');
     }
 
     /**
@@ -78,8 +72,7 @@ class Course extends AdminBase
     public function edit($bc_id)
     {
         $course = $this->course_model->find($bc_id);
-        $class_list  = $this->classt_model->order(['c_id' => 'ASC'])->select();
-        return $this->fetch('edit', compact('course','class_list'));
+        return $this->fetch('edit', compact('course'));
     }
 
     /**

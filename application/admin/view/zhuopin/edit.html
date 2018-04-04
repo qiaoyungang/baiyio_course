@@ -9,18 +9,22 @@
         </ul>
         <div class="layui-tab-content">
             <div class="layui-tab-item layui-show">
+                <form class="layui-form form-container" action="{:url('admin/zhuopin/update')}" method="post">
                 <table class="layui-table">
                     <tr>
-                        <td width="200">上传人</td>
+                        <td width="240">上传人</td>
                         <td>{$user[0]["username"]}</td>
                     </tr>
                     <tr>
-                        <td>班级</td>
-                        <td>{$classt[0]["c_title"]}</td>
-                    </tr>
-                    <tr>
                         <td>对应学习视频</td>
-                        <td>{$video[0]["v_title"]}</td>
+                        <td>
+                            {if condition="$zhuopin.bt_id eq 0"}
+                                {$zhuopin.zp_class}
+                            {/if}
+                            {if condition="$zhuopin.bt_id neq 0"}
+                                {$videom[0]["bt_title"]}
+                            {/if}
+                        </td>
                     </tr>
                     <tr>
                         <td>留言内容</td>
@@ -35,8 +39,21 @@
                         <td>{$zhuopin.zp_datetime}</td>
                     </tr>
                     <tr>
+                        <td>是否推荐到美术馆下的百亿欧作品</td>
+                        <td><input type="radio" name="zp_sel" value="1" {if condition="$zhuopin.zp_sel==1"} checked="checked"{/if} title="不推荐"> &nbsp;&nbsp;
+                            <input type="radio" name="zp_sel" value="2" {if condition="$zhuopin.zp_sel==2"} checked="checked"{/if} title="推荐"> 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>查看留言及回复</td>
+                        <td>
+                            <a href="{:url('admin/ZhuopinMessage/index',['zp_id'=>$zhuopin.zp_id])}" target="_blank">查看/我要回复</a></td>
+                    </tr>
+                    <tr>
                         <td>操作</td>
-                        <td><a href="{:url('admin/ZhuopinMessage/index',['zp_id'=>$zhuopin.zp_id])}">查看/我要回复</a></td>
+                        <td>
+                            <input type="hidden" name="zp_id" value="{$zhuopin.zp_id}">
+                            <input type="submit" class="layui-btn" value="更新"></td>
                     </tr>
                 </table>
             </div>

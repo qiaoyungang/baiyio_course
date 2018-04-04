@@ -1,0 +1,21 @@
+{include file="/Index/header" /}
+<div class="title"><i class="fa fa-home fa-lg"></i> 作品</div>
+{foreach name="ZhuopinList" id="vo"}
+<div class="F_single">
+<center><img src="__PUBLIC__{$vo.zp_pic}"  style="max-width:100%"></center>
+<h1>《{$vo.zp_title}》{foreach name="vo['von']" item="subn"}{$subn.username}{/foreach}</h1>
+{$vo.zp_text}<br>
+<div class="bdsharebuttonbox" style="float:right;"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+</div>
+</div>
+
+<div class="S_review">
+<span>老师<br>点评</span>
+{foreach name="vo['vok']" item="subk"}
+{$subk.zm_message}
+{/foreach}
+</div>
+{/foreach}
+<div style="clear:both;margin-bottom:20px;"></div>
+{include file="/Index/footer" /}

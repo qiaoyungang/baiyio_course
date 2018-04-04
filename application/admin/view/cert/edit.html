@@ -21,6 +21,15 @@
                         </div>
                     </div>
                     <div class="layui-form-item">
+                        <label class="layui-form-label">证书</label>
+                        <div class="layui-input-block">
+                            {if condition="$cert.thumb neq ''"}
+                            <img src="__PUBLIC__{$cert.thumb}" width="300" height="200"><br>{/if}
+                            <input type="text" name="thumb" value="{$cert.thumb}" class="layui-input layui-input-inline" id="thumb">
+                            <input type="file" name="file" class="layui-upload-file">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
                         <div class="layui-input-block">
                             <input type="hidden" name="bc_id" value="{$cert.bc_id}">
                             <button class="layui-btn" lay-submit lay-filter="*">更新</button>

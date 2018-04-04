@@ -1,0 +1,42 @@
+{extend name="base" /}
+{block name="body"}
+<div class="layui-body">
+    <!--tab标签-->
+    <div class="layui-tab layui-tab-brief">
+        <ul class="layui-tab-title">
+            <li class="layui-this">百亿欧作品管理</li>
+            <li class=""></li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <table class="layui-table">
+                    <thead>
+                    <tr>
+                        <th>作品</th>
+                        <th>教师</th>
+                        <th>上传人</th>
+                        <th>对应学习视频</th>
+                        <th>上传时间</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {foreach name="zhuopin_list" item="vo"}
+                    <tr>
+                        <td><img src="__PUBLIC__{$vo.zp_pic}" width="200"></td>
+                        <td>{foreach name="vo['vat']" item="subt"}{$subt["t_title"]}{/foreach}</td>
+                        <td>{foreach name="vo['voa']" item="suba"}{$suba["username"]}{/foreach}</td>
+                        <td>{foreach name="vo['vak']" item="subk"}{$subk["bt_title"]}{/foreach}</td>
+                        <td>{$vo.zp_datetime}</td>
+                        <td><a href="{:url('admin/zhuopinm/update',['zp_id'=>$vo['zp_id']])}">撤销推荐</a></td>
+                    </tr>
+                    {/foreach}
+                    </tbody>
+                </table>
+                <!--分页-->
+                {$zhuopin_list->render()}
+            </div>
+        </div>
+    </div>
+</div>
+{/block}

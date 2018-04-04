@@ -14,7 +14,6 @@
                         <thead>
                         <tr>
                             <th>标题</th>
-                            <th>班级</th>
                             <th>操作</th>
                         </tr>
                         </thead>
@@ -22,7 +21,6 @@
                         {foreach name="course_list" item="vo"}
                         <tr>
                             <td>{$vo.bc_title}</td>
-                            <td>{foreach name="vo['voa']" item="suba"}{$suba["c_title"]}{/foreach}</td>
                             <td>
                                 <a href="{:url('admin/course/edit',['bc_id'=>$vo['bc_id']])}" class="layui-btn layui-btn-normal layui-btn-mini">编辑</a>
                                 <a href="{:url('admin/course/delete',['bc_id'=>$vo['bc_id']])}" class="layui-btn layui-btn-danger layui-btn-mini ajax-delete">删除</a>

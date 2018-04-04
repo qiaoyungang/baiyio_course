@@ -1,0 +1,52 @@
+{extend name="base" /}
+{block name="body"}
+<div class="layui-body">
+    <!--tab标签-->
+    <div class="layui-tab layui-tab-brief">
+        <ul class="layui-tab-title">
+            <li class=""><a href="{:url('admin/VideoClass/index')}">视频种类管理</a></li>
+            <li class="layui-this">添加信息</li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <form class="layui-form form-container" action="{:url('admin/VideoClass/save')}" method="post">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">种类名称</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="vc_title" value="" required  lay-verify="required" placeholder="请输入种类名称" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">大概简介</label>
+                        <div class="layui-input-block">
+                            <textarea name="vc_text" placeholder="（选填）请输入简介" class="layui-textarea"></textarea>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">排序</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="vc_count" value="1" required  lay-verify="required" placeholder="请输入整数" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">选择老师</label>
+                        <div class="layui-input-block">
+                            <select name="t_id">
+                            {foreach name="teamList" item="vo"}
+                            <option value="{$vo.t_id}">{$vo.t_title}</option>
+                            {/foreach}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button class="layui-btn" lay-submit lay-filter="*">保存</button>
+                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}

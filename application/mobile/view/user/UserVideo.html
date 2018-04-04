@@ -1,0 +1,42 @@
+﻿{include file="/Index/header" /} 
+<body ontouchstart>
+<div class="weui_tab">
+    <div class="weui_tab_bd">
+    <div class="weui_panel weui_panel_access">
+    <div class="weui_panel_hd">您可以购买视频数量：{$videosl}次</div>
+    <div class="weui_panel_bd">
+        {foreach name="OrderListB" id="vo"}
+            {if condition="$vo.v_id neq 0"}
+                {foreach name="vo['voa']" item="suba"}
+                {if condition="$vo.o_off eq 2"}
+                <a href="{:url('/Mobile/Video/VideoView', ['v_id' => $suba.v_id])}" class="weui_media_box weui_media_appmsg" target="_blank">
+                    <div class="weui_media_hd">
+                        <img class="weui_media_appmsg_thumb" src="__PUBLIC__{$suba.v_pic}" alt="">
+                    </div>
+                    <div class="weui_media_bd">
+                        <h4 class="weui_media_title">{$suba["v_title"]}</h4>
+                        <p class="weui_media_desc">{foreach name="suba['voaaa']" item="subaa"}{$subaa.vc_title}{/foreach}　|　{if condition="$suba.v_selb eq 1"}大班{/if}{if condition="$suba.v_selb eq 2"}中班{/if}{if condition="$suba.v_selb eq 3"}小班{/if} <font color="#FF0000">￥{$suba["v_money"]}元</font></p>
+                    </div>
+                    <div class="weui_media_hd" style="width:400px;">{if condition="$vo.o_off eq 1"}未支付成功{else /}已支付成功{/if} </div> 
+                </a>{/if}
+                {/foreach}
+            {/if}
+        {/foreach}
+    </div>
+    <div class="weui_panel_hd">【请选择购买视频】</div>
+    <div class="weui_panel_bd">
+        {foreach name="VideoList" id="vo"}
+        <a href="{:url('/Mobile/User/UserVideoSubmit', ['v_id' => $vo.v_id,'v_money' => $vo.v_money])}" class="weui_media_box weui_media_appmsg">
+            <div class="weui_media_hd">
+                <img class="weui_media_appmsg_thumb" src="__PUBLIC__{$vo.v_pic}" alt="">
+            </div>
+            <div class="weui_media_bd">
+                <h4 class="weui_media_title">【{foreach name="vo['voa']" item="suaa"}{$suaa.vc_title}{/foreach}】{$vo.v_title}</h4>
+            </div> 
+            <div class="weui_media_hd">【点击购买】</div> 
+        </a>
+        {/foreach}
+    </div>
+</div>
+</div>
+{include file="/Index/footer" /} 

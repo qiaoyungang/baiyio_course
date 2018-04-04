@@ -1,0 +1,66 @@
+{include file="/Index/header" /}
+<div class="S_title">{$vc_title}</div>
+<div class="class_text">
+{$vc_text}
+</div>
+
+<div class="F_class">
+{foreach name="VideoMList" id="vo"}    
+<a href class="F_1">
+<img src="__PUBLIC__{$vo.vd_pic}">
+<p class="F_2">
+    {if condition="$vo.vd_selb eq 1"}精品大班课{/if}
+    {if condition="$vo.vd_selb eq 2"}精品中班课{/if}
+    {if condition="$vo.vd_selb eq 3"}精品小班课{/if}
+</p>
+<h1 class="F_3">{$vo.vd_title}</h1>
+<p class="F_4">{$vo['vd_textb']|mb_substr=0,40,'utf-8'}<br><font color="#0eadb3">{$vo.vd_xs}</font><font color="#FF0000" style="float:right">￥{$vo.vd_moneya}元</font></p>
+</a>
+{/foreach}
+</div>
+
+<script language="javascript">
+    function selb(obj){
+        location.href='{:url("index/Video/VideoM")}?bt_bl='+obj+'&vd_sel='+{$vd_sel};
+    }
+    function shop(obja,objb){
+        location.href='{:url("index/Video/Shop")}?bt_id='+obja+'&bt_rs='+objb;
+    }
+</script>
+<div class="S_class">
+<h1>
+课程安排<br><font color="#FF0000" size="-1">tips:请根据自己合适的时间选择课程</font>
+<span>
+<select onchange="selb(this.value)">
+    <option value="1" {if condition="$bt_bl eq 1"}selected{/if}>未开班</option>
+    <option value="2" {if condition="$bt_bl eq 2"}selected{/if}>已开班</option>
+    <option value="3" {if condition="$bt_bl eq 3"}selected{/if}>已结束</option>
+</select>
+</span>
+</h1>
+
+<div class="S_curriculum">
+    {foreach name="VideoList" id="vo"}
+    <dl class="{$className}">
+    {foreach name="vo['voa']" item="subk"}<dt><img src="__PUBLIC__{$subk.t_pic}">{$subk.t_title}</dt>{/foreach}
+    <dd>
+    <span class="{$state}">{$title}</span>
+    <p><a href="{:url('/index/Video/VideoMView',['bt_id'=>$vo.bt_id,'vc_title'=>$vc_title])}"><font color="#0faeb4"><b>{$vo['bt_title']|mb_substr=0,15,'utf-8'}</b></font></a><br>
+    {$vo["bt_time"]}<br>
+    课程类型：{if condition="$vo.bt_sel eq 1"}大班课{/if}{if condition="$vo.bt_sel eq 2"}中班课{/if}{if condition="$vo.bt_sel eq 3"}小班课{/if}<br>
+    人数：{$vo['vob']}/{$vo.bt_rs}<br>
+    {if condition="$bt_bl neq 3"}<input type="button" value="立即订购" class="order4" onclick='shop({$vo["bt_id"]},{$vo["bt_rs"]})'>{/if}
+    </p>
+    </dd>
+    </dl>
+    {/foreach}
+</div>
+</div>
+
+<div class="S_teacher">
+    <h1>师资团队</h1>
+    {foreach name="teamList" id="vo"}
+    <a href="{:url('/index/index/TeamView', ['t_id' => $vo.t_id])}"><img src="__PUBLIC__{$vo.t_pic}"><b>{$vo.t_title}</b><br>{$vo.t_zw}</a>
+    {/foreach}
+</div>
+{include file="/Index/footer" /}

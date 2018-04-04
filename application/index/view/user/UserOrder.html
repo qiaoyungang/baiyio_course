@@ -1,0 +1,113 @@
+{include file="/User/header" /}
+<div class="main">
+	{include file="/User/left" /}
+	<div class="right">
+	<div id="outer">
+		<ul id="tab">
+			<li class="current">课程</li>
+			<li>商城</li>
+		</ul>
+		<div id="content">
+			<ul style="display:block">
+				<div class="my_order">
+				<h1><font>操作</font><font>状态</font>订单信息</h1>
+				{foreach name="OrderListB" id="vo"}
+					{if condition="$vo.v_id neq 0"}
+						{foreach name="vo['voa']" item="suba"}
+						<dl>
+							<h2>{$vo["o_datetime"]}</h2>
+							<dt><img src="__PUBLIC__{$suba.v_pic}"></dt>
+							<dd><font color="#285c01">{$suba["v_title"]}</font><br>
+							{foreach name="suba['voaaa']" item="subaa"}{$subaa.vc_title}{/foreach}　|　{if condition="$suba.v_selb eq 1"}大班{/if}{if condition="$suba.v_selb eq 2"}中班{/if}{if condition="$suba.v_selb eq 3"}小班{/if}<br>
+							<font color="#FF0000">￥{$suba["v_money"]}元</font></dd>
+							<dt>{if condition="$vo.o_off eq 1"}未支付成功{else /}已支付成功{/if}</dt>
+							<dt><a href="{:url('/index/User/OrderDel', ['o_id' => $vo['o_id']])}">删除此订单</a> | {if condition="$vo.o_off eq 2"}<a href="{:url('/index/Video/VideoView', ['v_id' => $suba.v_id])}" target="_blank">点击播放</a>{/if}</dt>
+						</dl>
+						{/foreach}
+					{/if}
+		
+					{if condition="$vo.bt_id neq 0"}
+						{foreach name="vo['vbb']" item="subb"}
+						<dl>
+							<h2>{$vo["o_datetime"]}</h2>
+							<dt>{foreach name="subb['vobbb']" item="subbb"}<a href="{:url('/index/Video/VideoMView', ['bt_id' => $subb.bt_id,'vc_title'=>$subbb.vc_title])}" target="_blank">{/foreach}<img src="__PUBLIC__{$subb.bt_pic}"></a></dt>
+							<dd>{foreach name="subb['vobbb']" item="subbb"}<a href="{:url('/index/Video/VideoMView', ['bt_id' => $subb.bt_id,'vc_title'=>$subbb.vc_title])}" target="_blank">{/foreach}<font color="#285c01">{$subb["bt_title"]}</font></a><br>
+							{foreach name="subb['vobbb']" item="subbb"}{$subbb.vc_title}{/foreach}　|　{if condition="$subb.bt_sel eq 1"}大班{/if}{if condition="$subb.bt_sel eq 2"}中班{/if}{if condition="$subb.bt_sel eq 3"}小班{/if}<br>
+							<font color="#FF0000">￥{$subb["bt_moneyb"]}元</font></dd>
+							<dt>{if condition="$vo.o_off eq 1"}未支付成功{else /}已支付成功{/if}</dt>
+							<dt>{if condition="$vo.o_off eq 1"}<a href="{:url('/index/User/OrderDel', ['o_id' => $vo['o_id']])}">删除此订单</a>{else /}{$subb.bt_text4}{/if}</dt>
+						</dl>
+						{/foreach}
+					{/if}
+				{/foreach}
+				</div>
+				<div style="clear:both;margin-top:40px;"></div>
+				{foreach name="OrderListC" id="vo"}
+					{foreach name="vo['voa']" item="suba"}
+					<div class="title"><center>【{$suba.vd_title}】 <a href="{:url('/index/User/OrderDel', ['o_id' => $vo['o_id']])}">【删除此订单】</a></center></div>
+					<div class="my_order">
+						<h1><font>操作</font><font>状态</font>订单信息</h1>
+						{foreach name="suba['vobbb']" item="subbb"}
+						<dl>
+							<h2>{$subbb["v_datetime"]}</h2>
+							<dt><img src="__PUBLIC__{$subbb.v_pic}"></dt>
+							<dd><font color="#285c01">{$subbb["v_title"]}</font><br>
+							{foreach name="suba['voaaa']" item="subaa"}{$subaa.vc_title}{/foreach}　|　{if condition="$subbb.v_selb eq 1"}大班{/if}{if condition="$subbb.v_selb eq 2"}中班{/if}{if condition="$subbb.v_selb eq 3"}小班{/if}<br>
+							<font color="#FF0000">￥{$subbb["v_money"]}元</font></dd>
+							<dt>{if condition="$vo.o_off eq 1"}未支付成功{else /}已支付成功{/if}</dt>
+							<dt>{if condition="$vo.o_off eq 2"}<a href="{:url('/index/Video/VideoView', ['v_id' => $subbb.v_id])}" target="_blank">点击播放</a>{/if}</dt>
+						</dl>
+						{/foreach}
+					</div>
+					{/foreach}
+				{/foreach}
+			</ul>
+
+			<ul>
+				<div class="my_order">
+					<h1><font>操作</font><font>状态</font>订单信息</h1>
+					<dl>
+					<h2>2018-03-16   14:47</h2>
+					<dt><a href="#"><img src="images/3.jpg"></a></dt>
+					<dd><a href="#"><font color="#285c01">百亿欧水性蜡笔涂鸦笔</font></a><br>
+					120*200套装　|大<br>
+					<font color="#FF0000" >￥100.00元</font></dd>
+					<dt>交易成功<br><a href="#">订单详情</a><br><a href="#">查看物流</a> </dt>
+					<dt><a href="#">删除</a></dt>
+					</dl>
+					<dl>
+					<h2>2018-03-16   14:47</h2>
+					<dt><a href="#"><img src="images/3.jpg"></a></dt>
+					<dd><a href="#"><font color="#285c01">百亿欧水性蜡笔涂鸦笔</font></a><br>
+					120*200套装　|大<br>
+					<font color="#FF0000" >￥100.00元</font></dd>
+					<dt>交易成功<br><a href="#">订单详情</a><br><a href="#">查看物流</a> </dt>
+					<dt><a href="#">删除</a></dt>
+					</dl>
+				</div>  
+			</ul>
+		</div>
+	</div>
+	<!-- html代码end -->
+	<script src="__HOME__/js/jquery.min.js"></script>
+	<script>
+		$(function(){
+			window.onload = function()
+			{
+				var $li = $('#tab li');
+				var $ul = $('#content ul');
+							
+				$li.click(function(){
+					var $this = $(this);
+					var $t = $this.index();
+					$li.removeClass();
+					$this.addClass('current');
+					$ul.css('display','none');
+					$ul.eq($t).css('display','block');
+				})
+			}
+		});
+	</script>
+	</div>
+</div>
+{include file="/User/footer" /}

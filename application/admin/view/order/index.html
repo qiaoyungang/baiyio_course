@@ -17,6 +17,7 @@
                             <th>购买人</th>
                             <th>购买时间</th>
                             <th>购买价格</th>
+                            <th>对应微平台商品订单号</th>
                             <th>操作</th>
                         </tr>
                         </thead>
@@ -24,15 +25,23 @@
                         {foreach name="order_list" item="vo"}
                         <tr>
                             <td>
-                                {if condition="$vo.p_id==0"}
+                                {if condition="$vo.v_id neq 0"}
                                     {foreach name="vo['vov']" item="suba"}{$suba["v_title"]}{/foreach}
-                                {else /}
-                                    {foreach name="vo['voo']" item="subc"}{$subc["p_title"]}{/foreach}
+                                {/if}
+                                {if condition="$vo.p_id neq 0"}
+                                    {foreach name="vo['voo']" item="subb"}{$subb["p_title"]}{/foreach}
+                                {/if}
+                                {if condition="$vo.bt_id neq 0"}
+                                    {foreach name="vo['vmm']" item="subc"}{$subc["bt_title"]}{/foreach}
+                                {/if}
+                                {if condition="$vo.vd_id neq 0"}
+                                    {foreach name="vo['vdd']" item="subd"}{$subd["vd_title"]}{/foreach}
                                 {/if}
                             </td>
                             <td>{foreach name="vo['voa']" item="subb"}{$subb["username"]}{/foreach}</td>
                             <td>{$vo.o_datetime}</td>
                             <td>{$vo.o_money}</td>
+                            <td>{$vo.transaction_id}</td>
                             <td>
                                 <a href="{:url('admin/order/edit',['o_id'=>$vo['o_id']])}" class="layui-btn layui-btn-normal layui-btn-mini">查看</a>
                                 <a href="{:url('admin/order/delete',['o_id'=>$vo['o_id']])}" class="layui-btn layui-btn-danger layui-btn-mini ajax-delete">删除</a>

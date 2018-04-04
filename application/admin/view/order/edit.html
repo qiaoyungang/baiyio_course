@@ -16,22 +16,20 @@
                     </tr>
                     <tr>
                         <td width="120" align="center">项目名称</td>
-                        {if condition="$order.p_id==0"}
-                        <td>
-                            {if condition="$order.v_sel==1"}【范课】{/if}
-                            {if condition="$order.v_sel==2"}【亲子课】{/if}
-                            {if condition="$order.v_sel==3"}【小班课】{/if}
-                            {if condition="$order.v_sel==4"}【幼儿园】{/if}
-                            {$video.v_title} 
-                        </td>
-                        {else /}
-                        <td>{$package.p_title}</td>{/if}
+                        {if condition="$order.v_id neq 0"}<td>{$video.v_title} </td>{/if}
+                        {if condition="$order.p_id neq 0"}<td>{$package.p_title}</td>{/if}
+                        {if condition="$order.bt_id neq 0"}<td>{$videom.bt_title}</td>{/if}
+                        {if condition="$order.vd_id neq 0"}<td>{$videoD.vd_title}</td>{/if}
                     </tr>
                     
                     <tr>
                         <td width="120" align="center">购买价格</td>
                         <td>{$order.o_money} 元</td>
                     </tr>   
+                    <tr>
+                        <td width="120" align="center">对应微平台商品订单号</td>
+                        <td>{$order.transaction_id}</td>
+                    </tr> 
                     <tr>
                         <td width="120" align="center">购买时间</td>
                         <td>{$order.o_datetime}</td>

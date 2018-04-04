@@ -1,0 +1,16 @@
+{include file="/Index/header" /}
+<div class="title"><i class="fa fa-home fa-lg"></i> 首页 > {$title}</div>
+<div class="notice">
+<ul>
+    {foreach name="newsList" id="vo"}
+    <li><a href="{:url('/index/Index/NewsView', ['n_id' => $vo.n_id,'n_sel' => $vo.n_sel])}"><img src="__PUBLIC__{$vo.n_pic}"></a>
+    <a href="{:url('/index/Index/NewsView', ['n_id' => $vo.n_id,'n_sel' => $vo.n_sel])}"><span>{$vo['n_title']}</span>
+    <p>{$vo.n_textb}</p></a>
+    <font>{$vo.n_datetime|strtotime|date="Y-m-d",###}</font>
+    </li>
+    {/foreach}
+</ul>
+</div>
+
+<div class="page">{$newsList->render()}</div>
+{include file="/Index/footer" /}

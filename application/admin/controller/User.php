@@ -2,7 +2,6 @@
 namespace app\admin\controller;
 
 use app\admin\model\User as UserModel;
-use app\admin\model\Classt as ClasstModel;
 use app\admin\model\Leave as LeaveModel;
 use think\Db;
 
@@ -15,14 +14,12 @@ class User extends AdminBase
 {
 
     protected $user_model;
-    protected $classt_model;
     protected $leave_model;
 
     protected function _initialize()
     {
         parent::_initialize();
         $this->user_model = new UserModel();
-        $this->classt_model = new ClasstModel();
         $this->leave_model = new LeaveModel();
     }
 
@@ -38,11 +35,8 @@ class User extends AdminBase
         if (!empty($keyword)) {
             $map['username'] = ['like', "%{$keyword}%"];
         }
-        
+        $map["status"]="1";
         $user_list  = $this->user_model->where($map)->order(['create_time' => 'DESC'])->paginate(15, false, ['page' => $page]);
-        foreach($user_list as $n=>$var){
-            $user_list[$n]['voa']=$this->classt_model->where(array('c_id'=>$var['c_id']))->select();
-        }
         return $this->fetch('index', compact('user_list','keyword'));
     }
 
@@ -54,7 +48,6 @@ class User extends AdminBase
     public function edit($id)
     {
         $user = $this->user_model->find($id);
-        $classt = $this->classt_model->select();
         $leave_list = $this->leave_model->select();
         return $this->fetch('edit', compact('user','classt','leave_list'));
     }
@@ -73,13 +66,14 @@ class User extends AdminBase
                 $data["password"]=md5($_POST['password']);
             }
             $data["mobile"]=$_POST['mobile'];
+            $data["age"]=$_POST['age'];
+            $data["female"]=$_POST['female'];
             $data["email"]=$_POST['email'];
             $data["status"]=$_POST['status'];
             $data["touxiang"]=$_POST['touxiang'];
             $data["score"]=$_POST['score'];
             $data["create_time"]=$_POST['create_time'];
             $data["money"]=$_POST['money'];
-            $data["c_id"]=$_POST['c_id'];
             $data["off"]=$_POST['off'];
             $data["bl_id"]=$_POST['bl_id'];
             if ($this->user_model->save($data, ['id' => $id]) !== false) {

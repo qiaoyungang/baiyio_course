@@ -1,0 +1,22 @@
+{include file="/User/header" /}
+<div class="main">
+    {include file="/User/left" /}
+    <div class="right">
+        <div class="title">收藏</div>
+        <div class="my_order">
+        <h1><font>操作</font><font>金额(元)</font>信息</h1>
+        {foreach name="CollList" id="vo"}
+            {foreach name="vo['voa']" item="suba"}
+            <dl class="my_collection">
+                <dt><a href="{:url('/index/Video/VideoView', ['v_id' => $suba.v_id])}" target="_blank"><img src="__PUBLIC__{$suba.v_pic}"></a></dt>
+                <dd><a href="{:url('/index/Video/VideoView', ['v_id' => $suba.v_id])}" target="_blank"><font color="#285c01">{$suba["v_title"]}</font></a><br>
+                {if condition="$suba.v_selb eq 1"}大班{/if}{if condition="$suba.v_selb eq 2"}中班{/if}{if condition="$suba.v_selb eq 3"}小班{/if}　|　{$suba["v_datetime"]}</dd>
+                <dt>￥{$suba["v_money"]}元 </dt>
+                <dt><a href="{:url('/index/User/UserCollectionDel', ['c_id' => $vo.c_id])}">取消收藏</a></dt>
+            </dl>
+            {/foreach}
+        {/foreach}
+        </div>
+    </div>
+</div>
+{include file="/User/footer" /}

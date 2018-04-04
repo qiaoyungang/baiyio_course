@@ -1,0 +1,49 @@
+{extend name="base" /}
+{block name="body"}
+<div class="layui-body">
+    <!--tab标签-->
+    <div class="layui-tab layui-tab-brief">
+        <ul class="layui-tab-title">
+            <li><a href="{:url('admin/video/index',['v_id'=>$v_id,'v_sel'=>$v_sel])}">返回【{$v_title}】管理</a></li>
+            <li class="layui-this">活动参照实施管理</li>
+            <li class=""><a href="{:url('admin/VideoRight/add',['v_id'=>$v_id,'v_sel'=>$v_sel,'v_title'=>$v_title])}">添加信息</a></li>
+        </ul>
+        <div class="layui-tab-content">
+            <form action="" method="post" class="ajax-form">
+                <button type="button" class="layui-btn layui-btn-danger layui-btn-small ajax-action" data-action="{:url('admin/VideoRight/delete',['v_id'=>$v_id,'v_sel'=>$v_sel,'v_title'=>$v_title])}">删除</button>
+                <div class="layui-tab-item layui-show">
+                    <table class="layui-table">
+                        <thead>
+                        <tr>
+                            <th style="width: 15px;"><input type="checkbox" class="check-all"></th>
+                            <th style="width: 30px;">排序</th>
+                            <th>环节</th>
+                            <th>名称</th>
+                            <th>时间</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {foreach name="vr_list" item="vo"}
+                        <tr>
+                            <td><input type="checkbox" name="ids[]" value="{$vo.vr_id}"></td>
+                            <td>{$vo.vr_count}</td>
+                            <td>{$vo.vr_name}</td>
+                            <td>{$vo.vr_mc}</td>
+                            <td>{$vo.vr_sj}</td>
+                            <td>
+                                <a href="{:url('admin/VideoRight/edit',['vr_id'=>$vo['vr_id'],'v_id'=>$v_id,'v_title'=>$v_title,'v_sel'=>$v_sel])}" class="layui-btn layui-btn-normal layui-btn-mini">编辑</a>
+                                <a href="{:url('admin/VideoRight/delete',['vr_id'=>$vo['vr_id'],'v_id'=>$v_id,'v_title'=>$v_title,'v_sel'=>$v_sel])}" class="layui-btn layui-btn-danger layui-btn-mini ajax-delete">删除</a>
+                            </td>
+                        </tr>
+                        {/foreach}
+                        </tbody>
+                    </table>
+                    <!--分页-->
+                    {$vr_list->render()}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{/block}

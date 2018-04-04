@@ -1,0 +1,39 @@
+﻿{include file="/Index/header" /} 
+<link rel="stylesheet" href="__MOBILE__/css/style.css"/>
+<body ontouchstart>
+<div class="weui_tab">
+    <div class="weui_tab_bd">
+ 	<div class="weui_cells_title">我的作品</div>
+	 <!--画廊 开始 -->
+	<form action="{:url('Mobile/User/UserWorksSubmit')}" method="post" name="form1" enctype="multipart/form-data">
+	<div class="my_works">
+		<ul>
+			<li><input type="button" class="myup" value="上传"></li>
+			<li><span>老师：</span>
+				<select name="t_id">
+					{foreach name="teamList" id="vo"}
+					<option value="{$vo.t_id}">{$vo.t_title}</option>
+					{/foreach}
+				</select>
+			</li>
+			<li><span>班级：</span><input type="text" name="zp_class" required  placeholder="请输入班级"></li>
+			<li><span>标题：</span><input type="text" name="zp_title" required  placeholder="请输入标题"></li>
+			<li><span>描述：</span><textarea name="zp_text" placeholder="（选填）请输入描述："></textarea></li>
+			<li><span>作品：</span><input type="file" name="zp_pic" required  placeholder="请上传作品"></li>
+			<li><span>&nbsp;</span><input type="submit" class="myup" value="确定"></li>
+		</ul>
+	</div>
+	</form>
+ 	<link rel="stylesheet" href="__MOBILE__/css/drawer.css">
+ 	<link rel="stylesheet" type="text/css" href="__MOBILE__/css/style.css"/>
+	<script type="text/javascript" src="__MOBILE__/js/jquery.min.js"></script>
+	<script src="__MOBILE__/js/jaliswall.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('.wall').jaliswall({ item: '.article' });
+		});
+	</script>	
+	<!--画廊 结束 -->
+	</div>
+</div>
+{include file="/Index/footer" /} 

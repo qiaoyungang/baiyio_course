@@ -1,0 +1,93 @@
+{include file="/Index/header" /}
+<!--[if lt IE 9]>
+<script src="__HOME__/js/html5.js"></script>
+<![endif]-->
+<script src="__HOME__/js/blocksit.min.js"></script>
+<script>
+$(document).ready(function() {
+
+	//blocksit define
+	$(window).load( function() {
+		$('#container').BlocksIt({
+			numOfCol: 4,
+			offsetX: 8,
+			offsetY: 8
+		});
+	});
+	
+	//window resize
+	var currentWidth = 1200;
+	$(window).resize(function() {
+		var winWidth = $(window).width();
+		var conWidth;
+		if(winWidth < 660) {
+			conWidth = 440;
+			col = 2
+		} else if(winWidth < 880) {
+			conWidth = 660;
+			col = 3
+		} else if(winWidth < 1200) {
+			conWidth = 880;
+			col = 4;
+		} else {
+			conWidth = 1200;
+			col = 4;
+		}
+		
+		if(conWidth != currentWidth) {
+			currentWidth = conWidth;
+			$('#container').width(conWidth);
+			$('#container').BlocksIt({
+				numOfCol: col,
+				offsetX: 8,
+				offsetY: 8
+			});
+		}
+	});
+});
+</script>
+
+<div class="title"><i class="fa fa-home fa-lg"></i> 首页 > 美术馆</div>
+<div class="idea">
+<span>美术馆</span>
+<p><a href="{:url('/index/index/Gallery', ['p_sel' =>2])}">中国名画</a><a href="{:url('/index/index/Gallery', ['p_sel' =>3])}">国外名画</a><a href="{:url('/index/index/Gallery', ['p_sel' =>4])}">百亿欧作品</a></p>
+</div>
+
+<div id="container">
+	<a class="grid">
+		<div class="imgholder">
+			{if condition="$p_sel eq 2"}<img src="__HOME__/images/msg1.jpg" />{/if}
+			{if condition="$p_sel eq 3"}<img src="__HOME__/images/msg2.jpg" />{/if}
+			{if condition="$p_sel eq 4"}<img src="__HOME__/images/msg3.jpg" />{/if}
+		</div>
+	</a>
+	{foreach name="picList" id="vo"}
+	{if condition="$p_sel neq 4"}
+	<a class="grid" href="{:url('/index/index/PicView', ['p_sel' => $vo.p_sel,'p_id' => $vo.p_id])}" target="_blank">
+	<div class="imgholder">
+		<img src="__PUBLIC__{$vo.p_pic}" />
+	</div>
+	<strong>《{$vo.p_title}》</strong>
+	<p>{$vo['p_textb']|mb_substr=0,15,'utf-8'}</p>
+	</a>
+	{/if}
+
+	{if condition="$p_sel eq 4"}
+	<a class="grid" href="{:url('/index/Video/ZhuopinView', ['zp_id' => $vo.zp_id])}" target="_blank">		
+	<div class="imgholder">
+		<img src="__PUBLIC__{$vo.zp_pic}" />
+	</div>
+	<strong>{$vo.zp_title}</strong>
+		<p>
+		{foreach name="userList" item="subn"}
+			{if condition="$subn.id eq $vo.user_id"}
+			发表人：{$subn.username}
+			{/if}
+		{/foreach}
+		</p>
+	</a>
+	{/if}
+	{/foreach}
+</div>
+<div class="page">{$picList->render()}</div>
+{include file="/Index/footer" /}

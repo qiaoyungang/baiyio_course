@@ -1,0 +1,12 @@
+{include file="/Index/header" /}
+<div class="title"><i class="fa fa-home fa-lg"></i> {$title}</div>
+<div class="news" style="min-height:500px;">
+<h1>{$Reulst.n_title}</h1>
+<h4>发布时间：{$Reulst.n_datetime|strtotime|date="Y年m月d日",###}</h4>
+{$Reulst.n_text}
+<hr>
+{foreach name="newsList" id="vo" key="i"}
+<a href="{:url('/index/Index/NewsView', ['n_id' => $vo.n_id,'n_sel' => $vo.n_sel])}">》{$vo.n_title}</a><br>
+{/foreach}
+</div>
+{include file="/Index/footer" /}

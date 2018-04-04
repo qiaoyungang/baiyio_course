@@ -1,0 +1,62 @@
+﻿{include file="/Index/header" /} 
+<body ontouchstart>
+<div class="weui_tab">
+    <div class="weui_tab_bd">
+      <div class="top">
+      <a href="#" class="top1">
+        <i class="fa fa-user-circle"></i> {$username} <font color="#00CC99">P</font> {$orderCounta} 　<font color="#00CCFF">C</font> {$orderCountb}
+      </a>
+      <div class="top2"><img src="__PUBLIC__{$touxiang}"><br> {$username}</div>
+      <div class="top3">
+      <a href="{:url('/mobile/User/Game')}" class="weui_btn weui_btn_primary">马上开始</a>
+      </div>
+    </div>
+    <div class="nav1">
+        <ul>
+            <li><a href="{:url('/mobile/index/Pic', ['p_sel' => 1])}"> <i class="fa fa-play-circle"></i><br>图文视频</a></li>
+            <li><a href="{:url('/mobile/index/Gallery', ['p_sel' => 2])}"> <i class="fa fa-photo"></i><br>美术馆</a></li>
+            <li><a href="{:url('/mobile/index/Team', ['t_sel' => 2])}"> <i class="fa fa-user-plus"></i><br>师资团队</a></li>
+            <li><a href="{:url('/mobile/index/News', ['n_sel' => 9])}"> <i class="fa fa-newspaper-o"></i><br>公告新闻</a></li>
+        </ul>
+    </div>
+
+
+    <div class="weui_panel_bd index">
+        <a href="{:url('/mobile/Video/Video', ['vd_sel' => 1])}" class="weui_media_box weui_media_appmsg">
+            <div class="weui_media_hd">
+                <img class="weui_media_appmsg_thumb" src="__MOBILE__/images/1.jpg" alt="">
+            </div>
+            <div class="weui_media_bd">
+                <h4 class="weui_media_title">范课 Lv{$videoCounta}</h4>
+                <p class="weui_media_desc">{$orderCounta}/{$videoCounta}课</p>
+            </div>
+        </a>
+    </div>
+    <div class="weui_panel_bd index">
+        <a href="{:url('/mobile/Video/Video', ['vd_sel' => 2])}" class="weui_media_box weui_media_appmsg">
+            <div class="weui_media_hd">
+                <img class="weui_media_appmsg_thumb" src="__MOBILE__/images/2.jpg" alt="">
+            </div>
+            <div class="weui_media_bd">
+                <h4 class="weui_media_title">亲子课 Lv{$videoCountb}</h4>
+                <p class="weui_media_desc">{$orderCountb}/{$videoCountb}课</p>
+            
+            </div>
+        </a>
+    </div>
+    <div class="weui_panel_bd index">
+        <a href="{:url('/mobile/index/News', ['n_sel' => 6])}" class="weui_media_box weui_media_appmsg">
+            <div class="weui_media_hd">
+                <img class="weui_media_appmsg_thumb" src="__MOBILE__/images/3.jpg" alt="">
+            </div>
+            <div class="weui_media_bd">
+                <h4 class="weui_media_title">文化理念</h4>
+            
+            </div>
+        </a>
+    </div>
+
+
+    </div>
+{include file="/Index/footer" /}    
+    

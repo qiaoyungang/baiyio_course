@@ -41,7 +41,9 @@ class Pic extends AdminBase
         if($p_sel=="1"){
             $title="图文视频";
         }elseif($p_sel=="2"){
-            $title="美术馆";
+            $title="中国名画";
+        }elseif($p_sel=="3"){
+            $title="国外名画";
         }
         $pic_list  = $this->pic_model->field($field)->where($map)->order(['p_datetime' => 'DESC'])->paginate(15, false, ['page' => $page]);
         return $this->fetch('index', compact('pic_list','keyword','title','p_sel'));
@@ -65,6 +67,7 @@ class Pic extends AdminBase
         if ($this->request->isPost()) {
             $data["p_title"]=$_POST['p_title'];
             $data["p_text"]=$_POST['p_text'];
+            $data["p_textb"]=$_POST['p_textb'];
             $data["p_datetime"]=$_POST['p_datetime'];
             $data["p_pic"]=$_POST['thumb'];
             $data["p_sel"]=$_POST['p_sel'];

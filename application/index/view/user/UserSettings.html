@@ -1,0 +1,19 @@
+{include file="/User/header" /}
+<div class="main">
+    {include file="/User/left" /}
+    <form action="{:url('index/User/UserSettingsSubmit')}" method="post" name="form1">
+    <div class="right">
+        <div class="title">安全设置</div>
+        <div class="my_personal">
+        您的基础信息<br>会员名：{$userList.mobile}<br>
+        您的昵称：{$userList.username}
+        <ul>
+            <li><span>旧密码：</span><input type="password" name="password"></li>
+            <li><span>重置密码：</span><input type="password" name="new_password"></li>
+            <li><span>&nbsp;</span><input type="submit" class="mybutton" value="保存"></li>
+        </ul>
+        </div>
+    </div>
+    </form>
+</div>
+{include file="/User/footer" /}

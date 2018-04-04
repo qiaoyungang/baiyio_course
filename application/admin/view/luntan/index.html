@@ -1,0 +1,45 @@
+{extend name="base" /}
+{block name="body"}
+<div class="layui-body">
+    <!--tab标签-->
+    <div class="layui-tab layui-tab-brief">
+        <ul class="layui-tab-title">
+            <li class="layui-this">所有评论管理</li>
+            <li class=""></li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <table class="layui-table">
+                    <thead>
+                    <tr>
+                        <th style="text-align:center;">视频名称</th>
+                        <th style="text-align:center;">发布人</th>
+                        <th style="text-align:center;">发布时间</th>
+                        <th style="text-align:center;">是否显示</th>
+                        <th style="text-align:center;">是否已回复</th>
+                        <th style="text-align:center;">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {foreach name="luntan_list" item="vo"}
+                    <tr>
+                        <td align='center'>{foreach name="vo['voa']" item="subt"}{$subt["username"]}{/foreach}</td>
+                        <td align='center'>{foreach name="vo['vob']" item="suba"}{$suba["v_title"]}{/foreach}</td>
+                        <td align='center'>{$vo.l_datetime}</td>
+                        <td align='center'>{if condition="$vo.l_off==1"}<font color="red">【显示】</font>{/if}{if condition="$vo.l_off==2"}【不显示】{/if}</td>
+                        <td align='center'>{if condition="$vo.l_h_text neq null"}【已回复】 {else/}【未回复】{/if}</td>
+                        <td align='center'>
+                            <a href="{:url('admin/Luntan/edit',['l_id'=>$vo['l_id']])}" class="layui-btn layui-btn-normal layui-btn-mini">查看</a>
+                            <a href="{:url('admin/Luntan/delete',['l_id'=>$vo['l_id']])}" class="layui-btn layui-btn-danger layui-btn-mini ajax-delete">删除</a>
+                        </td>
+                    </tr>
+                    {/foreach}
+                    </tbody>
+                </table>
+                <!--分页-->
+                {$luntan_list->render()}
+            </div>
+        </div>
+    </div>
+</div>
+{/block}

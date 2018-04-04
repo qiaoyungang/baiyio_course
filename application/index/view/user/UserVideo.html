@@ -1,0 +1,57 @@
+{include file="/User/header" /}
+<div class="main">
+    {include file="/User/left" /}
+    <div class="right">
+        <div class="title">账户信息</div>
+        <div class="right1">
+            <dl>
+                <dd>您可以购买视频数量：{$videosl}次</dd>
+            </dl>
+        </div>
+    <div class="title">我的订单</div>
+    <div class="my_order">
+        <h1><font>操作</font><font>状态</font>订单信息</h1>
+        {foreach name="OrderListB" id="vo"}
+            {if condition="$vo.v_id neq 0"}
+                {foreach name="vo['voa']" item="suba"}
+                <dl>
+                    <h2>{$vo["o_datetime"]}</h2>
+                    <dt><img src="__PUBLIC__{$suba.v_pic}"></dt>
+                    <dd><font color="#285c01">{$suba["v_title"]}</font><br>
+                    {foreach name="suba['voaaa']" item="subaa"}{$subaa.vc_title}{/foreach}　|　{if condition="$suba.v_selb eq 1"}大班{/if}{if condition="$suba.v_selb eq 2"}中班{/if}{if condition="$suba.v_selb eq 3"}小班{/if}<br>
+                    <font color="#FF0000">￥{$suba["v_money"]}元</font></dd>
+                    <dt>{if condition="$vo.o_off eq 1"}未支付成功{else /}已支付成功{/if}</dt>
+                    <dt>{if condition="$vo.o_off eq 2"}<a href="{:url('/index/Video/VideoView', ['v_id' => $suba.v_id])}" target="_blank">点击播放</a>{/if}</dt>
+                </dl>
+                {/foreach}
+            {/if}
+
+            {if condition="$vo.bt_id neq 0"}
+                {foreach name="vo['vbb']" item="subb"}
+                <dl>
+                    <h2>{$vo["o_datetime"]}</h2>
+                    <dt>{foreach name="subb['vobbb']" item="subbb"}<a href="{:url('/index/Video/VideoMView', ['bt_id' => $subb.bt_id,'vc_title'=>$subbb.vc_title])}" target="_blank">{/foreach}<img src="__PUBLIC__{$subb.bt_pic}"></a></dt>
+                    <dd>{foreach name="subb['vobbb']" item="subbb"}<a href="{:url('/index/Video/VideoMView', ['bt_id' => $subb.bt_id,'vc_title'=>$subbb.vc_title])}" target="_blank">{/foreach}<font color="#285c01">{$subb["bt_title"]}</font></a><br>
+                    {foreach name="subb['vobbb']" item="subbb"}{$subbb.vc_title}{/foreach}　|　{if condition="$subb.bt_sel eq 1"}大班{/if}{if condition="$subb.bt_sel eq 2"}中班{/if}{if condition="$subb.bt_sel eq 3"}小班{/if}<br>
+                    <font color="#FF0000">￥{$subb["bt_moneyb"]}元</font></dd>
+                    <dt>{if condition="$vo.o_off eq 1"}未支付成功{else /}已支付成功{/if}</dt>
+                    <dt>{if condition="$vo.o_off eq 2"}{$subb.bt_text4}{/if}</dt>
+                </dl>
+                {/foreach}
+            {/if}
+        {/foreach}
+	</div>
+
+
+	<div class="title">选择要购买的视频</div>
+	<div class="my_works">
+		{foreach name="VideoList" id="vo"}
+		<a href="{:url('/index/User/UserVideoSubmit', ['v_id' => $vo.v_id,'v_money' => $vo.v_money])}" style="line-height:22px;"><img src="__PUBLIC__{$vo.v_pic}"><center>【{foreach name="vo['voa']" item="suaa"}{$suaa.vc_title}{/foreach}】{$vo.v_title}<br>【点击购买】</center></a>
+		{/foreach}
+	</div>
+
+
+
+    </div>
+</div>
+{include file="/User/footer" /}

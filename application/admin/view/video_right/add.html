@@ -1,0 +1,94 @@
+{extend name="base" /}
+{block name="body"}
+<div class="layui-body">
+    <!--tab标签-->
+    <div class="layui-tab layui-tab-brief">
+        <ul class="layui-tab-title">
+            <li class=""><a href="{:url('admin/VideoRight/index',['v_id'=>$v_id,'v_title'=>$v_title,'v_sel'=>$v_sel])}">活动参照实施</a></li>
+            <li class="layui-this">添加视频</li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <form class="layui-form form-container" action="{:url('admin/VideoRight/save')}" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="v_id" value="{$v_id}">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">环节</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="vr_name" value="" required  lay-verify="required" placeholder="请输入环节" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">名称</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="vr_mc" value="" required  lay-verify="required" placeholder="请输入名称" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">时间</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="vr_sj" value="" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">主要内容与事项</label>
+                        <div class="layui-input-block">
+                            <textarea name="vr_texta" placeholder="" class="layui-textarea" id="vr_texta"></textarea>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">教学目的</label>
+                        <div class="layui-input-block">
+                            <textarea name="vr_textb" placeholder="" class="layui-textarea" id="vr_textb"></textarea>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">道具及使用</label>
+                        <div class="layui-input-block">
+                            <textarea name="vr_textc" placeholder="" class="layui-textarea" id="vr_textc"></textarea>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">顾问理念传达</label>
+                        <div class="layui-input-block">
+                            <textarea name="vr_textd" placeholder="" class="layui-textarea" id="vr_textd"></textarea>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">备注</label>
+                        <div class="layui-input-block">
+                            <textarea name="vr_texte" placeholder="" class="layui-textarea" id="vr_texte"></textarea>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">排序</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="vr_count" value="1" required  lay-verify="required" placeholder="请输入排序" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <input type="submit" class="layui-btn" value="保存">
+                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
+{block name="js"}
+<script src="__JS__/ueditorPHP/ueditor.config.js"></script>
+<script src="__JS__/ueditorPHP/ueditor.all.min.js"></script>
+{/block}
+{block name="script"}
+<script>
+    $(function() {
+        var ue = UE.getEditor('vr_texta');
+        var ue = UE.getEditor('vr_textb');
+        var ue = UE.getEditor('vr_textc');
+        var ue = UE.getEditor('vr_textd');
+        var ue = UE.getEditor('vr_texte');
+    });
+</script>
+{/block}

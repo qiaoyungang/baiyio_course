@@ -1,0 +1,53 @@
+{extend name="base" /}
+{block name="body"}
+<div class="layui-body">
+    <!--tab标签-->
+    <div class="layui-tab layui-tab-brief">
+        <ul class="layui-tab-title">
+            <li class=""><a href="{:url('admin/VideoClass/index')}">视频种类管理</a></li>
+            <li class="layui-this">编辑信息</li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <form class="layui-form form-container" action="{:url('admin/VideoClass/update')}" method="post">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">标题</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="vc_title" value="{$datab.vc_title}" required  lay-verify="required" placeholder="请输入种类名称" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">大概简介</label>
+                        <div class="layui-input-block">
+                            <textarea name="vc_text" placeholder="（选填）请输入简介" class="layui-textarea">{$datab.vc_text}</textarea>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">排序</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="vc_count" value="{$datab.vc_count}" required  lay-verify="required" placeholder="请输入整数" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">老师</label>
+                        <div class="layui-input-block">
+                            <select name="t_id">
+                            {foreach name="teamList" item="vo"}
+                            <option value="{$vo.t_id}" {if condition="$datab.t_id==$vo.t_id"} selected {/if}>{$vo.t_title}</option>
+                            {/foreach}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <input type="hidden" name="vc_id" value="{$datab.vc_id}">
+                            <button class="layui-btn" lay-submit lay-filter="*">更新</button>
+                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}

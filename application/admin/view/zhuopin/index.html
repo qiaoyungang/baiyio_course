@@ -14,7 +14,6 @@
                     <tr>
                         <th>教师</th>
                         <th>上传人</th>
-                        <th>班级</th>
                         <th>对应学习视频</th>
                         <th>上传时间</th>
                         <th>操作</th>
@@ -25,8 +24,10 @@
                     <tr>
                         <td>{foreach name="vo['vat']" item="subt"}{$subt["t_title"]}{/foreach}</td>
                         <td>{foreach name="vo['voa']" item="suba"}{$suba["username"]}{/foreach}</td>
-                        <td>{foreach name="vo['vam']" item="subm"}{$subm["c_title"]}{/foreach}</td>
-                        <td>{foreach name="vo['vak']" item="subk"}{$subk["v_title"]}{/foreach}</td>
+                        <td>
+                            {if condition="$vo.bt_id eq 0"}{$vo.zp_class}{/if}
+                            {if condition="$vo.bt_id neq 0"}{foreach name="vo['vamm']" item="submm"}{$submm["bt_title"]}{/foreach}{/if}    
+                        </td>
                         <td>{$vo.zp_datetime}</td>
                         <td>
                             <a href="{:url('admin/zhuopin/edit',['zp_id'=>$vo['zp_id']])}" class="layui-btn layui-btn-normal layui-btn-mini">查看</a>

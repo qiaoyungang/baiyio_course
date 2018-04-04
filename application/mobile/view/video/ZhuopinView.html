@@ -1,0 +1,17 @@
+﻿{include file="/Index/header" /}
+<body style="background-color:#FFF">
+<div class="weui_tab">
+    <div class="weui_tab_bd">
+        <article class="weui_article">
+            {foreach name="ZhuopinList" id="vo"}
+            <h1><b>{$vo.zp_title}</b></h1>
+            <section>
+            <h3>foreach name="vo['von']" item="subn"}{$subn.username}{/foreach} <font color="#0066CC">{$vo.zp_datetime|strtotime|date="Y年m月d日",###}</font></h3>
+            <p align="center"><img src="__PUBLIC__{$vo.zp_pic}" height="400"></p>
+            {$vo.zp_text}
+            </section>
+            {/foreach}
+        </article>   
+    </div>
+</div>
+{include file="/Index/footer" /}

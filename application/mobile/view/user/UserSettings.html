@@ -1,0 +1,28 @@
+﻿{include file="/Index/header" /} 
+<body ontouchstart>
+<div class="weui_tab">
+ <div class="weui_tab_bd">
+   <div class="weui_cells_title">安全设置</div>
+   <form action="{:url('mobile/User/UserSettingsSubmit')}" method="post" name="form1">
+   <div class="weui_cells weui_cells_form">
+        
+        <div class="weui_cell">
+            <div class="weui_cell_hd"><label class="weui_label">原始密码</label></div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <input class="weui_input" type="password" pattern="[0-9]*" placeholder="请输入原始密码" name="password"/>
+            </div>
+        </div>
+        <div class="weui_cell">
+            <div class="weui_cell_hd"><label class="weui_label">重置密码</label></div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <input class="weui_input" type="password" pattern="[0-9]*" placeholder="请输入新密码" name="new_password"/>
+            </div>
+        </div>
+    </div>
+    <div class="weui_btn_area">
+        <input type="submit" class="weui_btn weui_btn_primary" value="保存">
+    </div>
+    </form>
+    </div>
+   </div> 
+{include file="/Index/footer" /} 

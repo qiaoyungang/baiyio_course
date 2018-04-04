@@ -1,0 +1,57 @@
+﻿{include file="/Index/header" /} 
+<link href="__MOBILE__/css/timeline.css" rel="stylesheet" type="text/css" />
+<body>
+{foreach name="videoResult" id="videoResult"}
+<header>
+<video src="__PUBLIC__{$videoResult.v_href_other}" width="100%" height="200"  controls="controls"></video>
+</header>
+{/foreach}
+
+<section id="cd-timeline" class="cd-container">
+	{foreach name="vr_list" id="voa" key="k"}
+	<div class="cd-timeline-block">
+		<div {if condition="$k eq 0"}class="cd-timeline-img cd-picture"{/if}{if condition="$k eq 1"}class="cd-timeline-img cd-movie"{/if}{if condition="$k eq 2"}class="cd-timeline-img cd-location"{/if}{if condition="$k eq 3"}class="cd-timeline-img cd-graffiti"{/if}{if condition="$k eq 4"}class="cd-timeline-img cd-share"{/if}>
+			{$voa.vr_name}
+		</div><!-- cd-timeline-img -->
+		<div class="cd-timeline-content">
+			<h2>主要内容与事项</h2>
+			{$voa.vr_texta}
+			<h2>教学目的</h2>
+			{$voa.vr_textb}
+			<h2>道具及使用</h2>
+			{$voa.vr_textc}
+			<h2>理念传达</h2>
+			{$voa.vr_textd}
+			<h2>备注</h2>
+			{$voa.vr_texte}
+		</div> <!-- cd-timeline-content -->
+	</div> <!-- cd-timeline-block -->
+	{/foreach}
+	
+</section> <!-- cd-timeline -->
+	
+<script>
+$(function(){
+	var $timeline_block = $('.cd-timeline-block');
+	//hide timeline blocks which are outside the viewport
+	$timeline_block.each(function(){
+		if($(this).offset().top > $(window).scrollTop()+$(window).height()*0.75) {
+			$(this).find('.cd-timeline-img, .cd-timeline-content').addClass('is-hidden');
+		}
+	});
+	//on scolling, show/animate timeline blocks when enter the viewport
+	$(window).on('scroll', function(){
+		$timeline_block.each(function(){
+			if( $(this).offset().top <= $(window).scrollTop()+$(window).height()*0.75 && $(this).find('.cd-timeline-img').hasClass('is-hidden') ) {
+				$(this).find('.cd-timeline-img, .cd-timeline-content').removeClass('is-hidden').addClass('bounce-in');
+			}
+		});
+	});
+});
+</script>
+
+
+
+
+</body>
+</html>

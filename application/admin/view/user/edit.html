@@ -11,7 +11,13 @@
             <div class="layui-tab-item layui-show">
                 <form class="layui-form form-container" action="{:url('admin/user/update')}" method="post">
                     <div class="layui-form-item">
-                        <label class="layui-form-label">用户名</label>
+                        <label class="layui-form-label">联系号码</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="mobile" value="{$user.mobile}" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">昵称</label>
                         <div class="layui-input-block">
                             <input type="text" name="username" value="{$user.username}" class="layui-input">
                         </div>
@@ -23,15 +29,22 @@
                         </div>
                     </div>
                     <div class="layui-form-item">
-                        <label class="layui-form-label">联系号码</label>
+                        <label class="layui-form-label">年龄</label>
                         <div class="layui-input-block">
-                            <input type="text" name="mobile" value="{$user.mobile}" class="layui-input">
+                            <input type="text" name="age" value="{$user.age}" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">邮箱地址</label>
                         <div class="layui-input-block">
                             <input type="text" name="email" value="{$user.email}" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">性别</label>
+                        <div class="layui-input-block">
+                            <input type="radio" name="female" value="1" title="男" {if condition="$user.female==1"} checked="checked"{/if}>
+                            <input type="radio" name="female" value="2" title="女" {if condition="$user.female==2"} checked="checked"{/if}>
                         </div>
                     </div>
                     <div class="layui-form-item">
@@ -59,16 +72,6 @@
                         <label class="layui-form-label">创建时间</label>
                         <div class="layui-input-block">
                             <input type="text" name="create_time" value="{$user.create_time}" class="layui-input datetime">
-                        </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">所在班级</label>
-                        <div class="layui-input-block">
-                            <select name="c_id">
-                                {foreach name="classt" item="vo"}
-                                <option value="{$vo.c_id}" {if condition="$user.c_id==$vo.c_id"} selected{/if}>{$vo.c_title}</option>
-                                {/foreach}
-                            </select>
                         </div>
                     </div>
                     <div class="layui-form-item">

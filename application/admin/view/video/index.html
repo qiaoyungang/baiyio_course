@@ -4,14 +4,11 @@
     <!--tab标签-->
     <div class="layui-tab layui-tab-brief">
         <ul class="layui-tab-title">
+            <li><a href="{:url('admin/VideoDirectory/index',['vd_sel'=>$v_sel])}">{$title}视频总目录管理</a></li>
             <li class="layui-this">视频管理</li>
             <li class=""><a href="{:url('admin/video/add',['v_sel'=>$v_sel])}">添加视频</a></li>
         </ul>
         <div class="layui-tab-content">
-
-            
-            <hr>
-
             <form action="" method="post" class="ajax-form">
                 <button type="button" class="layui-btn layui-btn-danger layui-btn-small ajax-action" data-action="{:url('admin/video/delete',['v_sel'=>$v_sel])}">删除</button>
                 <div class="layui-tab-item layui-show">
@@ -33,7 +30,7 @@
                         <tr>
                             <td><input type="checkbox" name="ids[]" value="{$vo.v_id}"></td>
                             <td>{$vo.v_id}</td>
-                            <td>{$vo.v_title}</td>
+                            <td>{if condition="$vo.v_selb eq 1"}【大班】{/if}{if condition="$vo.v_selb eq 2"}【中班】{/if}{if condition="$vo.v_selb eq 3"}【小班】{/if}{$vo.v_title}</td>
                             <td>{$vo.v_money}</td>
                             <td>{$vo.v_time}</td>
                             <td>{$vo.v_score}</td>
@@ -41,6 +38,7 @@
                             <td>
                                 <a href="{:url('admin/video/edit',['v_id'=>$vo['v_id'],'v_sel'=>$vo['v_sel']])}" class="layui-btn layui-btn-normal layui-btn-mini">编辑</a>
                                 <a href="{:url('admin/video/delete',['v_id'=>$vo['v_id'],'v_sel'=>$vo['v_sel']])}" class="layui-btn layui-btn-danger layui-btn-mini ajax-delete">删除</a>
+                                <a href="{:url('admin/videoRight/index',['v_id'=>$vo['v_id'],'v_sel'=>$vo['v_sel'],'v_title'=>$vo['v_title']])}" class="layui-btn layui-btn-normal layui-btn-mini">编辑活动参照实施</a>
                             </td>
                         </tr>
                         {/foreach}

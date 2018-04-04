@@ -1,0 +1,41 @@
+﻿{include file="/Index/header" /} 
+<body ontouchstart>
+<div class="weui_tab">
+    <div class="weui_tab_bd" >
+        <div class="weui_navbar">
+			<div class="weui_navbar_item weui_bar_item_on">
+				美术馆
+            </div>
+        </div>
+<div class="weui_tab_bd">
+<!--画廊 开始 -->
+<div class="wrapper">
+	<ul class="wall">
+		{foreach name="picList" id="vo"}
+		<li class="article">
+			{if condition="$p_sel neq 4"}
+				<a href="{:url('/mobile/index/PicView', ['p_sel' => $vo.p_sel,'p_id' => $vo.p_id])}"><img src="__PUBLIC__{$vo.p_pic}" /></a>
+				<p>{$vo.p_title}</p>		
+			{/if}	
+			{if condition="$p_sel eq 4"}
+				<a href="{:url('/mobile/Video/ZhuopinView', ['zp_id' => $vo.zp_id])}"><img src="__PUBLIC__{$vo.zp_pic}" /></a>
+				<p>{$vo.zp_title}</p>
+			{/if}
+		</li>
+		{/foreach}
+	</ul>
+</div>
+	
+<link rel="stylesheet" href="__MOBILE__/css/drawer.css">
+<link rel="stylesheet" type="text/css" href="__MOBILE__/css/style.css"/>
+<script type="text/javascript" src="__MOBILE__/js/jquery.min.js"></script>
+<script src="__MOBILE__/js/jaliswall.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('.wall').jaliswall({ item: '.article' });
+		});
+	</script>	
+<!--画廊 结束 -->
+        </div>
+    </div>
+{include file="/Index/footer" /}

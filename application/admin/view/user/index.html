@@ -31,7 +31,6 @@
                             <th style="width: 15px;"><input type="checkbox" class="check-all"></th>
                             <th>用户名称</th>
                             <th>电话</th>
-                            <th>所在班级</th>
                             <th>创建时间</th>
                             <th>会员类型</th>
                             <th>操作</th>
@@ -43,7 +42,6 @@
                             <td><input type="checkbox" name="ids[]" value="{$vo.id}"></td>
                             <td>{$vo.username}</td>
                             <td>{$vo.mobile}</td>
-                            <td>{foreach name="vo['voa']" item="suba"}{$suba["c_title"]}{/foreach}</td>
                             <td>{$vo.create_time}</td>
                             <td>{if condition="$vo.status==1"}普通会员{else /}<font color="red">付费会员</font>{/if}</td>
                             <td>

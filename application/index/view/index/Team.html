@@ -1,0 +1,16 @@
+{include file="/Index/header" /}
+<div class="idea">
+<span>团队</span>
+<p><a href="{:url('/index/index/Team', ['t_sel' => 1])}">研发团队</a><a href="{:url('/index/index/Team', ['t_sel' => 2])}">师资团队</a></p>
+</div>
+<div class="news">
+<ul>
+{foreach name="teamList" id="vo"}
+<li><span>{$title}</span>
+<a href="{:url('/index/index/TeamView', ['t_sel' => $vo.t_sel,'t_id' => $vo.t_id])}" target="_blank"><img src="__PUBLIC__{$vo.t_pic}">
+<center>{$vo['t_title']|mb_substr=0,22,'utf-8'}</center></a></li>
+{/foreach}
+</ul>
+</div>
+<div class="page">{$teamList->render()}</div>
+{include file="/Index/footer" /}

@@ -32,16 +32,35 @@
                         <div class="layui-input-block">
                             <input type="radio" name="v_lx" value="1" title="Flv格式" {if condition="$video.v_lx==1"} checked="checked"{/if}>
                             <input type="radio" name="v_lx" value="2" title="Mp4格式" {if condition="$video.v_lx==2"} checked="checked"{/if}>
+                            <input type="radio" name="v_lx" value="3" title="SWF格式" {if condition="$video.v_lx==3"} checked="checked"{/if}>
                         </div>
                     </div>
                     <div class="layui-form-item">
-                        <label class="layui-form-label">视频</label>
+                        <label class="layui-form-label">班级类型</label>
+                        <div class="layui-input-block">
+                            <input type="radio" name="v_selb" value="1" title="大班" {if condition="$video.v_selb==1"} checked="checked"{/if}>
+                            <input type="radio" name="v_selb" value="2" title="中班" {if condition="$video.v_selb==2"} checked="checked"{/if}>
+                            <input type="radio" name="v_selb" value="3" title="小班" {if condition="$video.v_selb==3"} checked="checked"{/if}>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">电脑版视频</label>
                         <div class="layui-input-block">
                             {if condition="$video.v_href neq null"}
-                            <a href="{$video.v_href}" target="_blank">视频另存为下载</a><br><br>
+                            <a href="__PUBLIC__{$video.v_href}" target="_blank">视频另存为下载</a><br><br>
                             {/if}
                             <input type="file" name="video">
                             <input type="hidden" name="v_hrefa" value="{$video.v_href}">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">手机版视频</label>
+                        <div class="layui-input-block">
+                            {if condition="$video.v_href_other neq null"}
+                            <a href="__PUBLIC__{$video.v_href_other}" target="_blank">视频另存为下载</a><br><br>
+                            {/if}
+                            <input type="file" name="videoa">
+                            <input type="hidden" name="v_href_othera" value="{$video.v_href_other}">
                         </div>
                     </div>
                     <div class="layui-form-item">
@@ -78,6 +97,12 @@
                         <label class="layui-form-label">发布时间</label>
                         <div class="layui-input-block">
                             <input type="text" name="v_datetime" value="{$video.v_datetime}" class="layui-input datetime">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">点赞数</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="v_count" value="{$video.v_count}" required  lay-verify="required" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-form-item">

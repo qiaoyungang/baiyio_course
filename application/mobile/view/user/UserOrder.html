@@ -1,0 +1,50 @@
+﻿{include file="/Index/header" /} 
+<body ontouchstart>
+<div class="weui_tab">
+    <div class="weui_tab_bd">
+    <div class="weui_panel weui_panel_access">
+    <div class="weui_panel_hd">我的订单</div>
+    <div class="weui_panel_bd">
+        {foreach name="OrderListB" id="vo"}
+            {if condition="$vo.v_id neq 0"}
+                {foreach name="vo['voa']" item="suba"}
+                {if condition="$vo.o_off eq 2"}
+                <a href="{:url('/Mobile/Video/VideoView', ['v_id' => $suba.v_id])}" class="weui_media_box weui_media_appmsg" target="_blank">
+                    <div class="weui_media_hd">
+                        <img class="weui_media_appmsg_thumb" src="__PUBLIC__{$suba.v_pic}" alt="">
+                    </div>
+                    <div class="weui_media_bd">
+                        <h4 class="weui_media_title">{$suba["v_title"]}</h4>
+                        <p class="weui_media_desc">{foreach name="suba['voaaa']" item="subaa"}{$subaa.vc_title}{/foreach}　|　{if condition="$suba.v_selb eq 1"}大班{/if}{if condition="$suba.v_selb eq 2"}中班{/if}{if condition="$suba.v_selb eq 3"}小班{/if} <font color="#FF0000">￥{$suba["v_money"]}元</font></p>
+                    </div>
+                    <div class="weui_media_hd" style="width:400px;">{if condition="$vo.o_off eq 1"}未支付成功{else /}已支付成功{/if} </div> 
+                </a>{/if}
+                {/foreach}
+            {/if}
+        {/foreach}
+        
+        {foreach name="OrderListC" id="vo"}
+            {foreach name="vo['voa']" item="suba"}
+                <div class="title"><center>【{$suba.vd_title}】 <a href="{:url('/Mobile/User/OrderDel', ['o_id' => $vo['o_id']])}">【删除此订单】</a></center></div>
+                {if condition="$vo.o_off eq 2"}
+                    {foreach name="suba['vobbb']" item="subbb"}
+                    <a href="{:url('/Mobile/Video/VideoView', ['v_id' => $subbb.v_id])}" target="_blank" class="weui_media_box weui_media_appmsg">
+                    <div class="weui_media_hd">
+                        <img class="weui_media_appmsg_thumb" src="__PUBLIC__{$subbb.v_pic}">
+                    </div>
+                    <div class="weui_media_bd">
+                        <h4 class="weui_media_title">{$subbb["v_title"]}</h4>
+                        <p class="weui_media_desc">
+                            {foreach name="suba['voaaa']" item="subaa"}{$subaa.vc_title}{/foreach}　|　{if condition="$subbb.v_selb eq 1"}大班{/if}{if condition="$subbb.v_selb eq 2"}中班{/if}{if condition="$subbb.v_selb eq 3"}小班{/if} <font color="#FF0000">￥{$subbb["v_money"]}元</font>
+                        </p>
+                    </div>
+                    <div class="weui_media_hd">{if condition="$vo.o_off eq 1"}未支付成功{else /}已支付成功{/if}</div> 
+                    </a>
+                    {/foreach}
+                {/if}
+            {/foreach}
+        {/foreach}
+    </div>
+</div>
+</div>
+{include file="/Index/footer" /} 

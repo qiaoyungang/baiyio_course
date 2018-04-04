@@ -1,0 +1,161 @@
+{include file="/Index/header" /}
+<style>
+p,body{margin:0;padding:0; line-height:24px; font-size:14px; }
+.col-md-2{ margin:10px 0 10px;}
+h3{ color:#0faeb4; font-size:16px;}
+.container{
+    width: 1200px;
+}
+.commentbox{
+    width: 1200px;
+    margin: 20px auto;
+}
+.mytextarea {
+    width: 100%;
+    overflow: auto;
+    word-break: break-all;
+    height: 100px;
+    color: #000;
+    font-size: 1em; margin-top:10px;
+    resize:none;border:1px solid #e6e6e6;margin-bottom:10px;
+}
+.mytextareas {
+    width: 98%;
+    overflow: auto;
+    word-break: break-all;
+    height: 40px;
+    color: #000;
+    font-size: 1em;
+    resize:none;border:1px solid #e6e6e6;
+}
+.comment-list{
+    width: 1200px;
+    margin: 20px auto;
+    clear: both;
+    padding-top: 20px;
+}
+.comment-list .comment-info{
+    position: relative;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e6e6e6;
+}
+.comment-list .comment-info header{
+    width: 10%;
+    position: absolute;
+}
+.comment-list .comment-info header img{
+    width:100px;height:100px;
+    border-radius: 50%;
+    padding: 5px;
+}
+.comment-list .comment-info .comment-right{
+    padding:5px 0px 5px 11%; 
+}
+.comment-list .comment-info .comment-right h3{
+    margin: 5px 0px;
+}
+.comment-list .comment-info .comment-right .comment-content-header{
+    height: 25px;
+}
+.comment-list .comment-info .comment-right .comment-content-header span,.comment-list .comment-info .comment-right .comment-content-footer span{
+    padding-right: 2em;
+    color: #aaa;
+}
+.comment-list .comment-info .comment-right .comment-content-header span,.comment-list .comment-info .comment-right .comment-content-footer span.reply-btn,.send,.reply-list-btn{
+    cursor: pointer;
+}
+.comment-list .comment-info .comment-right .reply-list {
+    border-left: 3px solid #ccc; background-color:#f1f1f1;
+    padding: 5px;
+}
+.comment-list .comment-info .comment-right .reply-list .reply{padding:10px 0; font-size:14px;
+}
+span{
+    color: #06F;}
+    .replyname{ margin:0 5px;}
+.btn{width:145px;height:40px; background-color:#00a651; color:#FFF; text-align:center; line-height:40px;border-radius:5px; font-size:18px;border:0; float:right}
+.send{ background-color:#00a651; color:#FFF; text-align:center; font-size:12px; padding:5px 10px; margin-bottom:10px;}
+.replybox{margin-bottom:10px;height:80px;}
+.F_comments1{width:100%;hieght:36px;border-bottom:1px solid #e6e6e6; font-size:14px; line-height:36px; text-align:right; margin-top:30px; float:left;}
+.F_comments1 span{border-bottom:3px solid #0faeb4; color:#0faeb4; font-size:18px; padding:0 15px; float:left;}
+a{color: #333; text-decoration:none; margin-right:20px;}
+</style>
+<script language="javascript">
+    function shop(obja,objb){
+        location.href='{:url("index/Video/Shop")}?bt_id='+obja+'&bt_rs='+objb;
+    }
+</script>
+<div class="title"><i class="fa fa-home fa-lg"></i> 美育课程 > 范课 > {$vc_title}</div>
+{foreach name="VideoList" id="vo"}
+<div class="S_about">
+{foreach name="vo['voa']" item="subk"}
+<img src="__PUBLIC__{$subk.t_pic}">
+<h1>{$subk.t_title}</h1>
+{$subk.t_text}
+{/foreach}
+<ul>
+<li>班级：{$vo['bt_title']}</li>
+<li>人数：{$vo['vob']}/{$vo.bt_rs}人</li>
+<li>开课时间：{$vo['bt_time']}</li>
+<li>授课方式：{$vo['bt_sk']}</li>
+</ul>
+<span style="float:left">
+限时抢购：<font color="#FF0000" size="+3">￥{$vo['bt_moneya']}元</font><br>
+课程原价：<del>￥{$vo['bt_moneyb']}元</del>
+</span>
+{if condition="$vo['bt_bl'] neq 3"}<input type="button" value="立即订购" class="order1" onclick='shop({$vo["bt_id"]},{$vo["bt_rs"]})'>{/if}
+</div>
+
+<div class="S_text">
+<div class="S_text1">
+<ul>
+<li><img src="__HOME__/images/S_1.png"><br><font size="+2">高清直播</font><br>高清原画1080P直播授课<br>零距离体验老师绘画过程</li>
+<li><img src="__HOME__/images/S_2.png"><br><font size="+2">课上互动交流</font><br>老师实时互动交流<br>引导孩子绘画、说画</li>
+<li><img src="__HOME__/images/S_3.png"><br><font size="+2">精品小班授课</font><br>精品小班8人课堂 <br>孩子随时随地答疑解惑</li>
+</ul>
+</div>
+
+<div class="S_text2">
+<div class="S_text0"><span>课程概述</span></div>
+{$vo.bt_text1}
+</div>
+
+<div class="S_text2">
+<div class="S_text0"><span>课程大纲</span></div>
+{$vo.bt_text2}
+</div>
+{/foreach}
+<div class="S_text2">
+<div class="S_text0"><span>作品欣赏</span></div>
+    <ul>
+    {foreach name="ZhuopinList" id="vo"}
+    <li><a href="{:url('/index/Video/ZhuopinView', ['zp_id' => $vo.zp_id])}"><img src="__PUBLIC__/{$vo.zp_pic}"><center>《{$vo.zp_title}》{foreach name="vo['von']" item="subn"}{$subn.username}{/foreach}</center></a></li>
+    {/foreach}
+    </ul>
+</div>
+</div>
+
+<div class="container" style="margin:0 auto;">
+    <div class="F_comments1"><span>全部评论</span></div>
+    <div class="comment-list" style="background:#FFF;">
+        {foreach name="ZhuopinList" id="vo"}
+        <div class='comment-info'>
+            {foreach name="vo['von']" item="subn"}
+            <header><img src="__PUBLIC__{$subn.touxiang}"></header>
+            <div class='comment-right'><h3>{$subn.username}</h3>
+            {/foreach}
+            <div class='comment-content-header'><span><i class='glyphicon glyphicon-time'></i>{$vo.zp_datetime}</span></div>
+            <p class='content'>{$vo.zp_text}</p>
+            {foreach name="vo['vok']" item="subk"}
+            <div class='reply-list reply'> 
+                <span class='replyname'>老师回复</span>：{$subk.zm_message} 【{$subk.zm_datetime}】
+            </div>
+            {/foreach}
+        </div>
+        </div> 
+        {/foreach}
+    
+    </div>
+</div>
+{include file="/Index/footer" /}

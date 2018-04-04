@@ -1,0 +1,30 @@
+﻿{include file="/Index/header" /} 
+<body ontouchstart>
+<div class="weui_tab">
+    <div class="weui_tab_bd" >
+        <div class="weui_navbar">
+            <div class="weui_navbar_item weui_bar_item_on">
+                公告新闻
+            </div>
+        </div>
+    <div class="weui_tab_bd">
+        <div class="weui_panel weui_panel_access">
+        <div class="weui_panel_bd">
+            {foreach name="newsList" id="vo"}
+            <a href="{:url('/mobile/Index/NewsView', ['n_id' => $vo.n_id,'n_sel' => $vo.n_sel])}" class="weui_media_box weui_media_appmsg">
+                <div class="weui_media_hd">
+                    <img class="weui_media_appmsg_thumb" src="__PUBLIC__{$vo.n_pic}" alt="">
+                </div>
+                <div class="weui_media_bd">
+                    <h4 class="weui_media_title">{$vo['n_title']|mb_substr=0,22,'utf-8'}</h4>
+                    <p class="weui_media_desc">{$vo['n_textb']|mb_substr=0,22,'utf-8'}</p>
+                </div> 
+            </a>
+            {/foreach}
+        </div>
+        <div class="weui_panel_ft">{$newsList->render()}</div>
+    </div>
+
+        </div>
+    </div>
+{include file="/Index/footer" /} 

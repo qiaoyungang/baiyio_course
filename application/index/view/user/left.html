@@ -1,0 +1,17 @@
+<div class="left">
+    <ul>
+        <li><a href="{:url('/index/User/UserOrder')}">全部订单</a></li>
+        <li><a href="{:url('/index/User/UserDiscounts')}">优惠券</a></li>
+        <li><a href="{:url('/index/User/UserIntegral')}">积分</a></li>
+        {if condition="session('status') eq '2'"}
+        <li><a href="{:url('/index/User/UserVideo')}">视频选择</a></li>
+        {/if}
+        <li><a href="{:url('/index/User/UserCollection')}">收藏</a></li>
+        <li><a href="#">论坛</a></li>
+        <li><a href="{:url('/index/User/UserWorks')}">作品</a></li>
+        <li><a href="{:url('/index/User/UserPersonal')}">个人资料</a></li>
+        <li><a href="{:url('/index/User/UserSettings')}">安全设置</a></li>
+        <li><a href="{:url('/index/User/UserCert')}">认证</a></li>
+        <li><a href="{:url('/index/Index/Text', ['t_id' => 2])}" target="_blank">帮助</a></li>
+    </ul>
+</div>

@@ -2,6 +2,7 @@
 namespace app\admin\controller;
 
 use app\admin\model\Video as VideoModel;
+use app\admin\model\VideoClass as VideoClassModel;
 
 /**
  * 文章管理
@@ -11,14 +12,13 @@ use app\admin\model\Video as VideoModel;
 class Video extends AdminBase
 {
     protected $video_model;
-   
+    protected $video_class_model;
 
     protected function _initialize()
     {
         parent::_initialize();
         $this->video_model  = new VideoModel();
-        
-       
+        $this->video_class_model  = new VideoClassModel();
     }
 
     /**
@@ -31,7 +31,9 @@ class Video extends AdminBase
     public function index($v_sel,$page = 1)
     {
         $video_list  = $this->video_model->where('v_sel',$v_sel)->order(['v_datetime' => 'desc'])->paginate(15, false, ['page' => $page]);
-        return $this->fetch('index', compact('video_list','v_sel'));
+        $video_class_list = $this->video_class_model->where('vc_id',$v_sel)->select();
+        $title=$video_class_list[0]['vc_title'];
+        return $this->fetch('index', compact('video_list','v_sel','title'));
     }
 
     /**
@@ -40,6 +42,7 @@ class Video extends AdminBase
      */
     public function add($v_sel)
     {
+
         return $this->fetch('',compact('v_sel'));
     }
 
@@ -57,14 +60,15 @@ class Video extends AdminBase
             $data["v_time"]=$_POST['v_time'];
             $data["v_score"]=$_POST['v_score'];
             $data["v_sel"]=$_POST['v_sel'];
+            $data["v_selb"]=$_POST['v_selb'];
             $data["v_lx"]=$_POST['v_lx'];
             $data["v_datetime"]=$_POST['v_datetime'];
             if (!empty($_FILES)) {
-				//如果有文件上传 上传附件
+                //如果有文件上传 上传附件
                 $this->_upload();
                 $data["v_href"]=$_POST['v_href'];
+                $data["v_href_other"]=$_POST['v_href_other'];
             }
-
             $validate_result = $this->validate($data, 'Video');
             if ($validate_result !== true) {
                 $this->error($validate_result);
@@ -103,6 +107,8 @@ class Video extends AdminBase
             $data["v_time"]=$_POST['v_time'];
             $data["v_score"]=$_POST['v_score'];
             $data["v_sel"]=$_POST['v_sel'];
+            $data["v_selb"]=$_POST['v_selb'];
+            $data["v_count"]=$_POST['v_count'];
             $data["v_lx"]=$_POST['v_lx'];
             $data["v_datetime"]=$_POST['v_datetime'];
             if($_FILES["video"]["name"]<>""){
@@ -110,16 +116,20 @@ class Video extends AdminBase
                     //如果有文件上传 上传附件
                     $this->_upload();
                 }
-
-                /*$videoResult = Db::query('select * from byc_video where v_id=:v_id',['v_id'=>$v_id]);
-                $aaa=$videoResult[0]["v_href"];
-                if($aaa<>""){
-                    unlink("/public".$aaa);  
-                }*/
                 $data["v_href"]=$_POST["v_href"];	
             }else{
                 $data["v_href"]=$_POST["v_hrefa"];
             }
+            if($_FILES["videoa"]["name"]<>""){
+                if (!empty($_FILES)) {
+                    //如果有文件上传 上传附件
+                    $this->_upload();
+                }
+                $data["v_href_other"]=$_POST["v_href_other"];	
+            }else{
+                $data["v_href_other"]=$_POST["v_href_othera"];
+            }
+       
             $validate_result = $this->validate($data, 'Video');
             if ($validate_result !== true) {
                 $this->error($validate_result);
@@ -154,14 +164,16 @@ class Video extends AdminBase
 
     //文件上传
 	public function _upload(){
-        $file = request()->file('video');
+        $filea = request()->file('video');
+        $fileb = request()->file('videoa');
         // 移动到框架应用根目录/public/uploads/ 目录下
-        $info = $file->validate(['size'=>9000000000,'ext'=>'flv,mp4'])->move(ROOT_PATH . 'public' . DS . 'uploads');
-        if($info){
-            $_POST['v_href'] = "/uploads/".date("Ymd")."/".$info->getFilename(); 
-        }else{
-            // 上传失败获取错误信息
-            echo $file->getError();
+        if($filea){
+            $infoa = $filea->validate(['size'=>9000000000,'ext'=>'flv,mp4,swf'])->move(ROOT_PATH . 'public' . DS . 'uploads');
+            $_POST['v_href'] = "/uploads/".date("Ymd")."/".$infoa->getFilename(); 
+        }
+        if($fileb){
+            $infob = $fileb->validate(['size'=>9000000000,'ext'=>'flv,mp4,swf'])->move(ROOT_PATH . 'public' . DS . 'uploads');
+            $_POST['v_href_other'] = "/uploads/".date("Ymd")."/".$infob->getFilename();
         }
     }
 }

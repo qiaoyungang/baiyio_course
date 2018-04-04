@@ -69,6 +69,7 @@ class Team extends AdminBase
             $data["t_zy"]=$_POST['t_zy'];
             $data["t_pic"]=$_POST['thumb'];
             $data["t_sel"]=$_POST['t_sel'];
+            $data["t_lb"]=$_POST['t_lb'];
             $validate_result = $this->validate($data, 'Team');
 
             if ($validate_result !== true) {

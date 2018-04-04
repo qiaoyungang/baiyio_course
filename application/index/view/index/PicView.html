@@ -1,0 +1,10 @@
+{include file="/Index/header" /}
+<div class="title"><i class="fa fa-home fa-lg"></i> {$title}</div>
+<div class="news">
+<h1>{$Reulst.p_title}</h1>
+<h4>发布时间：{$Reulst.p_datetime|strtotime|date="Y年m月d日",###}</h4>
+{if condition="$Reulst.p_sel neq '1'"}<p align="center"><img src="__PUBLIC__{$Reulst.p_pic}" height="400"></p>{/if}
+{if condition="$Reulst.p_sel eq '1'"}<p align="center">{$Reulst.p_href}</p>{/if}
+{$Reulst.p_text}
+</div>
+{include file="/Index/footer" /}

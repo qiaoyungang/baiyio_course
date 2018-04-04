@@ -5,6 +5,8 @@ use app\admin\model\Order as OrderModel;
 use app\admin\model\User as UserModel;
 use app\admin\model\Video as VideoModel;
 use app\admin\model\Package as PackageModel;
+use app\admin\model\Videom as VideomModel;
+use app\admin\model\VideoDirectory as VideoDirectoryModel;
 use think\Db;
 
 /**
@@ -14,11 +16,6 @@ use think\Db;
  */
 class Order extends AdminBase
 {
-
-    protected $order_model;
-    protected $user_model;
-    protected $video_model;
-
     protected function _initialize()
     {
         parent::_initialize();
@@ -26,6 +23,8 @@ class Order extends AdminBase
         $this->user_model = new UserModel();
         $this->video_model = new VideoModel();
         $this->package_model = new PackageModel();
+        $this->videom_model = new VideomModel();
+        $this->videoD_model = new VideoDirectoryModel();
     }
 
     /**
@@ -46,6 +45,12 @@ class Order extends AdminBase
         foreach($order_list as $o=>$oo){
             $order_list[$o]['voo']=$this->package_model->where(array('p_id'=>$oo['p_id']))->select();
         }
+        foreach($order_list as $m=>$mm){
+            $order_list[$m]['vmm']=$this->videom_model->where(array('bt_id'=>$mm['bt_id']))->select();
+        }
+        foreach($order_list as $d=>$dd){
+            $order_list[$d]['vdd']=$this->videoD_model->where(array('vd_id'=>$dd['vd_id']))->select();
+        }
         return $this->fetch('index', compact('order_list'));
     }
 
@@ -60,11 +65,15 @@ class Order extends AdminBase
         $v_id=$order[0]["v_id"];
         $id=$order[0]["user_id"];
         $p_id=$order[0]["p_id"];
+        $bt_id=$order[0]["bt_id"];
+        $vd_id=$order[0]["vd_id"];
 
         $user = $this->user_model->find($id);
         $video = $this->video_model->find($v_id);
         $package = $this->package_model->find($p_id);
-        return $this->fetch('edit', compact('order','user','video','package'));
+        $videom = $this->videom_model->find($bt_id);
+        $videoD = $this->videoD_model->find($vd_id);
+        return $this->fetch('edit', compact('order','user','video','package','videom','videoD'));
     }
 
     /**

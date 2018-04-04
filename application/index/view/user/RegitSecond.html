@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>百亿欧</title>
+<link href="__HOME__/css/page.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" src="__HOME__/js/jquery-1.11.1.js"></script>
+<script type="text/javascript" src="__HOME__/js/jquery.validate.js"></script>
+<script type="text/javascript" src="__HOME__/js/additional-methods.js"></script>
+<script type="text/javascript" src="__HOME__/js/jquery.validate.extend.js"></script>
+<script type="text/javascript">
+    $(function(){
+        //让当前表单调用validate方法，实现表单验证功能
+        $("#ff").validate({
+            debug:true,	//调试模式，即使验证成功也不会跳转到目标页面
+            onkeyup:true, //当丢失焦点时才触发验证请求
+            rules:{		//配置验证规则，key就是被验证的dom对象，value就是调用验证的方法(也是json格式)
+                password:{
+                    required:true
+                },
+                username:{
+                  required:true
+                },
+                age:{
+                  required:true,
+                  digits:true
+                },
+            },
+            messages:{              
+                password:{
+                  required:"请输入登录密码"
+                },
+                username:{
+                  required:"请输入孩子昵称"
+                },
+                age:{
+                  required:"请输入孩子孩子年龄",
+                  number:"请输入整数"
+                },
+            }
+        });
+    });
+    $.validator.setDefaults({
+        submitHandler: function() {
+            forma.submit();
+        }
+    });
+</script>
+</head>
+
+<body background="__HOME__/images/body.jpg">
+
+<div class="login_bg">
+  <div class="login">
+  <h1>百亿欧</h1>
+  <form action="{:url('/index/User/RegitSubmit')}" method="post" id="ff" name="forma">
+  <input type="hidden" name="mobile" value="{$sphone}">
+  <input type="hidden" name="verify" value="{$verify}">
+  <ul>
+    <li><input type="password" class="name" placeholder="登录密码" name="password" id="password"></li>
+    <li><input type="text" class="name" placeholder="孩子昵称" name="username" id="username"></li>
+    <li><input type="text" class="name" placeholder="孩子年龄" name="age" id="age"></li>
+    <li>
+      孩子性别：　
+      <input type="radio" id="female" name="female" value="2" checked /><label for="female">女</label>　 
+      <input type="radio" id="male" name="female" value="1" /> <label for="male">男</label>
+    </li>
+    
+    <li><input type="submit" class="menu" value="确定"></li>
+  </ul>
+  </form>
+  </div>
+</div>
+
+<script>
+$(function() {
+  $('label').click(function(){    var radioId = $(this).attr('name');
+    $('label').removeAttr('class') && $(this).attr('class', 'checked');
+    $('input[type="radio"]').removeAttr('checked') && $('#' + radioId).attr('checked', 'checked');
+  });
+});
+</script>
+</body>
+</html>

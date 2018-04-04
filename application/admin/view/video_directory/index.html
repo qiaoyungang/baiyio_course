@@ -1,0 +1,52 @@
+{extend name="base" /}
+{block name="body"}
+<div class="layui-body">
+    <!--tab标签-->
+    <div class="layui-tab layui-tab-brief">
+        <ul class="layui-tab-title">
+            <li class="layui-this"><a href="{:url('admin/VideoDirectory/index',['vd_sel'=>$vd_sel])}">{$title}视频总目录管理</a></li>
+            <li><a href="{:url('admin/VideoDirectory/add',['vd_sel'=>$vd_sel])}">添加视频总目录</a></li>
+            <li><a href="{:url('admin/Video/index',['v_sel'=>$vd_sel])}">管理此分类下视频</a></li>
+        </ul>
+        <div class="layui-tab-content">
+            <form action="" method="post" class="ajax-form">
+                <div class="layui-tab-item layui-show">
+                    <table class="layui-table">
+                        <thead>
+                        <tr>
+                            <th>标题</th>
+                            <th>课程学时</th>
+                            <th>授课方式</th>
+                            <th>课程人数</th>
+                            <th>课程类型</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {foreach name="videoD_list" item="vo"}
+                        <tr>
+                            <td>{$vo.vd_title}</td>
+                            <td>{$vo.vd_xs}</td>
+                            <td>{$vo.vd_fs}</td>
+                            <td>{$vo.vd_rs}</td>
+                            <td>
+                                {if condition="$vo.vd_selb eq 1"}大班{/if}
+                                {if condition="$vo.vd_selb eq 2"}中班{/if}
+                                {if condition="$vo.vd_selb eq 3"}小班{/if}
+                            </td>
+                            <td>
+                                <a href="{:url('admin/VideoDirectory/edit',['vd_id'=>$vo['vd_id'],'vd_sel'=>$vo['vd_sel']])}" class="layui-btn layui-btn-normal layui-btn-mini">编辑</a>
+                                <a href="{:url('admin/VideoDirectory/delete',['vd_id'=>$vo['vd_id'],'vd_sel'=>$vo['vd_sel']])}" class="layui-btn layui-btn-danger layui-btn-mini ajax-delete">删除</a>
+                            </td>
+                        </tr>
+                        {/foreach}
+                        </tbody>
+                    </table>
+                    <!--分页-->
+                    {$videoD_list->render()}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{/block}

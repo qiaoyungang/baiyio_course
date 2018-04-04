@@ -49,8 +49,6 @@ class Package extends AdminBase
     {
         $video_lista  = $this->video_model->where('v_sel','1')->select();//范课
         $video_listb  = $this->video_model->where('v_sel','2')->select();//亲子课
-        $video_listc  = $this->video_model->where('v_sel','3')->select();//小班课
-        $video_listd  = $this->video_model->where('v_sel','4')->select();//幼儿园
         return $this->fetch('',compact('video_lista','video_listb','video_listc','video_listd'));
     }
 
@@ -90,8 +88,6 @@ class Package extends AdminBase
     {
         $video_lista  = $this->video_model->where('v_sel','1')->select();//范课
         $video_listb  = $this->video_model->where('v_sel','2')->select();//亲子课
-        $video_listc  = $this->video_model->where('v_sel','3')->select();//小班课
-        $video_listd  = $this->video_model->where('v_sel','4')->select();//幼儿园
         $package = $this->package_model->find($p_id);
         return $this->fetch('edit', compact('package','video_lista','video_listb','video_listc','video_listd'));
     }

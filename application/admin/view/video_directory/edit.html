@@ -1,0 +1,117 @@
+{extend name="base" /}
+{block name="body"}
+<div class="layui-body">
+    <!--tab标签-->
+    <div class="layui-tab layui-tab-brief">
+        <ul class="layui-tab-title">
+            <li><a href="{:url('admin/VideoDirectory/index',['vd_sel'=>$vd_sel])}">{$title}视频总目录管理</a></li>
+            <li class="layui-this">编辑视频总目录</li>
+            <li><a href="{:url('admin/Video/index',['v_sel'=>$vd_sel])}">管理此分类下视频</a></li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <form class="layui-form form-container" action="{:url('admin/VideoDirectory/update')}" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="vd_sel" value="{$vd_sel}">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">标题</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="vd_title" value="{$videoD.vd_title}" required  lay-verify="required" placeholder="请输入标题" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">缩略图</label>
+                        <div class="layui-input-block">
+                            {if condition="$videoD.vd_pic neq ''"}
+                            <img src="__PUBLIC__{$videoD.vd_pic}" width="300" height="200"><br>{/if}
+                            <input type="text" name="thumb" value="{$videoD.vd_pic}" class="layui-input layui-input-inline" id="thumb">
+                            <input type="file" name="file" class="layui-upload-file">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">大概简介</label>
+                        <div class="layui-input-block">
+                            <textarea name="vd_textb" placeholder="（选填）请输入简介" class="layui-textarea">{$videoD.vd_textb}</textarea>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">内容</label>
+                        <div class="layui-input-block">
+                            <textarea name="vd_text" placeholder="" class="layui-textarea" id="vd_text">{$videoD.vd_text}</textarea>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">授课学时</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="vd_xs" value="{$videoD.vd_xs}" required  lay-verify="required" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">授课方式</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="vd_fs" value="{$videoD.vd_fs}" required  lay-verify="required" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">课程人数</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="vd_rs" value="{$videoD.vd_rs}" required  lay-verify="required" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">限时抢购(/元)</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="vd_moneya" value="{$videoD.vd_moneya}" required  lay-verify="required" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">原价(/元)</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="vd_moneyb" value="{$videoD.vd_moneyb}" required  lay-verify="required" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">积分(/分)</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="vd_score" value="{$videoD.vd_score}" required  lay-verify="required" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">班级类型</label>
+                        <div class="layui-input-block">
+                            <input type="radio" name="vd_selb" value="1" title="大班" {if condition="$videoD.vd_selb==1"} checked="checked"{/if}>
+                            <input type="radio" name="vd_selb" value="2" title="中班" {if condition="$videoD.vd_selb==2"} checked="checked"{/if}>
+                            <input type="radio" name="vd_selb" value="3" title="小班" {if condition="$videoD.vd_selb==3"} checked="checked"{/if}>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">老师选择</label>
+                        <div class="layui-input-block">
+                            <select name="t_id">
+                            {foreach name="team_list" item="vo"}
+                            <option value="{$vo.t_id}" {if condition="$videoD.t_id==$vo.t_id"} selected {/if}>{$vo.t_title}</option>
+                            {/foreach}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <input type="hidden" name="vd_id" value="{$videoD.vd_id}">
+                            <input type="submit" class="layui-btn" value="更新">
+                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
+{block name="js"}
+<script src="__JS__/ueditorPHP/ueditor.config.js"></script>
+<script src="__JS__/ueditorPHP/ueditor.all.min.js"></script>
+{/block}
+{block name="script"}
+<script>
+    var ue = UE.getEditor('vd_text');
+</script>
+{/block}

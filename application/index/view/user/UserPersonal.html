@@ -1,0 +1,36 @@
+{include file="/User/header" /}
+<script type="text/javascript">
+function F_Open_dialog() { 
+document.getElementById("touxiang").click(); 
+} 
+
+</script>
+<div class="main">
+        {include file="/User/left" /}
+        <form action="{:url('index/User/UserPersonalSubmit')}" method="post" name="form1" enctype="multipart/form-data">
+        <div class="right">
+                {foreach name="userList" id="vo"}
+                <div class="title">个人资料</div>
+                <div class="my_personal">
+                亲爱的 {$vo.username}，填写真实的资料，有助于好友找到你哦。
+                <ul>
+                <li><span>头像：</span>
+                <img src="__PUBLIC__{$vo.touxiang}" onclick="F_Open_dialog()">
+                <input type="file" id="touxiang" name="touxiang" style="display:none">
+                <input type="hidden" name="touxianga" value="{$vo.touxiang}">
+                </li>
+                <li><span>电话：</span>{$vo.mobile}</li>
+                <li><span>邮箱：</span><input type="text" name="email" value="{$vo.email}"></li>
+                <li><span>孩子昵称：</span><input type="text" name="username" value="{$vo.username}"></li>
+                <li><span>孩子性别：</span>　
+                <input type="radio" id="female" name="female" value="2" {if condition="$vo.female eq 2"}checked{/if} /><label for="female">女</label>　 
+                <input type="radio" id="male" name="female" value="1" {if condition="$vo.female eq 1"}checked{/if} /> <label for="male">男</label></li>
+                <li><span>孩子年龄：</span><input type="text" name="age" value="{$vo.age}" size="2"> 岁</li>
+                <li><span>&nbsp;</span><input type="submit" class="mybutton" value="保存"></li>
+                </ul>
+                </div>
+                {/foreach}
+        </div>
+        </form>
+</div>
+{include file="/User/footer" /}

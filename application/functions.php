@@ -1,210 +1,49 @@
 <?php
 
 use think\Db;
-
 /**
- * 检测是否登录.
+ * 用户积分
  */
-function is_login()
+function user_score($user_id)
 {
-    $user = session('user_power');
-    if (is_null($user)) {
-        return false;
-    } else {
-        return session('user_sign') == data_sign($user) ? true : false;
-    }
+    return Db::name('user')->field('score')->where(['id' => $user_id])
+            ->select();
 }
-
 /**
- * 获取登陆人ID.
+ * 优惠券积分
  */
-function user_id()
+function get_d_score($d_id)
 {
-    return session('user_power.id');
+    return Db::name('discounts')->field('d_score')->find($d_id);
 }
-
 /**
- * 获取登陆人ID.
+ * 用户是否已购买过此优惠券
  */
-function user_name()
+function get_discounts_order($d_id)
 {
-    return session('user_power.username');
+    return Db::name('discounts_order')->where('d_id',$d_id)->count();
 }
-
 /**
- * 轮播图
- *
- * @param string $order
- * @param integer $page
- * @return void
+ * 其他渠道用户购买次数判断
  */
-function get_slide($order = 'sort desc', $page = 4)
+function get_videosl($user_id)
 {
-    return Db::name('slide')->where(['status' => 1])
-            ->order($order)
-            ->limit($page)
-            ->select();
+    $Result=Db::name('user')->where(['id' => $user_id])->find();
+    return $Result["videosl"];
 }
-
 /**
- * 签名认证
- *
- * @param $data
- *
- * @return string
+ * 其他渠道用户是否购买过此订单视频
  */
-function data_sign($data)
+function get_uservideo_order($user_id,$v_id)
 {
-    if (!is_array($data)) {
-        $data = (array) $data;
-    }
-    ksort($data);
-    $code = http_build_query($data);
-    $sign = sha1($code);
-
-    return $sign;
+    return Db::name('order')->where(array('user_id'=>$user_id,'v_id'=>$v_id))->count();
 }
-
-function get_user_name($id)
-{
-    return Db::name('member')->where(['id' => $id])
-            ->value('user_name');
-}
-
-function get_user_avatar($id)
-{
-    return Db::name('member')->where(['id' => $id])
-            ->value('user_avatar');
-}
-
-function get_user_type($id)
-{
-    return Db::name('member')->where(['id' => $id])
-            ->value('user_type');
-}
-
-function get_user_teacher()
-{
-    return Db::name('member')->where(['user_type' => \app\web\model\Member::USER_TYPE_TEACHER])
-            ->field('id, user_name')
-            ->select();
-}
-
-function get_user_expert()
-{
-    return Db::name('member')->where(['user_type' => \app\web\model\Member::USER_TYPE_EXPERT])
-            ->field('id, user_name')
-            ->select();
-}
-
-function get_user_scount($id)
-{
-    return Db::name('space')->where(['uid' => $id])
-            ->count('id');
-}
-
-function get_user_rcount($id)
-{
-    return Db::name('space')->where(['uid' => $id])
-            ->sum('reply');
-}
-
-function get_area($no)
-{
-    return Db::name('area')->where(['no' => $no])
-            ->value('name');
-}
-
-function get_team_name($id)
-{
-    return Db::name('team')->where(['id' => $id])
-            ->value('class_name');
-}
-
-function get_class_type($key = null)
-{
-    $data = [
-        \app\admin\model\Team::TYPE_CLASS_BIG => '大班',
-        \app\admin\model\Team::TYPE_CLASS_MID => '中班',
-        \app\admin\model\Team::TYPE_CLASS_SMA => '小班',
-    ];
-
-    if (isset($key)) {
-        return $data[$key];
-    }
-
-    return $data;
-}
-
-function get_member_type($key = null)
-{
-    $data = [
-        \app\web\model\Member::USER_TYPE_FREE    => '免费用户',
-        \app\web\model\Member::USER_TYPE_CLASS   => '班级用户',
-        \app\web\model\Member::USER_TYPE_COMMON  => '普通用户',
-        \app\web\model\Member::USER_TYPE_TEACHER => '教师用户',
-        \app\web\model\Member::USER_TYPE_EXPERT  => '专家用户',
-    ];
-
-    if (isset($key)) {
-        return $data[$key];
-    }
-
-    return $data;
-}
-
-function get_message_count($id)
-{
-    return Db::name('letter')->where(['uid' => $id, 'read_status' => 0, 'status' => 1])
-            ->count('id');
-}
-
-function get_comment_tree()
-{
-    $comment_level_list = Db::name('comment')
-            ->order(['sort' => 'DESC', 'id' => 'ASC'])
-            ->select();
-    return array2tree($comment_level_list);
-}
-
-function get_teacher_comment($id)
-{
-    return Db::name('comment')->where(['id' => $id])
-            ->value('title');
-}
-
-function get_user_info($id)
-{
-    return Db::name('member')->where(['id' => $id])
-            ->find();
-}
-
-function get_teacher_team($id)
-{
-    return Db::name('team')->where(['class_teacher' => $id, 'status' => 1])
-            ->field('id, class_name')
-            ->select();
-}
-
-function get_team_student($id)
-{
-    return Db::name('team_student')->where(['team_id' => $id])
-            ->field('id, name')
-            ->select();
-}
-
-function get_student_name($id)
-{
-    return Db::name('team_student')->where(['id' => $id])
-            ->value('name');
-}
-
 function get_video_category($key = null)
 {
     $data = [
-        'small'   => '小班',
-        'middle'  => '中班',
-        'big'     => '大班'
+        '3'   => '小班',
+        '2'  => '中班',
+        '1'     => '大班'
     ];
 
     if (isset($key)) {
@@ -212,4 +51,65 @@ function get_video_category($key = null)
     }
 
     return $data;
+}
+
+function get_news_title($n_sel=null)
+{
+    $data=[
+        '1'=>'资讯',
+        '2'=>'国内美育理论',
+        '3'=>'国际美育理论',
+        '4'=>'董事长寄语',
+        '5'=>'专家指导',
+        '6'=>'百亿欧文化理念',
+        '7'=>'涂鸦报告',
+        '8'=>'排课公告',
+        '9'=>'公告',
+        '10'=>'服务保障',
+    ];
+    if (isset($n_sel)) {
+        return $data[$n_sel];
+    }
+
+    return $data;
+}
+
+function get_team_title($t_sel=null){
+    $data=[
+        '1'=>'研发团队',
+        '2'=>'师资团队',
+    ];
+    if (isset($t_sel)) {
+        return $data[$t_sel];
+    }
+
+    return $data;
+}
+
+function get_pic_title($p_sel=null){
+    $data=[
+        '1'=>'图文视频',
+        '2'=>'中国名画',
+        '3'=>'国外名画',
+    ];
+    if (isset($p_sel)) {
+        return $data[$p_sel];
+    }
+
+    return $data;
+}
+
+function send_post($url, $post_data) {    
+    $postdata = http_build_query($post_data);    
+    $options = array(    
+          'http' => array(    
+              'method' => 'POST',    
+              'header' => 'Content-type:application/x-www-form-urlencoded;charset=UTF-8',    
+              'content' => $postdata,    
+              'timeout' => 15 * 60 // 超时时间（单位:s）    
+          )    
+      );    
+      $context = stream_context_create($options);    
+      $result = file_get_contents($url, false, $context);             
+      return $result;    
 }

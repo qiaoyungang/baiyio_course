@@ -163,6 +163,8 @@ return [
         '__PUBLIC__' => '/public/',
         '__UPLOAD__' => '/public/uploads',
         '__STATIC__' => '/public/static',
+        '__HOME__' => '/public/home',
+        '__MOBILE__' => '/public/mobile',
         '__IMG__'    => '/public/static/images',
         '__JS__'     => '/public/static/js',
         '__CSS__'    => '/public/static/css',
@@ -262,5 +264,13 @@ return [
         'type'      => 'bootstrap',
         'var_page'  => 'page',
         'list_rows' => 15,
+    ],
+
+    //微信支付
+    'wxpay'=>[
+        'appid'=>'wxdb1772b4350b9b1d',//绑定支付的APPID（开户邮件中可查看）
+        'mchid'=>'1502903221', //MCHID：商户号（开户邮件中可查看）
+        'key'=>'dalianbiochalkgongsiT18525500267',//KEY：商户支付密钥，参考开户邮件设置（登录商户平台自行设置）
+        'appsecret'=>'bfde7e977f94eca157ba230a8173e9d4', //APPSECRET：公众帐号secert（仅JSAPI支付的时候需要配置， 登录公众平台，进入开发者中心可设置），bfde7e977f94eca157ba230a8173e9d4
     ],
 ];

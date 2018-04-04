@@ -1,0 +1,26 @@
+{include file="/User/header" /}
+<div class="main">
+    {include file="/User/left" /}
+    <div class="right">
+        <div class="title">积分</div>
+        <div class="my_integral">
+        
+        可用的积分：<font size="+3" color="#358405">{$score}</font>
+        </div>
+
+        <div class="my_integral1">
+            <h1><font>日期</font> <span>兑换视频</span> <font>所需积分</font> </h1>
+            {foreach name="dList" id="vo"}
+                {foreach name="vo['voa']" item="suba"}
+                <dl>
+                    <dt>{$vo.d_startime}至{$vo.d_endtime} </dt>
+                    <dd>{$suba.vd_title}</dd>
+                    <dt><font color="#33CC66" size="+2">+{$vo.d_score}</font></dt>
+                    <dt><a href="{:url('/index/User/UserIntegralSubmit', ['d_id' => $vo.d_id])}" class="my_integral1_a">我要兑换</a></dt>
+                </dl>
+                {/foreach}
+            {/foreach}
+        </div>
+    </div>
+</div>
+{include file="/User/footer" /}

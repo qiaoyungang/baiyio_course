@@ -1,0 +1,27 @@
+﻿{include file="/Index/header" /} 
+<body ontouchstart>
+<div class="weui_tab">
+    <div class="weui_tab_bd">
+    <div class="weui_panel weui_panel_access">
+    <div class="weui_panel_hd">收藏</div>
+    <div class="weui_panel_bd">
+        {foreach name="CollList" id="vo"}
+            {foreach name="vo['voa']" item="suba"}
+            <a href="{:url('/Mobile/Video/VideoView', ['v_id' => $suba.v_id])}" class="weui_media_box weui_media_appmsg" target="_blank">
+                <div class="weui_media_hd">
+                    <img class="weui_media_appmsg_thumb" src="__PUBLIC__{$suba.v_pic}" alt="">
+                </div>
+                <div class="weui_media_bd">
+                    <h4 class="weui_media_title">{$suba["v_title"]}</h4>
+                    <p class="weui_media_desc">
+                        {if condition="$suba.v_selb eq 1"}大班{/if}{if condition="$suba.v_selb eq 2"}中班{/if}{if condition="$suba.v_selb eq 3"}小班{/if}　|　{$suba["v_datetime"]}
+                    </p>
+                </div>
+                <div class="weui_media_hd" style="width:400px;"><font color="red">￥{$suba["v_money"]}元</font> </div> 
+            </a>
+            {/foreach}
+        {/foreach}
+    </div>
+</div>
+</div>
+{include file="/Index/footer" /} 

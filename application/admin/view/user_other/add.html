@@ -1,0 +1,91 @@
+{extend name="base" /}
+{block name="body"}
+<div class="layui-body">
+    <!--tab标签-->
+    <div class="layui-tab layui-tab-brief">
+        <ul class="layui-tab-title">
+            <li class=""><a href="{:url('admin/UserOther/index')}">会员管理</a></li>
+            <li class="layui-this">添加用户</li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <form class="layui-form form-container" action="{:url('admin/UserOther/save')}" method="post">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">可观看的视频数量</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="videosl" value="0" class="layui-input" placeholder="必须填写数量">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">联系号码</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="mobile" value="" class="layui-input" placeholder="必须填写联系号码">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">昵称</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="username" value="" class="layui-input" placeholder="必须填写昵称">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">密码</label>
+                        <div class="layui-input-block">
+                            <input type="password" name="password" value="" placeholder="必须填写密码" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">年龄</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="age" value="" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">邮箱地址</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="email" value="" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">性别</label>
+                        <div class="layui-input-block">
+                            <input type="radio" name="female" value="1" title="男">
+                            <input type="radio" name="female" value="2" title="女">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">头像</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="thumb" value="" class="layui-input layui-input-inline" id="thumb">
+                            <input type="file" name="file" class="layui-upload-file">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">用户积分</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="score" value="0" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">等级选择</label>
+                        <div class="layui-input-block">
+                            <select name="bl_id">
+                            <option value="0" selected>无等级</option>
+                            {foreach name="leave_list" item="vol"}
+                            <option value="{$vol.bl_id}">{$vol.bl_title}</option>
+                            {/foreach}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button class="layui-btn" lay-submit lay-filter="*">保存</button>
+                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}

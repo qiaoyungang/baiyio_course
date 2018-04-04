@@ -1,0 +1,30 @@
+{extend name="base" /}
+{block name="body"}
+<link href="__HOME__/css/page.css" type="text/css" rel="stylesheet">
+<div class="class">{$vc_title}</div>
+<div class="class_text">
+<p>{$vc_text}</p>
+</div>
+
+<div class="F_class">
+{foreach name="VideoList" id="vo"}
+<a href="{:url('/index/Video/VideoList', ['v_sel' => $vo.vd_sel,'v_selb' => $vo.vd_selb])}" {if condition="$vo.vd_selb neq 1"}class="F_1"{/if} {if condition="$vo.vd_selb eq 1"}class="F_1 F_5"{/if}>
+<img src="__PUBLIC__{$vo.vd_pic}">
+<p class="F_2">
+    {if condition="$vo.vd_selb eq 1"}精品大班课{/if}
+    {if condition="$vo.vd_selb eq 2"}精品中班课{/if}
+    {if condition="$vo.vd_selb eq 3"}精品小班课{/if}
+</p>
+<h1 class="F_3">{$vo.vd_title}</h1>
+<p class="F_4">{$vo['vd_textb']|mb_substr=0,40,'utf-8'}<br><font color="#0eadb3">{$vo.vd_xs}</font><font color="#FF0000" style="float:right">￥{$vo.vd_moneya}元</font></p>
+</a>
+{/foreach}
+</div>
+<div class="teacher">
+<h1>老师介绍</h1>
+<img src="__PUBLIC__{$teamList.t_pic}">
+<p><font color="0eadb3" size="+2">{$teamList.t_title}</font><br>
+{$teamList.t_text1}</p>
+</div>
+{include file="/Index/footer" /}
+{/block}

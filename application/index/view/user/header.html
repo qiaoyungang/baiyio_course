@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>百亿欧</title>
+<link href="__HOME__/css/my.css" type="text/css" rel="stylesheet">
+<link href="__HOME__/css/font-awesome.min.css" type="text/css" rel="stylesheet">
+<style type="text/css">
+
+</style>
+<script language="javascript">
+    function subm(){
+        form1.submit();
+    }
+</script>
+</head>
+
+<body>
+<form name="form1" action="{:url('/index/Index/Search')}" method="post">
+<div class="my_header" >
+    <dl>
+        <dt><img src="__HOME__/images/logo.png" > <input type="text" class="my_search" name="keyword"> <a href="javascript:void(0)" onclick="subm()"><i class="fa fa-search fa-2x"></i></a></dt>
+        <dd><a href="{:url('/index/User/UserContole')}">个人中心</a><a href="{:url('/Index/index')}">百亿欧首页</a><a href="{:url('/index/User/UserOut')}">【退出】</a></dd>
+    </dl>
+</div>
+</form>

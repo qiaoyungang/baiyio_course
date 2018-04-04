@@ -1,0 +1,212 @@
+{include file="/Index/header" /}
+<style>
+p,body{margin:0;padding:0; line-height:24px; font-size:14px; }
+.col-md-2{ margin:10px 0 10px;}
+h3{ color:#0faeb4; font-size:16px;}
+.container{
+    width: 1200px;
+}
+.commentbox{
+    width: 1200px;
+    margin: 20px auto;
+}
+.mytextarea {
+    width: 100%;
+    overflow: auto;
+    word-break: break-all;
+    height: 100px;
+    color: #000;
+    font-size: 1em; margin-top:10px;
+    resize:none;border:1px solid #e6e6e6;margin-bottom:10px;
+}
+.mytextareas {
+    width: 98%;
+    overflow: auto;
+    word-break: break-all;
+    height: 40px;
+    color: #000;
+    font-size: 1em;
+    resize:none;border:1px solid #e6e6e6;
+}
+.comment-list{
+    width: 1200px;
+    margin: 20px auto;
+    clear: both;
+    padding-top: 20px;
+}
+.comment-list .comment-info{
+    position: relative;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e6e6e6;
+}
+.comment-list .comment-info header{
+    width: 10%;
+    position: absolute;
+}
+.comment-list .comment-info header img{
+    width:100px;height:100px;
+    border-radius: 50%;
+    padding: 5px;
+}
+.comment-list .comment-info .comment-right{
+    padding:5px 0px 5px 11%; 
+}
+.comment-list .comment-info .comment-right h3{
+    margin: 5px 0px;
+}
+.comment-list .comment-info .comment-right .comment-content-header{
+    height: 25px;
+}
+.comment-list .comment-info .comment-right .comment-content-header span,.comment-list .comment-info .comment-right .comment-content-footer span{
+    padding-right: 2em;
+    color: #aaa;
+}
+.comment-list .comment-info .comment-right .comment-content-header span,.comment-list .comment-info .comment-right .comment-content-footer span.reply-btn,.send,.reply-list-btn{
+    cursor: pointer;
+}
+.comment-list .comment-info .comment-right .reply-list {
+    border-left: 3px solid #ccc; background-color:#f1f1f1;
+    padding-left: 7px;
+}
+.comment-list .comment-info .comment-right .reply-list .reply{padding:10px 0; font-size:14px;
+}
+.comment-list .comment-info .comment-right .reply-list .reply div span{
+    padding-left: 10px;
+}
+.comment-list .comment-info .comment-right .reply-list .reply p span{
+    padding-right: 2em;
+    color: #aaa;
+}
+.btn{width:145px;height:40px; background-color:#00a651; color:#FFF; text-align:center; line-height:40px;border-radius:5px; font-size:18px;border:0; float:right}
+.send{ background-color:#00a651; color:#FFF; text-align:center; font-size:12px; padding:5px 10px; margin-bottom:10px;}
+.replybox{margin-bottom:10px;height:80px;}
+.F_comments1{width:100%;height:36px;border-bottom:1px solid #e6e6e6; font-size:14px; line-height:36px; text-align:right; margin-top:30px; float:left;}
+.F_comments1 span{border-bottom:3px solid #0faeb4; color:#0faeb4; font-size:18px; padding:0 15px; float:left;}
+
+</style>
+<div class="title"><i class="fa fa-home fa-lg"></i> 美育课程 > {$vc_title} > {$title}</div>
+{foreach name="videoResult" id="videoResult"}
+<div class="F_single">
+{if condition="$videoResult.v_lx eq 1"}
+    <center>
+        <object class id="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" width="1200" height="675">
+          <param name="movie" value="__HOME__/js/flvplayer.swf">
+          <param name="quality" value="high">
+          <param name="allowFullScreen" value="true">
+          <param name="FlashVars" value="vcastr_file=__PUBLIC__{$videoResult.v_href}&LogoText={$videoResult.v_title}&BufferTime=3&IsAutoPlay=1">
+          <embed src="__HOME__/js/flvplayer.swf" allowfullscreen="true" flashvars="vcastr_file={$videoResult.v_href}&LogoText={$videoResult.v_title}&IsAutoPlay=1" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="1200" height="675"></embed>
+        </object>
+    </center>
+{/if}
+
+{if condition="$videoResult.v_lx eq 2"}
+<video src="__PUBLIC__{$videoResult.v_href}" controls="controls" width="1200" height="675"></video>
+{/if}
+
+{if condition="$videoResult.v_lx eq 3"}
+<embed src="__PUBLIC__{$videoResult.v_href}" width="1200" height="675" wmode="transparent">
+{/if}
+
+<h1>{$videoResult.v_title}<a href="{:url('/index/Video/VideoCollection', ['v_id' => $videoResult.v_id,'c'=>'video'])}" class="collection">收藏</a></h1>
+{$videoResult.v_text}
+</div>
+{/foreach}
+
+<script language="javascript">
+    function subm(){
+        document.formb.submit();
+    }
+</script>
+<div class="container" style="margin:0 auto;">
+    <form name="formb" method="post" action="{:url('/index/Video/VideoViewMessage')}">
+    <input type="hidden" name="v_id" value={$v_id}>
+    <div class="commentbox">
+        <textarea cols="80" rows="50" placeholder="来说几句吧......" class="mytextarea" id="l_text" name="l_text"></textarea>
+        <div class="btn btn-info pull-right" id="comment" onclick="subm()">评论</div>
+    </div>
+    </form>
+    <div class="F_comments1"><span>全部评论</span></div>
+    
+    <div class="comment-list" style="background:#FFF;">
+        {foreach name="luntanList" id="vo"}
+        <div class='comment-info'>
+            {foreach name="vo['voa']" item="subt"}
+            <header><img src="__PUBLIC__{$subt.touxiang}"></header>
+            <div class='comment-right'><h3>{$subt.username}</h3>
+            {/foreach}
+            <div class='comment-content-header'><span><i class='glyphicon glyphicon-time'></i>{$vo.l_datetime}</span></div>
+            <p class='content'>{$vo.l_text}</p>
+            <div class='reply-list reply'> 
+            <span class='replyname'>管理员</span>：{$vo.l_h_text}
+            </div>
+        </div>
+        </div> 
+        {/foreach}
+    
+    </div>
+</div>
+
+{include file="/Index/footer" /}
+<link href="__HOME__/css/style.css" rel="stylesheet" media="screen" type="text/css" />
+<script type="text/javascript" src="__HOME__/js/jquery-1.10.2.min.js"></script>
+<div class="container"></div>
+
+<!-- 客服部分 -->
+<div style="right:-630px;" class="contactusdiyou">
+	<div class="hoverbtn">
+		<span>点</span><span>击</span><span>详</span><span>情</span>
+		<img class="hoverimg" src="__HOME__/images/hoverbtnbg.gif" height="9" width="13">
+	</div>
+	<div class="conter">
+        {foreach name="vr_list" id="voa"}
+        <div class="dytimer">
+			<h1>环节：{$voa.vr_name}</h1>
+            <span>名称：{$voa.vr_mc}：</span><br>
+            <span>时间：{$voa.vr_sj}：</span>
+        </div>
+        <div style="clear:both;"></div>
+        <div class="dytimer">
+            <h1>主要内容与事项</h1>
+            <span>{$voa.vr_texta}</span>
+        </div>
+        <div style="clear:both;"></div>
+        <div class="dytimer">
+            <h1>教学目的</h1>
+            <span>{$voa.vr_textb}</span>
+        </div>
+        <div style="clear:both;"></div>
+        <div class="dytimer">
+            <h1>道具及使用</h1>
+            <span>{$voa.vr_textc}</span>
+        </div>
+        <div style="clear:both;"></div>
+        <div class="dytimer">
+            <h1>顾问理念传达</h1>
+            <span>{$voa.vr_textd}</span>
+        </div>
+        <div style="clear:both;"></div>
+        <div class="dytimer">
+            <h1>备注</h1r>
+            <span>{$voa.vr_texte}</span>
+        </div>
+        <div style="clear:both;border-bottom:3px solid #fff"></div>
+        {/foreach}
+	</div>
+</div>
+
+<div class="diyoumask" ></div>
+
+<script type="text/javascript">
+$(function() {
+	$(".contactusdiyou").hover(function() {
+		$(".hoverimg").attr("src","__HOME__/images/hoverbtnbg1.gif");
+		$('.diyoumask').fadeIn();
+		$('.contactusdiyou').animate({right:'0'},300); 
+	}, function() {
+		$(".hoverimg").attr("src","__HOME__/images/hoverbtnbg.gif");
+		$('.contactusdiyou').animate({right:'-630px'},300,function(){});
+		$('.diyoumask').fadeOut();
+	});
+});
+</script>

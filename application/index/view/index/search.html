@@ -1,0 +1,40 @@
+{include file="/Index/header" /}
+<div class="title"><i class="fa fa-home fa-lg"></i> 首页 > 全站搜索</div>
+<div class="notice">
+<form name="form1" action="{:url('/index/Index/Search')}" method="post">
+<input type="text" class="serach1" name="keyword" value="{$keyword}"><input type="submit" value="搜索" class="search2">
+{foreach name="news_list" id='vo'}
+<dl>
+    <dt><a href="{:url('/index/Index/NewsView', ['n_id' => $vo.n_id,'n_sel' => $vo.n_sel])}" target="_blank">{$vo.n_title}</a></dt>
+    <dd><img src="__PUBLIC__{$vo.n_pic}"><p><a href="{:url('/index/Index/NewsView', ['n_id' => $vo.n_id,'n_sel' => $vo.n_sel])}" target="_blank">{$vo.n_textb}</a></p></dd>
+</dl>
+{/foreach}
+{foreach name="pic_list" id='vo'}
+<dl>
+    <dt><a href="{:url('/index/index/PicView', ['p_sel' => $vo.p_sel,'p_id' => $vo.p_id])}" target="_blank">{$vo.p_title}</a></dt>
+    <dd><img src="__PUBLIC__{$vo.p_pic}"><p><a href="{:url('/index/index/PicView', ['p_sel' => $vo.p_sel,'p_id' => $vo.p_id])}" target="_blank">{$vo.p_textb}</a></p></dd>
+</dl>
+{/foreach}
+{foreach name="team_list" id='vo'}
+<dl>
+    <dt><a href="{:url('/index/index/TeamView', ['t_sel' => $vo.t_sel,'t_id' => $vo.t_id])}" target="_blank">{$vo.t_title}</a></dt>
+    <dd><img src="__PUBLIC__{$vo.t_pic}"><p><a href="{:url('/index/index/TeamView', ['t_sel' => $vo.t_sel,'t_id' => $vo.t_id])}" target="_blank">{$vo.t_text1}</a></p></dd>
+</dl>
+{/foreach}
+{foreach name="video_list" id='vo'}
+<dl>
+    <dt><a href="{:url('/index/Video/VideoList', ['v_sel' => $vo.v_sel,'v_selb' => $vo.v_selb])}" target="_blank">{$vo.v_title}</a></dt>
+    <dd><img src="__PUBLIC__{$vo.v_pic}"><p><a href="{:url('/index/Video/VideoList', ['v_sel' => $vo.v_sel,'v_selb' => $vo.v_selb])}" target="_blank">{$vo.v_text1}</a></p></dd>
+</dl>
+{/foreach}
+{foreach name="videom_list" id="vo"}
+    <dl>
+    <dt><a href="{:url('/index/Video/VideoMView',['bt_id'=>$vo.bt_id,'vc_title'=>$vc_title])}" target="_blank">{$vo.bt_title}</a></dt>
+    <dd><img src="__PUBLIC__{$vo.bt_pic}"><p><a href="{:url('/index/Video/VideoMView',['bt_id'=>$vo.bt_id,'vc_title'=>$vc_title])}" target="_blank">{$vo.bt_text1}</a></p></dd>
+    </dl>
+{/foreach}
+</form>
+</div>
+<div style="clear:both;margin-bottom:20px;"></div>
+{include file="/Index/footer" /}
+

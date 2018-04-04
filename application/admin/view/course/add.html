@@ -23,16 +23,6 @@
                         </div>
                     </div>
                     <div class="layui-form-item">
-                        <label class="layui-form-label">班级</label>
-                        <div class="layui-input-block">
-                            <select name="c_id">
-                            {foreach name="class_list" item="vo"}
-                            <option value="{$vo.c_id}">{$vo.c_title}</option>
-                            {/foreach}
-                            </select>
-                        </div>
-                    </div>
-                    <div class="layui-form-item">
                         <div class="layui-input-block">
                             <button class="layui-btn" lay-submit lay-filter="*">保存</button>
                             <button type="reset" class="layui-btn layui-btn-primary">重置</button>

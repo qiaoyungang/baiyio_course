@@ -9,7 +9,7 @@ class Video extends Validate
        
         'v_title' => 'require',
         'v_time'  => 'require|number',
-        'v_score'  => 'require|number'
+        'v_score'  => 'require|number',
     ];
 
     protected $message = [

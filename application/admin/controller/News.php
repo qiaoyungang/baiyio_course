@@ -18,9 +18,6 @@ class News extends AdminBase
     {
         parent::_initialize();
         $this->news_model = new NewsModel();
-        $news_list  = $this->news_model->select();
-
-        $this->assign('news_list', $news_list);
     }
 
     /**
@@ -82,6 +79,7 @@ class News extends AdminBase
             //$data            = $this->request->param();
             $data["n_title"]=$_POST['n_title'];
             $data["n_text"]=$_POST['n_text'];
+            $data["n_textb"]=$_POST['n_textb'];
             $data["n_datetime"]=$_POST['n_datetime'];
             $data["n_pic"]=$_POST['thumb'];
             $data["n_sel"]=$_POST['n_sel'];

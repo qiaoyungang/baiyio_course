@@ -32,7 +32,6 @@ class Index extends AdminBase
             'mysql_version'   => $version[0]['ver'],
             'max_upload_size' => ini_get('upload_max_filesize')
         ];
-
-        return $this->fetch('index', compact('config'));
+       return $this->fetch('index', compact('config'));
     }
 }

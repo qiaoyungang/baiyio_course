@@ -1,0 +1,27 @@
+{include file="/User/header" /}
+<div class="main">
+    {include file="/User/left" /}
+    <form action="{:url('index/User/UserWorksSubmit')}" method="post" name="form1" enctype="multipart/form-data">
+    <div class="right">
+        <div class="title">作品　　 </div>
+        <div class="my_works">
+            <ul>
+                <li><input type="button" class="myup" value="上传"></li>
+                <li><span>老师选择：</span>
+                    <select name="t_id">
+                        {foreach name="teamList" id="vo"}
+                        <option value="{$vo.t_id}">{$vo.t_title}</option>
+                        {/foreach}
+                    </select>
+                </li>
+                <li><span>班级：</span><input type="text" name="zp_class" required  placeholder="请输入班级"></li>
+                <li><span>标题：</span><input type="text" name="zp_title" size="85" required  placeholder="请输入标题"></li>
+                <li><span>描述：</span><textarea name="zp_text" placeholder="（选填）请输入描述："></textarea></li>
+                <li><span>作品上传：</span><input type="file" name="zp_pic" required  placeholder="请上传作品"></li>
+                <li><span>&nbsp;</span><input type="submit" class="myup" value="确定"></li>
+            </ul>
+        </div>
+    </div>
+    </form>
+</div>
+{include file="/User/footer" /}

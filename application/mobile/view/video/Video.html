@@ -1,0 +1,59 @@
+﻿{include file="/Index/header" /} 
+<script language="javascript">
+    function shop(obj){
+        location.href='{:url("mobile/Video/Shop")}?vd_id='+obj;  
+    }
+    function shopa(obj){
+        location.href='{:url("mobile/Video/Shop")}?v_id='+obj;  
+    }
+</script>
+<body ontouchstart>
+<div class="weui_tab">
+    <div class="weui_tab_bd" >
+        <div class="weui_navbar">
+            <div class="weui_navbar_item {if condition='$vd_selb eq 3'}weui_bar_item_on{/if}">
+                <a href="{:url('/mobile/Video/Video', ['vd_sel' => $vd_sel,'vd_selb'=>'3'])}">小班</a>
+            </div>
+            <div class="weui_navbar_item {if condition='$vd_selb eq 2'}weui_bar_item_on{/if}">
+                <a href="{:url('/mobile/Video/Video', ['vd_sel' => $vd_sel,'vd_selb'=>'2'])}">中班</a>
+            </div>
+             <div class="weui_navbar_item {if condition='$vd_selb eq 1'}weui_bar_item_on{/if}">
+                <a href="{:url('/mobile/Video/Video', ['vd_sel' => $vd_sel,'vd_selb'=>'1'])}">大班</a>
+            </div>
+        </div>
+<div class="weui_tab_bd">
+<!--画廊 开始 -->
+<div class="wrapper">
+		<ul class="wall">
+            {foreach name="VideoList" id="vo"}
+            <li class="article">
+				<img src="__MOBILE__/images/class1.jpg" />
+				<p>【{$vc_title}】{$vo.vd_title} </p>
+                <small>￥{$vo.vd_moneya}元</small>
+                <button onclick='shop({$vo["vd_id"]})'>购买</button>					
+            </li>
+            {/foreach}
+            {foreach name="VideoDList" id="vo" key="i"}
+			<li class="article">
+				<a href="{:url('/mobile/Video/VideoView', ['v_id' => $vo.v_id])}">
+					<img src="__PUBLIC__{$vo.v_pic}" /></a>
+					<p>{$vo.v_title}</p>	
+                    <small>总课程：第{$i+1}节 （￥{$vo.v_money}/节）<a href="{:url('/mobile/Video/VideoCollection', ['v_id' => $vo.v_id,'c'=>'video'])}"><font color="red">收藏</font></a></small>
+                    <button onclick='shopa({$vo["v_id"]})'>购买</button>		
+            </li>
+            {/foreach}
+		</ul>
+	</div>
+	
+ <link rel="stylesheet" type="text/css" href="__MOBILE__/css/style.css"/>
+<script type="__MOBILE__/text/javascript" src="__MOBILE__/js/jquery.min.js"></script>
+<script src="__MOBILE__/js/jaliswall.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('.wall').jaliswall({ item: '.article' });
+		});
+	</script>	
+<!--画廊 结束 -->
+        </div>
+    </div>
+{include file="/Index/footer" /} 

@@ -1,0 +1,78 @@
+{extend name="base" /}
+{block name="body"}
+<div class="layui-body">
+    <!--tab标签-->
+    <div class="layui-tab layui-tab-brief">
+        <ul class="layui-tab-title">
+            <li class=""><a href="{:url('admin/discounts/index')}">优惠券管理</a></li>
+            <li class="layui-this">添加信息</li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <form class="layui-form form-container" action="{:url('admin/discounts/save')}" method="post">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">优惠券名称</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="d_title" value="" required  lay-verify="required" placeholder="请输入优惠券名称" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">抵扣价钱</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="d_money" value="1" required  lay-verify="required" placeholder="请输入抵扣价钱" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">开始日期</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="d_startime" value="{$ds}" required  lay-verify="required" placeholder="请输入开始日期" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">结束日期</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="d_endtime" value="{$de}" required  lay-verify="required" placeholder="请输入结束日期" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">适用视频</label>
+                        <div class="layui-input-block">
+                            <select name="vd_id">
+                                {foreach name="vdList" item="vo"}
+                                <option value="{$vo.vd_id}">{$vo.vd_title}</option>
+                                {/foreach}
+                            </select>  
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">适用视频</label>
+                        <div class="layui-input-block">
+                            <input type="radio" name="d_sel" value="1" title="视频" checked>
+                            <input type="radio" name="d_sel" value="2" title="商城">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">是否开启</label>
+                        <div class="layui-input-block">
+                            <input type="radio" name="d_off" value="1" title="开启" checked>
+                            <input type="radio" name="d_off" value="2" title="关闭">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">积分</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="d_score" value="1" required  lay-verify="required" placeholder="请输入积分" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button class="layui-btn" lay-submit lay-filter="*">保存</button>
+                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}

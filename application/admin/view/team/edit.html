@@ -50,6 +50,13 @@
                         </div>
                     </div>
                     <div class="layui-form-item">
+                        <label class="layui-form-label">老师标注</label>
+                        <div class="layui-input-block">
+                            <input type="radio" name="t_lb" value="1" title="其他课老师" {if condition="$team.t_lb==1"} checked="checked"{/if}>
+                            <input type="radio" name="t_lb" value="2" title="小班课老师" {if condition="$team.t_lb==2"} checked="checked"{/if}>(如果老师同时兼容多课无关系，只是标注是否教小班课)
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
                         <div class="layui-input-block">
                             <input type="hidden" name="t_id" value="{$team.t_id}">
                             <button class="layui-btn" lay-submit lay-filter="*">更新</button>

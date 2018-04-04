@@ -1,0 +1,60 @@
+{include file="/Index/header" /} 
+<script type="text/javascript" src="__HOME__/js/jquery-1.11.1.js"></script>
+<script type="text/javascript" src="__HOME__/js/jquery.validate.js"></script>
+<script type="text/javascript" src="__HOME__/js/additional-methods.js"></script>
+<script type="text/javascript" src="__HOME__/js/jquery.validate.extend.js"></script>
+<script type="text/javascript">
+    $(function(){
+        //让当前表单调用validate方法，实现表单验证功能
+        $("#ff").validate({
+            debug:true,	//调试模式，即使验证成功也不会跳转到目标页面
+            onkeyup:true, //当丢失焦点时才触发验证请求
+            rules:{		//配置验证规则，key就是被验证的dom对象，value就是调用验证的方法(也是json格式)
+                sphone:{
+                    required:true,
+                    phone:true,
+                    rangelength:[0,11],
+                    remote:{
+                        url:"{:url('/Mobile/User/AjaxUser')}",
+                        type:"post"
+                    }
+                }
+            },
+            messages:{              
+                sphone:{
+                    required:"请输入手机号",
+                    rangelength:$.validator.format("手机号码是11位"),
+                    remote:"该手机号已存在！"
+                }
+            }
+        });
+    });
+    $.validator.setDefaults({
+        submitHandler: function() {
+            forma.submit();
+        }
+    });
+</script>
+<script type="text/javascript">
+    function sendMessage(){
+        var sendcode=Math.floor(Math.random()*9000)+1000;
+        document.getElementById('first_verify').value=sendcode;
+        var sphone=document.getElementById('phone').value;
+        window.location.href='{:url("Mobile/User/UserRegitSend")}?sphone='+sphone+'&verify='+sendcode;
+    }
+</script>
+<body background="__MOBILE__/images/body.jpg" style="background-size:100% 100%;">
+<form action="{:url('/Mobile/User/RegitSecond')}" method="post" id="ff" name="forma">
+<input type="hidden" name="first_verify" id="first_verify">
+<div class="login">
+    <h1>百亿欧</h1>
+    <ul>
+    <li><input type="text" id="phone" name="sphone"  class="name" placeholder="输入手机号码" tip="请输入手机号码"></li>
+    <li><input type="text" class="yzm" placeholder="验证码" tip="请输入验证码" name="verify"> <input type="button" class="button" value="发送验证码" onclick="sendMessage()"></li>
+    <li><input type="submit" class="menu" value="下一步"></li>
+    <li>已有帐号， <a href="{:url('/Mobile/User/Login')}">立即登录</a></li>
+    </ul>
+</div>
+</form>
+</body>
+</html>

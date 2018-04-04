@@ -1,0 +1,16 @@
+﻿{include file="/Index/header" /}
+<body style="background-color:#FFF">
+<div class="weui_tab">
+    <div class="weui_tab_bd">
+        <article class="weui_article">
+            <h1><b>{$Reulst.p_title}</b></h1>
+            <section>
+            <h3>百亿欧 <font color="#0066CC">{$Reulst.p_datetime|strtotime|date="Y年m月d日",###}</font></h3>
+            {if condition="$Reulst.p_sel neq '1'"}<p align="center"><img src="__PUBLIC__{$Reulst.p_pic}" height="400"></p>{/if}
+            {if condition="$Reulst.p_sel eq '1'"}<p align="center">{$Reulst.p_href}</p>{/if}
+            {$Reulst.p_text}
+            </section>
+        </article>   
+    </div>
+</div>
+{include file="/Index/footer" /}

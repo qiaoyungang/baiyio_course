@@ -1,0 +1,63 @@
+﻿{include file="/Index/header" /} 
+<body ontouchstart>
+<div class="weui_tab">
+    <div class="weui_tab_bd">
+      <div class="my">
+        <div class="my1"><img src="__PUBLIC__{$Result.touxiang}"></div>
+        <div class="top3">{$Result.username}</div>
+      </div>
+
+    <div class="weui_cells weui_cells_access">
+         <a class="weui_cell" href="{:url('/Mobile/User/UserPersonal')}">
+            <div class="weui_cell_hd"><i class="fa fa-user-circle-o"></i></div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <p style="font-size:12px">({$Result.username} {$Result.age}岁)</p>
+            </div>
+            <div class="weui_cell_ft"><i class="fa fa-plus-circle"></i></div>
+        </a>
+        <a class="weui_cell" href="{:url('/Mobile/User/UserOrder')}">
+            <div class="weui_cell_hd"><i class="fa fa-cny"></i></div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <p>已购课程</p>
+            </div>
+            <div class="weui_cell_ft"></div>
+        </a>
+        {if condition="session('status') eq '2'"}
+        <a class="weui_cell" href="{:url('/Mobile/User/UserVideo')}">
+            <div class="weui_cell_hd"><i class="fa fa-cny"></i></div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <p>视频选择</p>
+            </div>
+            <div class="weui_cell_ft"></div>
+        </a>
+        {/if}
+        <a class="weui_cell" href="{:url('/Mobile/User/UserCollection')}">
+            <div class="weui_cell_hd"><i class="fa fa-clone"></i></div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <p>收藏</p>
+            </div>
+            <div class="weui_cell_ft"></div>
+        </a>
+        <a class="weui_cell" href="{:url('/Mobile/User/UserWorks')}">
+            <div class="weui_cell_hd"><i class="fa fa-file-image-o"></i></div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <p>作品</p>
+            </div>
+            <div class="weui_cell_ft"></div>
+        </a>
+        <a class="weui_cell" href="{:url('/Mobile/User/UserSettings')}">
+            <div class="weui_cell_hd"><i class="fa fa-cog"></i></div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <p>安全设置</p>
+            </div>
+            <div class="weui_cell_ft"></div>
+        </a>
+        <a class="weui_cell" href="{:url('/Mobile/User/UserOut')}">
+            <div class="weui_cell_bd">
+                <p>【退出】</p>
+            </div>
+            <div class="weui_cell_ft"></div>
+        </a>
+    </div>
+    </div>
+{include file="/Index/footer" /}    

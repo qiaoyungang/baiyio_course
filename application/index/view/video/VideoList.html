@@ -1,0 +1,40 @@
+{include file="/Index/header" /}
+<script language="javascript">
+    function shop(obj){
+        location.href='{:url("index/Video/Shop")}?v_id='+obj;  
+    }
+</script>
+<div class="title"><i class="fa fa-home fa-lg"></i> 美育课程 > {$vc_title} > {$title}</div>
+{foreach name="VideoDList" id="vo"}
+<form name="forma" action="{:url('/index/Video/Shop')}" method="post">
+<input type="hidden" name="vd_id" value="{$vo.vd_id}">
+    <div class="F_about">
+    <img src="__PUBLIC__{$vo.vd_pic}">
+    <h1>【{$vc_title}】{$vo.vd_title}</h1>
+    {$vo.vd_text}
+    <ul>
+    <li>课程学时：{$vo.vd_xs}</li>
+    <li>授课方式：{$vo.vd_fs}</li>
+    <li>课程人数：{$vo.vd_rs}</li>
+    </ul>
+    <span style="float:left">
+    限时抢购：<font color="#FF0000" size="+3">￥{$vo.vd_moneya}元</font><br>
+    课程原价：<del>￥{$vo.vd_moneyb}元</del>
+    </span>
+    <input type="submit" value="立即订购" class="order1">
+    </div>
+</form>
+{/foreach}
+<div class="F_list">
+<h1>{$title}</h1>
+<ul>
+{foreach name="VideoList" id="voa" key="i"}
+    <li><a href="{:url('/index/Video/VideoView', ['v_id' => $voa.v_id])}"><img src="__PUBLIC__{$voa.v_pic}"></a>
+    <p>{$voa.v_title}</p>
+    <font color="#0faeb4">总课程：第{$i+1}节 （￥{$voa.v_money}/节）</font>
+    <input type="button" value="订购" class="order2" onclick='shop({$voa["v_id"]})'>
+    </li>
+{/foreach}
+</ul>
+</div>
+{include file="/Index/footer" /}

@@ -59,7 +59,7 @@ class Upload extends Controller
     {
         $config = [
             'size' => 2097152000,
-            'ext'  => 'flv,mp4'
+            'ext'  => 'flv,mp4,swf'
         ];
 
         $file = $this->request->file('file');
